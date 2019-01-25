@@ -10,6 +10,7 @@ class ComposerStaticInitb44aa0781c59d659eca7a2ddb8801472
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
+            'PhpParser\\' => 10,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
         ),
         'D' => 
@@ -22,6 +23,10 @@ class ComposerStaticInitb44aa0781c59d659eca7a2ddb8801472
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
+        'PhpParser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (

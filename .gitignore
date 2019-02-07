@@ -4,6 +4,7 @@
 .idea
 application/config/*
 application/vendor/*
+restricted/*
 
 # Ignore Twig Cache Files
 application/cache/Twig/*/

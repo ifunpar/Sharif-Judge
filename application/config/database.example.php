@@ -75,13 +75,10 @@
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-
 $active_group = 'default';
 $query_builder = TRUE;
-
 $db['default'] = array(
 	'dsn'	=> '',
-
 	/*  Enter database connection settings here:  */
 	'dbdriver' => 'mysqli',     // database driver (mysqli, postgre)
 	'hostname' => 'localhost',  // database host
@@ -90,7 +87,6 @@ $db['default'] = array(
 	'database' => '',           // database name
 	'dbprefix' => 'shj_',       // table prefix
 	/**********************************************/
-
 	'pconnect' => TRUE,
 	'db_debug' => FALSE,
 	'cache_on' => FALSE,
@@ -104,6 +100,5 @@ $db['default'] = array(
 	'stricton' => FALSE,
 	'failover' => array()
 );
-
 /* End of file database.php */
 /* Location: ./application/config/database.php */

@@ -4,8 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cecc69684d21c9d0e9d4973c9b67b2b7",
-    "packages": [
+    "content-hash": "052b0302fefb906784e182914f3c6226",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "dapphp/radius",
             "version": "2.5.1",
@@ -299,7 +300,6 @@
             "time": "2017-10-23T01:57:42+00:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],

@@ -1,8 +1,7 @@
 <?php
-include('BaseTest.php');
 defined('BASEPATH') OR exit('No direct script access allowed');
 // php index.php ContohTest
-class ContohTest extends BaseTest {
+class BaseTest extends CI_Controller {
         public function __construct()
         {
             parent::__construct(); 

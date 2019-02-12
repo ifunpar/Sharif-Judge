@@ -83,12 +83,28 @@ class SettingTest extends CI_Controller
         return $this->db->select('shj_value')->get_where('settings', array('shj_key'=>$key))->row()->shj_value;
     }
 
+    public function get_all_settings()
+    {
+        $result = $this->db->get('settings')->result_array();
+        $settings = array();
+        foreach($result as $item)
+        {
+            $settings[$item['shj_key']] = $item['shj_value'];
+        }
+        return $settings;
+    }
+
     public function index(){
         //$exist = $this->check_db();
         $set = $this->set_setting("timezone", "Asia/Tokyo");
         $test = $this->get_setting("timezone");
+        $testAll = $this->get_all_settings();
         $expected_result = "Asia/Tokyo";
         $test_name = "Change Time Zone test function";
+
+        echo "Current Setting";
+        print_r($testAll);
+        echo "\n";
 
         $this->unit->run($test,$expected_result,$test_name);
         $results = $this->unit->result();

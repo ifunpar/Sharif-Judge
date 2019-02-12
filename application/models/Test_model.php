@@ -22,14 +22,16 @@ abstract class Test_model extends CI_Model
     //example content of test
     // $this->test = $this->division(6,3);
     // $this->expected_result = 2;
-    // $this->test_name = "Division test function";
+	// $this->test_name = "Division test function";
+	// $this->unit->run($this->test,$this->expected_result,$this->test_name);	
     abstract public function test();
 
     public function runTest() {
         $this->test();
-		$this->unit->run($this->test,$this->expected_result,$this->test_name);
-        $results = $this->unit->result();
-        // print_r($this->results);
+	}
+	
+	public function showResult() {
+		$results = $this->unit->result();
 		foreach ($results as $result) {
 			echo "=== " . $result['Test Name'] . " ===\n";
 			foreach ($result as $key => $value) {
@@ -40,7 +42,7 @@ abstract class Test_model extends CI_Model
 			}
 			echo "\n";
 		}
-    }
+	}
 
 	// ------------------------------------------------------------------------
 }

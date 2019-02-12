@@ -4,8 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // php index.php ContohTest
 class RunTest extends CI_Controller {
 
-	public $array = [
-		'exampletest_model'
+	public $classes = [
+		'initialtest_model',
+		'notificationtest_model'
 	];
 	private $test, $expected_result, $test_name;
 
@@ -13,22 +14,11 @@ class RunTest extends CI_Controller {
 	{
 		parent::__construct();
 
-		foreach ($this->array as $className) {
-			echo $className;
-			echo $array;
+		foreach ($this->classes as $className) {
 			$this->load->model($className);
 			$this->$className->runTest();
 		}
-	}
-	
-	public function runTest(){
-		$this->test = $this->division(6,3);
-		$this->expected_result = 3;
-		$this->test_name = "Division test function";
-	}
-	
-	private function division($a,$b){
-		return $a/$b;
+		$this->initialtest_model->showResult();
 	}
 	
 	public function index(){}

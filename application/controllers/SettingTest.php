@@ -95,16 +95,16 @@ class SettingTest extends CI_Controller
     }
 
     public function index(){
-        //$exist = $this->check_db();
+        $this->printSetting();
+        echo "\n";
+        $this->testing();
+    }
+
+    public function testing(){
         $set = $this->set_setting("timezone", "Asia/Tokyo");
         $test = $this->get_setting("timezone");
-        $testAll = $this->get_all_settings();
         $expected_result = "Asia/Tokyo";
         $test_name = "Change Time Zone test function";
-
-        echo "Current Setting";
-        print_r($testAll);
-        echo "\n";
 
         $this->unit->run($test,$expected_result,$test_name);
         $results = $this->unit->result();
@@ -119,4 +119,12 @@ class SettingTest extends CI_Controller
             echo "\n";
         }
     }
+
+    public function printSetting(){
+        $testAll = $this->get_all_settings();
+        echo "Current Setting";
+        print_r($testAll);
+        echo "\n";
+    }
+
 }

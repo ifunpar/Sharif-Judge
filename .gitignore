@@ -2,9 +2,12 @@
 
 .git
 .idea
+
 application/config/database.php
 application/config/secrets.php
 application/vendor/
+restricted/
+
 
 # Ignore Twig Cache Files
 application/cache/Twig/*/

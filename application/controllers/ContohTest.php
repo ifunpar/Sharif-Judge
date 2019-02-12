@@ -1,13 +1,11 @@
 <?php
-include('BaseTest.php');
 defined('BASEPATH') OR exit('No direct script access allowed');
 // php index.php ContohTest
-class ContohTest extends BaseTest {
+class ContohTest extends CI_Controller {
         public function __construct()
         {
             parent::__construct(); 
 			$this->load->library("unit_test");
-			// $this->load->model("settings_model"); load model
         }
 		
 		
@@ -16,11 +14,9 @@ class ContohTest extends BaseTest {
 		}
 		
 		public function index(){
-			// $test = $this->settings_model->get_all_settings(); call model method
 			$test = $this->division(6,3);
 			$expected_result = 2;
 			$test_name = "Division test function";
-			echo $test;
 			$this->unit->run($test,$expected_result,$test_name);
 			$results = $this->unit->result();
 	        foreach ($results as $result) {

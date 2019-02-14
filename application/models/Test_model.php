@@ -11,38 +11,45 @@ abstract class Test_model extends CI_Model
 
     protected $test, $expected_result, $test_name;
 
-	public function __construct()
-	{
+  public function __construct()
+  {
         parent::__construct();
         $this->load->library('unit_test');
-	}
+  }
 
-	// ------------------------------------------------------------------------
-    
-    //example content of test
-    // $this->test = $this->division(6,3);
-    // $this->expected_result = 2;
-	// $this->test_name = "Division test function";
-	// $this->unit->run($this->test,$this->expected_result,$this->test_name);	
     abstract public function test();
 
     public function runTest() {
         $this->test();
-	}
-	
-	public function showResult() {
-		$results = $this->unit->result();
-		foreach ($results as $result) {
-			echo "=== " . $result['Test Name'] . " ===\n";
-			foreach ($result as $key => $value) {
-				echo "$key: $value\n";
-				if($key ==='Result'){
-					break;
-				}
-			}
-			echo "\n";
-		}
-	}
-
-	// ------------------------------------------------------------------------
+  }
+  
+  public function showResult() {
+    $results = $this->unit->result();
+    $statistics = [
+            'Pass' => 0,
+            'Fail' => 0
+        ];
+    foreach ($results as $result) {
+      echo "=== " . $result['Test Name'] . " ===\n";
+      foreach ($result as $key => $value) {
+        echo "$key: $value\n";
+        if($key ==='Result'){
+          if ($result['Result'] === 'Passed') {
+            $statistics['Pass']++;
+          } else {
+            $statistics['Fail']++;
+          }
+          break;
+        }
+      }
+      echo "\n";
+    }
+    echo "==========\n";
+    foreach ($statistics as $key => $value) {
+        echo "$value test(s) $key\n";
+    }
+    if ($statistics['Fail'] > 0) {
+        exit(1);
+    }        
+  }
 }

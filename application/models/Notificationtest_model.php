@@ -15,7 +15,6 @@ class Notificationtest_model extends Test_model
         $this->load->model("Notifications_model");
 	}
 
-	// ------------------------------------------------------------------------
     public function test(){
         $this->checkNotificationFirstTime();
         $this->checkAddNotification();

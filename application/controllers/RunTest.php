@@ -1,7 +1,7 @@
 <?php
 include('BaseTest.php');
 defined('BASEPATH') OR exit('No direct script access allowed');
-// php index.php ContohTest
+// php index.php RunTest
 class RunTest extends CI_Controller {
 
 	public $classes = [

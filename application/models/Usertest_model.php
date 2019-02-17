@@ -20,17 +20,29 @@ class Usertest_model extends Test_model
     
     public function test(){
         // 1 - 10
-        $this->testing_method_add_user();
-        // 11 - 12
-		$this->testing_method_add_users();
-        // 13 - 15
-		$this->testing_method_have_user();
-        // 16 - 17
-		$this->testing_method_username_to_user_id();
-        // 18 - 20
-		$this->testing_method_user_id_to_username();
-        // 21 - 23
-        $this->testing_method_have_email();
+				$this->testing_method_add_user();
+		// 11 - 12
+				$this->testing_method_add_users();
+		// 13 - 15
+				$this->testing_method_have_user();
+		// 16 - 17
+				$this->testing_method_username_to_user_id();
+		// 18 - 20
+				$this->testing_method_user_id_to_username();
+		// 21 - 23
+				$this->testing_method_have_email();
+		// 24 - 27
+				$this->testing_method_validate_user();
+		// // 28
+				$this->testing_method_get_names();
+		// // 29 - 30 
+				$this->testing_method_get_user();
+		// // 31
+				$this->testing_method_get_all_users();
+		// // 32 - 33 
+				$this->testing_method_delete_submissions();
+		// 34 - 35
+				//$this->testing_method_selected_assignment();
         
         $this->clear();
     }
@@ -209,10 +221,100 @@ class Usertest_model extends Test_model
 	private function testing_method_validate_user()
 	{
 		//24 - User_model method validate_user
-		$test = $this->User_model->validate_user();
-		$expected_result = true;
-		$test_name = "Testing validate_user function in User_model.php || input :  \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$test = $this->User_model->validate_user('nothing', 'admin123');
+		$expected_result = false;
+		$test_name = "Testing validate_user function in User_model.php || input : username not exists \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
 		$this->unit->run($test, $expected_result, $test_name);
+
+		//25 - User_model method validate_user
+		$test = $this->User_model->validate_user('ADMIN', 'admin123');
+		$expected_result = false;
+		$test_name = "Testing validate_user function in User_model.php || input : username not valid \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+
+		//26 - User_model method validate_user
+		$test = $this->User_model->validate_user('admin', 'nothing');
+		$expected_result = false;
+		$test_name = "Testing validate_user function in User_model.php || input : not valid password \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+
+		//27 - User_model method validate_user
+		$test = $this->User_model->validate_user('admin', 'nothing');
+		$expected_result = false;
+		$test_name = "Testing validate_user function in User_model.php || input : valid username and password \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+	}
+
+	private function testing_method_get_names()
+	{
+		//28 - User_model method get_names
+		$temp = array();
+		$temp['admin'] = 'Admin';
+		$temp['usertest1'] = 'usertest1';
+		$test = $this->User_model->get_names();
+		$expected_result = $temp;
+		$test_name = "Testing get_names function in User_model.php || input : valid names \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+
+	}
+
+	private function testing_method_get_user(){
+		//29 - User_model method get_user
+		$test = $this->User_model->get_user(0);
+		$expected_result = false;
+		$test_name = "Testing get_user function in User_model.php || input : not valid id \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+
+		//30 - User_model method get_user
+		$test = $this->User_model->get_user(1);
+		$expected_result = true;
+		$test_name = "Testing get_user function in User_model.php || input : valid id \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+	}
+
+	private function testing_method_get_all_users(){
+		//31 - User_model method get_all_users
+		$temp = $this->db->order_by('role', 'asc')->order_by('id')->get('users')->result_array();
+		$test = $this->User_model->get_all_users();
+		$expected_result = $temp;
+		$test_name = "Testing get_all_users function in User_model.php || input : - \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+	}
+
+	private function testing_method_delete_submissions(){
+		//32 - User_model method delete_submissions
+		$test = $this->User_model->delete_submissions(0);
+		$expected_result = false;
+		$test_name = "Testing delete_submissions function in User_model.php || input : not valid id \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+
+		//33 - User_model method delete_submissions
+		$test = $this->User_model->delete_submissions(1);
+		$expected_result = true;
+		$test_name = "Testing delete_submissions function in User_model.php || input : valid id \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+	}
+
+	private function testing_method_selected_assignment(){
+		// //34 - User_model method selected_assignment
+		// $temp2 = 'nothing';
+		// $temp = $this->db->select('selected_assignment')->get_where('users', array('username'=>$temp2));
+		// $test = $this->User_model->selected_assignment($temp2);
+		// $expected_result = $temp;
+		// $test_name = "Testing validate_user function in User_model.php || input : not valid username \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		// $this->unit->run($test, $expected_result, $test_name);
+
+		// //35 - User_model method selected_assignment
+		// $temp2 = 'admin';
+		// $temp = $this->db->select('selected_assignment')->get_where('users', array('username'=>$temp2));
+		// $test = $this->User_model->selected_assignment($temp2);
+		// $expected_result = $temp;
+		// $test_name = "Testing validate_user function in User_model.php || input : valid username \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		// $this->unit->run($test, $expected_result, $test_name);
+	}
+
+	private function testing_method_update_profile(){
+
 	}
 
 	// ------------------------------------------------------------------------

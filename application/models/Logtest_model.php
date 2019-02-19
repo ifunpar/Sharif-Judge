@@ -20,7 +20,7 @@ class Logtest_model extends Test_model
     
     public function test(){
         $this->testInitialDBStatus();
-        // $this->initPastLogin();
+        $this->initPastLogin();
         $this->loginUser();
         $this->clear();
     }
@@ -36,25 +36,27 @@ class Logtest_model extends Test_model
 		$this->unit->run($test, $expected_result, $test_name);
     }
     
-    // private function initPastLogin() {
-    //     $data = array(
-    //         'username' => 'testuser',
-    //         'ip_address' => '127.0.0.1'
-    //     );
-    //     $this->db->insert('logins', $data);
-    // }
+    private function initPastLogin() {
+        $data = array(
+            'username' => 'testuser',
+            'ip_address' => '127.0.0.1'
+        );
+        $this->db->insert('logins', $data);
+    }
 
     private function loginUser() {
-        $this->Logs_model->insert_to_logs('testuser', '127.0.0.1');
+        $this->Logs_model->insert_to_logs('testuser', '127.0.0.2');
 
         $temp = $this->Logs_model->get_all_logs()[0];
         $test = array(
             'username' => $temp['username'],
-            'ip_address' => $temp['ip_address']
+            'ip_address' => $temp['ip_address'],
+            'last_24h_login_id' => $temp['last_24h_login_id']
         );
         $expected_result = array(
             'username' => 'testuser',
-            'ip_address' => '127.0.0.1'
+            'ip_address' => '127.0.0.2',
+            'last_24h_login_id' => 1
         );
         $test_name = "Login test | Login log should be updated by this last login";
         $this->unit->run($test, $expected_result, $test_name);

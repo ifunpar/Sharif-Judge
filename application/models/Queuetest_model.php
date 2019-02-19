@@ -5,8 +5,8 @@
  * Date: 2019-02-19
  * Time: 14:41
  */
-
-class Queuetest_Model extends Test_model
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Queuetest_model extends Test_model
 {
     public function __construct()
     {

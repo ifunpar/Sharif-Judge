@@ -552,7 +552,6 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $submissions[2]);
       $total = count($this->Submit_model->get_final_submissions(1, 1, "Aku Tester"));
       $expected_result = 2;
-      var_dump($total);
       $this->unit->run($total,$expected_result,$test_name);
       $this->clear();
     }

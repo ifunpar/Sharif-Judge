@@ -4,6 +4,7 @@
  * @file User_model.php
  * @author Mohammad Javad Naderi <mjnaderi@gmail.com>
  */
+include('Test_model.php');
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Notificationtest_model extends Test_model

@@ -24,7 +24,7 @@ class Queuetest_model extends Test_model
     public function testNotEmptyQueue(){
         $test_name = "Test isi dari queue";
         $test = count($this->Queue_model->get_queue());
-        $expected_result = 1;
+        $expected_result = 0;
         $this->unit->run($test,$expected_result,$test_name);
     }
 

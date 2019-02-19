@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 // php index.php ContohTest
-class Scoreboard_model_test extends CI_Controller {
+class Scoreboardtest_model extends Test_model {
   var $shj_submissionsdummy = array(
     array(
         'submit_id' => '1',
@@ -255,22 +255,11 @@ class Scoreboard_model_test extends CI_Controller {
          $this->emptyDB('assignments');
         }
 
-		public function index(){
+		public function test(){
 
             $this->testGetScoreboard();
             $this->testUpdateScoreboard();
             $this->testUpdateAllScoreboard();
-            $results2 = $this->unit->result();   
-	        foreach ($results2 as $result2) {
-			echo "=== " . $result2['Test Name'] . " ===\n";
-            foreach ($result2 as $key2 => $value2) {
-				echo "$key2: $value2\n";
-				if($key2 ==='Result'){
-					break;
-				}
-            }
-            echo "\n";
-            }
     }   
 }
     

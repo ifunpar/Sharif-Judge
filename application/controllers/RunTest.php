@@ -8,7 +8,8 @@ class RunTest extends CI_Controller {
 		'initialtest_model',
 		'notificationtest_model',
 		'usertest_model',
-		'settingtest_model'
+		'settingtest_model',
+		'Scoreboardtest_model'
 	];
 	private $test, $expected_result, $test_name;
 

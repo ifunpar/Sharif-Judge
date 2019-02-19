@@ -22,34 +22,4 @@ abstract class Test_model extends CI_Model
     public function runTest() {
         $this->test();
   }
-  
-  public function showResult() {
-    $results = $this->unit->result();
-    $statistics = [
-            'Pass' => 0,
-            'Fail' => 0
-        ];
-    foreach ($results as $result) {
-      echo "=== " . $result['Test Name'] . " ===\n";
-      foreach ($result as $key => $value) {
-        echo "$key: $value\n";
-        if($key ==='Result'){
-          if ($result['Result'] === 'Passed') {
-            $statistics['Pass']++;
-          } else {
-            $statistics['Fail']++;
-          }
-          break;
-        }
-      }
-      echo "\n";
-    }
-    echo "==========\n";
-    foreach ($statistics as $key => $value) {
-        echo "$value test(s) $key\n";
-    }
-    if ($statistics['Fail'] > 0) {
-        exit(1);
-    }        
-  }
 }

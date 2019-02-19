@@ -1,57 +1,72 @@
 <?php
+
 /**
  * SharIF Judge online judge
  * @file User_model.php
  * @author Mohammad Javad Naderi <mjnaderi@gmail.com>
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Usertest_model extends Test_model
 {
 
 	public function __construct()
 	{
-        parent::__construct();
-        $this->load->model("Notifications_model");
-        $this->load->model("User_model");
+		parent::__construct();
+		$this->load->model("Notifications_model");
+		$this->load->model("User_model");
 	}
 
     // ------------------------------------------------------------------------
-    
-    public function test(){
-        // 1 - 10
-				$this->testing_method_add_user();
-		// 11 - 12
-				$this->testing_method_add_users();
-		// 13 - 15
-				$this->testing_method_have_user();
-		// 16 - 17
-				$this->testing_method_username_to_user_id();
-		// 18 - 20
-				$this->testing_method_user_id_to_username();
-		// 21 - 23
-				$this->testing_method_have_email();
-		// 24 - 27
-				$this->testing_method_validate_user();
-		// // 28
-				$this->testing_method_get_names();
-		// // 29 - 30 
-				$this->testing_method_get_user();
-		// // 31
-				$this->testing_method_get_all_users();
-		// // 32 - 33 
-				$this->testing_method_delete_submissions();
-		// 34 - 35
-				//$this->testing_method_selected_assignment();
-        
-        $this->clear();
-    }
 
-    private function clear(){
-        $this->db->truncate('users');
-    }
-    
-    private function testing_method_add_user()
+	public function test()
+	{
+        // 1 - 10
+		$this->testing_method_add_user();
+		// 11 - 12
+		$this->testing_method_add_users();
+		// 13 - 15
+		$this->testing_method_have_user();
+		// 16 - 17
+		$this->testing_method_username_to_user_id();
+		// 18 - 20
+		$this->testing_method_user_id_to_username();
+		// 21 - 23
+		$this->testing_method_have_email();
+		// 24 - 27
+		$this->testing_method_validate_user();
+		// // 28
+		$this->testing_method_get_names();
+		// // 29 - 30 
+		$this->testing_method_get_user();
+		// // 31
+		$this->testing_method_get_all_users();
+		// // 32 - 33 
+		$this->testing_method_delete_submissions();
+		// 34 - 35
+		$this->testing_method_delete_user();
+		//
+		$this->testing_method_passchange_is_valid();
+		//
+		$this->testing_method_send_password_reset_mail();
+		//
+		$this->testing_method_reset_password();
+		//
+		$this->testing_method_update_profile();
+		//
+		$this->testing_method_update_login_time();
+		//
+		$this->testing_method_selected_assignment();
+
+		$this->clear();
+	}
+
+	private function clear()
+	{
+		$this->db->truncate('users');
+	}
+
+	private function testing_method_add_user()
 	{
 		//1 - User_model method add_user
 		$test = $this->User_model->add_user('admin', 'admin@judge.com', 'Admin', 'admin123', 'admin');
@@ -258,7 +273,8 @@ class Usertest_model extends Test_model
 
 	}
 
-	private function testing_method_get_user(){
+	private function testing_method_get_user()
+	{
 		//29 - User_model method get_user
 		$test = $this->User_model->get_user(0);
 		$expected_result = false;
@@ -272,7 +288,8 @@ class Usertest_model extends Test_model
 		$this->unit->run($test, $expected_result, $test_name);
 	}
 
-	private function testing_method_get_all_users(){
+	private function testing_method_get_all_users()
+	{
 		//31 - User_model method get_all_users
 		$temp = $this->db->order_by('role', 'asc')->order_by('id')->get('users')->result_array();
 		$test = $this->User_model->get_all_users();
@@ -281,7 +298,8 @@ class Usertest_model extends Test_model
 		$this->unit->run($test, $expected_result, $test_name);
 	}
 
-	private function testing_method_delete_submissions(){
+	private function testing_method_delete_submissions()
+	{
 		//32 - User_model method delete_submissions
 		$test = $this->User_model->delete_submissions(0);
 		$expected_result = false;
@@ -295,7 +313,42 @@ class Usertest_model extends Test_model
 		$this->unit->run($test, $expected_result, $test_name);
 	}
 
-	private function testing_method_selected_assignment(){
+	private function testing_method_delete_user()
+	{
+		//34 - User_model method delete_user
+		$test = $this->User_model->delete_user(-1);
+		$expected_result = false;
+		$test_name = "Testing reset_password function in User_model.php || input : not valid userId \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+
+		//35 - User_model method delete_user
+		$test = $this->User_model->delete_user(2);
+		$expected_result = true;
+		$test_name = "Testing reset_password function in User_model.php || input : valid userId \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+	}
+
+	private function testing_method_update_profile()
+	{
+		// - User_model method update_profile
+		$test = $this->User_model->update_profile(0);
+		$expected_result = false;
+		$test_name = "Testing update_profile function in User_model.php || input : not valid userId \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+	}
+
+	private function testing_method_passchange_is_valid()
+	{
+		// - User_model method passchange_is_valid
+		$test = $this->User_model->passchange_is_valid(-1);
+		$expected_result = 'Invalid password reset link.';
+		$test_name = "Testing passchange_is_valid function in User_model.php || input : not valid passChangeKey \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+	}
+
+
+	private function testing_method_selected_assignment()
+	{
 		// //34 - User_model method selected_assignment
 		// $temp2 = 'nothing';
 		// $temp = $this->db->select('selected_assignment')->get_where('users', array('username'=>$temp2));
@@ -313,9 +366,29 @@ class Usertest_model extends Test_model
 		// $this->unit->run($test, $expected_result, $test_name);
 	}
 
-	private function testing_method_update_profile(){
-
+	private function testing_method_send_password_reset_mail()
+	{
+		// - User_model method send_password_reset_mail
+		$test = $this->User_model->send_password_reset_mail('asdfasdf');
+		$expected_result = null;
+		$test_name = "Testing send_password_reset_mail function in User_model.php || input : not valid email \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
 	}
 
+	private function testing_method_reset_password()
+	{
+		// - User_model method passchange_is_valid
+		$test = $this->User_model->reset_password(-1);
+		$expected_result = false;
+		$test_name = "Testing reset_password function in User_model.php || input : not valid passChangeKey \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+		$this->unit->run($test, $expected_result, $test_name);
+	}
+
+	
+
+	private function testing_method_update_login_time()
+	{
+
+	}
 	// ------------------------------------------------------------------------
 }

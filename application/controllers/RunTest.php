@@ -6,7 +6,7 @@ class RunTest extends CI_Controller {
 
 	public $classes = [
 		'notificationtest_model',
-		// 'usertest_model',
+		'usertest_model',
 		'settingtest_model',
 		'Scoreboardtest_model',
 		'logtest_model',
@@ -22,7 +22,7 @@ class RunTest extends CI_Controller {
         $this->load->library('unit_test');
 
 		foreach ($this->classes as $className) {
-			$this->load->model($className);
+			$this->load->model('tests/' . $className);
 			$this->$className->runTest();
 		}
 	}

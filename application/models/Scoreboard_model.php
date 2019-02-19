@@ -129,8 +129,9 @@ class Scoreboard_model extends CI_Model
 
 		// If scoreboard in not enabled, do nothing
 		$scoreboard_enabled = $this->db->select('scoreboard')->get_where('assignments', array('id'=>$assignment_id))->row()->scoreboard;
-		if ($assignment_id == 0 OR  ! $scoreboard_enabled )
+		if ($assignment_id == 0 OR  ! $scoreboard_enabled ){
 			return;
+		}
 
 		// Generate the scoreboard
 		list ($scores, $scoreboard) = $this->_generate_scoreboard($assignment_id);
@@ -151,7 +152,6 @@ class Scoreboard_model extends CI_Model
 		);
 
 		$scoreboard_table = $this->twig->render('pages/scoreboard_table.twig', $data);
-
 
 		// Minify the scoreboard's html code
 		// $scoreboard_table = $this->output->minify($scoreboard_table, 'text/html');

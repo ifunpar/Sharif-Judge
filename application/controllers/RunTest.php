@@ -11,7 +11,8 @@ class RunTest extends CI_Controller {
 		'settingtest_model',
 		'Scoreboardtest_model',
 		'logtest_model',
-		'Submittest_model'
+		'Submittest_model',
+		'Queuetest_Model'
 	];
 	private $test, $expected_result, $test_name;
 

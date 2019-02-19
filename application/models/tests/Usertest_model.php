@@ -378,7 +378,7 @@ class Usertest_model extends Test_model
   private function testing_method_reset_password()
   {
     // - User_model method passchange_is_valid
-    $test = $this->User_model->reset_password(-1);
+    $test = $this->User_model->reset_password(-1, 'newPass');
     $expected_result = false;
     $test_name = "Testing reset_password function in User_model.php || input : not valid passChangeKey \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
     $this->unit->run($test, $expected_result, $test_name);

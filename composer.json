@@ -13,7 +13,8 @@
     "require": {
 		"dapphp/radius": "^2.5",
         "phpoffice/phpspreadsheet": "^1.2",
-        "kenjis/ci-phpunit-test": "^0.16.1"
+        "kenjis/ci-phpunit-test": "^0.16.1",
+        "phpunit/php-code-coverage": "^7.0"
 	},
     "config": {
         "vendor-dir": "application/vendor"

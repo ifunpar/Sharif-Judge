@@ -1,3 +1,0 @@
-<table class="sharif_table"><thead><tr><th>#</th><th>Username</th><th>Name</th><th><a dir="auto" href="http://127.0.0.1:8000/problems/1/1">Problem </a><br><span class="tiny_text_b">100</span></th><th>
-			Total<br><span class="tiny_text_b">100</span></th></tr></thead><tr><td>1</td><td>admin</td><td dir="auto">Admin</td><td>
-					0<br><span class="tiny_text" title="Time">15:31</span></td><td><span style="font-weight: bold;">0</span><br><span class="tiny_text" title="Total Time + Submit Penalty">15:36</span></td></tr></table>

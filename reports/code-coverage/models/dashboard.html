@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\laragon\www\Sharif-Judge\application\models</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../_css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">C:\laragon\www\Sharif-Judge\application</a></li>
+         <li class="breadcrumb-item"><a href="index.html">models</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="User.php.html#9">User</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue_model.php.html#9">Queue_model</a></td><td class="text-right">3%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#9">Assignment_model</a></td><td class="text-right">4%</td></tr>
+       <tr><td><a href="Settings_model.php.html#13">Settings_model</a></td><td class="text-right">7%</td></tr>
+       <tr><td><a href="Submit_model.php.html#9">Submit_model</a></td><td class="text-right">29%</td></tr>
+       <tr><td><a href="Logs_model.php.html#9">Logs_model</a></td><td class="text-right">55%</td></tr>
+       <tr><td><a href="User_model.php.html#10">User_model</a></td><td class="text-right">57%</td></tr>
+       <tr><td><a href="Hof_model.php.html#9">Hof_model</a></td><td class="text-right">58%</td></tr>
+       <tr><td><a href="Notifications_model.php.html#9">Notifications_model</a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="tests/Hoftest_model.php.html#4">Hoftest_model</a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Assignment_model.php.html#9">Assignment_model</a></td><td class="text-right">2850</td></tr>
+       <tr><td><a href="User_model.php.html#10">User_model</a></td><td class="text-right">411</td></tr>
+       <tr><td><a href="Submit_model.php.html#9">Submit_model</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="Queue_model.php.html#9">Queue_model</a></td><td class="text-right">215</td></tr>
+       <tr><td><a href="User.php.html#9">User</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Settings_model.php.html#13">Settings_model</a></td><td class="text-right">45</td></tr>
+       <tr><td><a href="Notifications_model.php.html#9">Notifications_model</a></td><td class="text-right">21</td></tr>
+       <tr><td><a href="Logs_model.php.html#9">Logs_model</a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Hof_model.php.html#9">Hof_model</a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Assignment_model.php.html#12"><abbr title="Assignment_model::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submit_model.php.html#23"><abbr title="Submit_model::get_submission">get_submission</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue_model.php.html#160"><abbr title="Queue_model::get_first_item">get_first_item</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue_model.php.html#175"><abbr title="Queue_model::remove_item">remove_item</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#30"><abbr title="Assignment_model::add_assignment">add_assignment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings_model.php.html#17"><abbr title="Settings_model::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings_model.php.html#35"><abbr title="Settings_model::set_setting">set_setting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings_model.php.html#44"><abbr title="Settings_model::get_all_settings">get_all_settings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings_model.php.html#59"><abbr title="Settings_model::set_settings">set_settings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submit_model.php.html#94"><abbr title="Submit_model::count_final_submissions">count_final_submissions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue_model.php.html#83"><abbr title="Queue_model::rejudge">rejudge</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submit_model.php.html#127"><abbr title="Submit_model::set_final_submission">set_final_submission</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submit_model.php.html#154"><abbr title="Submit_model::add_upload_only">add_upload_only</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#18"><abbr title="User::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#64"><abbr title="User::select_assignment">select_assignment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#80"><abbr title="User::save_widget_positions">save_widget_positions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#99"><abbr title="User::get_widget_positions">get_widget_positions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User_model.php.html#359"><abbr title="User_model::selected_assignment">selected_assignment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User_model.php.html#577"><abbr title="User_model::update_login_time">update_login_time</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue_model.php.html#128"><abbr title="Queue_model::rejudge_single">rejudge_single</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue_model.php.html#193"><abbr title="Queue_model::save_judge_result_in_db">save_judge_result_in_db</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue_model.php.html#59"><abbr title="Queue_model::add_to_queue">add_to_queue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#380"><abbr title="Assignment_model::get_moss_time">get_moss_time</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#154"><abbr title="Assignment_model::delete_assignment">delete_assignment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#186"><abbr title="Assignment_model::all_assignments">all_assignments</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#210"><abbr title="Assignment_model::new_assignment_id">new_assignment_id</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#309"><abbr title="Assignment_model::is_participant">is_participant</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue_model.php.html#50"><abbr title="Queue_model::empty_queue">empty_queue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#360"><abbr title="Assignment_model::set_moss_time">set_moss_time</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#336"><abbr title="Assignment_model::increase_total_submits">increase_total_submits</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#402"><abbr title="Assignment_model::save_problem_description">save_problem_description</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notifications_model.php.html#129"><abbr title="Notifications_model::have_new_notification">have_new_notification</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue_model.php.html#25"><abbr title="Queue_model::in_queue">in_queue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notifications_model.php.html#39"><abbr title="Notifications_model::get_latest_notifications">get_latest_notifications</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="tests/Hoftest_model.php.html#9"><abbr title="Hoftest_model::emptyDB">emptyDB</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#443"><abbr title="Assignment_model::_update_coefficients">_update_coefficients</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User_model.php.html#447"><abbr title="User_model::send_password_reset_mail">send_password_reset_mail</abbr></a></td><td class="text-right">9%</td></tr>
+       <tr><td><a href="User_model.php.html#402"><abbr title="User_model::update_profile">update_profile</abbr></a></td><td class="text-right">16%</td></tr>
+       <tr><td><a href="User_model.php.html#496"><abbr title="User_model::passchange_is_valid">passchange_is_valid</abbr></a></td><td class="text-right">37%</td></tr>
+       <tr><td><a href="User_model.php.html#163"><abbr title="User_model::add_users">add_users</abbr></a></td><td class="text-right">37%</td></tr>
+       <tr><td><a href="Hof_model.php.html#48"><abbr title="Hof_model::get_all_user_assignments">get_all_user_assignments</abbr></a></td><td class="text-right">44%</td></tr>
+       <tr><td><a href="Logs_model.php.html#27"><abbr title="Logs_model::insert_to_logs">insert_to_logs</abbr></a></td><td class="text-right">47%</td></tr>
+       <tr><td><a href="User_model.php.html#521"><abbr title="User_model::reset_password">reset_password</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Submit_model.php.html#69"><abbr title="Submit_model::get_all_submissions">get_all_submissions</abbr></a></td><td class="text-right">53%</td></tr>
+       <tr><td><a href="Submit_model.php.html#42"><abbr title="Submit_model::get_final_submissions">get_final_submissions</abbr></a></td><td class="text-right">57%</td></tr>
+       <tr><td><a href="Hof_model.php.html#27"><abbr title="Hof_model::get_all_final_submission">get_all_final_submission</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#279"><abbr title="Assignment_model::assignment_info">assignment_info</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Submit_model.php.html#111"><abbr title="Submit_model::count_all_submissions">count_all_submissions</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Assignment_model.php.html#236"><abbr title="Assignment_model::all_problems">all_problems</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="User_model.php.html#30"><abbr title="User_model::have_user">have_user</abbr></a></td><td class="text-right">83%</td></tr>
+       <tr><td><a href="User_model.php.html#326"><abbr title="User_model::validate_user">validate_user</abbr></a></td><td class="text-right">87%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Assignment_model.php.html#30"><abbr title="Assignment_model::add_assignment">add_assignment</abbr></a></td><td class="text-right">506</td></tr>
+       <tr><td><a href="Assignment_model.php.html#443"><abbr title="Assignment_model::_update_coefficients">_update_coefficients</abbr></a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="User.php.html#18"><abbr title="User::__construct">__construct</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="User_model.php.html#163"><abbr title="User_model::add_users">add_users</abbr></a></td><td class="text-right">40</td></tr>
+       <tr><td><a href="Assignment_model.php.html#309"><abbr title="Assignment_model::is_participant">is_participant</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Submit_model.php.html#94"><abbr title="Submit_model::count_final_submissions">count_final_submissions</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="User_model.php.html#402"><abbr title="User_model::update_profile">update_profile</abbr></a></td><td class="text-right">19</td></tr>
+       <tr><td><a href="Assignment_model.php.html#402"><abbr title="Assignment_model::save_problem_description">save_problem_description</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Notifications_model.php.html#129"><abbr title="Notifications_model::have_new_notification">have_new_notification</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Queue_model.php.html#83"><abbr title="Queue_model::rejudge">rejudge</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Submit_model.php.html#69"><abbr title="Submit_model::get_all_submissions">get_all_submissions</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Submit_model.php.html#42"><abbr title="Submit_model::get_final_submissions">get_final_submissions</abbr></a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="User_model.php.html#496"><abbr title="User_model::passchange_is_valid">passchange_is_valid</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="Logs_model.php.html#27"><abbr title="Logs_model::insert_to_logs">insert_to_logs</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="User_model.php.html#326"><abbr title="User_model::validate_user">validate_user</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="User_model.php.html#359"><abbr title="User_model::selected_assignment">selected_assignment</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Settings_model.php.html#59"><abbr title="Settings_model::set_settings">set_settings</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Submit_model.php.html#23"><abbr title="Submit_model::get_submission">get_submission</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Queue_model.php.html#193"><abbr title="Queue_model::save_judge_result_in_db">save_judge_result_in_db</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Settings_model.php.html#44"><abbr title="Settings_model::get_all_settings">get_all_settings</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Assignment_model.php.html#154"><abbr title="Assignment_model::delete_assignment">delete_assignment</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Assignment_model.php.html#186"><abbr title="Assignment_model::all_assignments">all_assignments</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Assignment_model.php.html#210"><abbr title="Assignment_model::new_assignment_id">new_assignment_id</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Assignment_model.php.html#380"><abbr title="Assignment_model::get_moss_time">get_moss_time</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="User_model.php.html#577"><abbr title="User_model::update_login_time">update_login_time</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Queue_model.php.html#128"><abbr title="Queue_model::rejudge_single">rejudge_single</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Notifications_model.php.html#39"><abbr title="Notifications_model::get_latest_notifications">get_latest_notifications</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Queue_model.php.html#160"><abbr title="Queue_model::get_first_item">get_first_item</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="User_model.php.html#447"><abbr title="User_model::send_password_reset_mail">send_password_reset_mail</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Submit_model.php.html#111"><abbr title="Submit_model::count_all_submissions">count_all_submissions</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="User_model.php.html#30"><abbr title="User_model::have_user">have_user</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Hof_model.php.html#48"><abbr title="Hof_model::get_all_user_assignments">get_all_user_assignments</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="User_model.php.html#521"><abbr title="User_model::reset_password">reset_password</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Hof_model.php.html#27"><abbr title="Hof_model::get_all_final_submission">get_all_final_submission</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Assignment_model.php.html#279"><abbr title="Assignment_model::assignment_info">assignment_info</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Assignment_model.php.html#236"><abbr title="Assignment_model::all_problems">all_problems</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 7.0.2</a> using <a href="https://secure.php.net/" target="_top">PHP 7.2.11</a> with <a href="https://xdebug.org/">Xdebug 2.6.1</a> at Mon Feb 25 11:28:46 UTC 2019.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/jquery.min.js" type="text/javascript"></script>
+  <script src="../_js/d3.min.js" type="text/javascript"></script>
+  <script src="../_js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([1,3,0,1,0,0,3,1,0,1,1,8], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([36,1,1,0,2,2,3,1,2,3,4,91], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[4.9079754601226995,57,"<a href=\"Assignment_model.php.html#9\">Assignment_model<\/a>"],[58.82352941176471,5,"<a href=\"Hof_model.php.html#9\">Hof_model<\/a>"],[55.00000000000001,6,"<a href=\"Logs_model.php.html#9\">Logs_model<\/a>"],[60,12,"<a href=\"Notifications_model.php.html#9\">Notifications_model<\/a>"],[3.7037037037037033,15,"<a href=\"Queue_model.php.html#9\">Queue_model<\/a>"],[97.14285714285714,16,"<a href=\"Scoreboard_model.php.html#9\">Scoreboard_model<\/a>"],[7.6923076923076925,7,"<a href=\"Settings_model.php.html#13\">Settings_model<\/a>"],[29.87012987012987,25,"<a href=\"Submit_model.php.html#9\">Submit_model<\/a>"],[0,10,"<a href=\"User.php.html#9\">User<\/a>"],[57.971014492753625,68,"<a href=\"User_model.php.html#10\">User_model<\/a>"],[88.88888888888889,5,"<a href=\"tests\/Hoftest_model.php.html#4\">Hoftest_model<\/a>"],[100,6,"<a href=\"tests\/Logtest_model.php.html#9\">Logtest_model<\/a>"],[100,8,"<a href=\"tests\/Notificationtest_model.php.html#10\">Notificationtest_model<\/a>"],[100,3,"<a href=\"tests\/Queuetest_model.php.html#9\">Queuetest_model<\/a>"],[100,6,"<a href=\"tests\/Scoreboardtest_model.php.html#4\">Scoreboardtest_model<\/a>"],[100,7,"<a href=\"tests\/Settingtest_model.php.html#9\">Settingtest_model<\/a>"],[100,10,"<a href=\"tests\/Submittest_model.php.html#9\">Submittest_model<\/a>"],[100,3,"<a href=\"tests\/Test_model.php.html#9\">Test_model<\/a>"],[100,22,"<a href=\"tests\/Usertest_model.php.html#10\">Usertest_model<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"Assignment_model.php.html#12\">Assignment_model::__construct<\/a>"],[0,22,"<a href=\"Assignment_model.php.html#30\">Assignment_model::add_assignment<\/a>"],[0,2,"<a href=\"Assignment_model.php.html#154\">Assignment_model::delete_assignment<\/a>"],[0,2,"<a href=\"Assignment_model.php.html#186\">Assignment_model::all_assignments<\/a>"],[0,2,"<a href=\"Assignment_model.php.html#210\">Assignment_model::new_assignment_id<\/a>"],[80,2,"<a href=\"Assignment_model.php.html#236\">Assignment_model::all_problems<\/a>"],[100,1,"<a href=\"Assignment_model.php.html#260\">Assignment_model::problem_info<\/a>"],[75,2,"<a href=\"Assignment_model.php.html#279\">Assignment_model::assignment_info<\/a>"],[0,4,"<a href=\"Assignment_model.php.html#309\">Assignment_model::is_participant<\/a>"],[0,1,"<a href=\"Assignment_model.php.html#336\">Assignment_model::increase_total_submits<\/a>"],[0,1,"<a href=\"Assignment_model.php.html#360\">Assignment_model::set_moss_time<\/a>"],[0,2,"<a href=\"Assignment_model.php.html#380\">Assignment_model::get_moss_time<\/a>"],[0,3,"<a href=\"Assignment_model.php.html#402\">Assignment_model::save_problem_description<\/a>"],[0,12,"<a href=\"Assignment_model.php.html#443\">Assignment_model::_update_coefficients<\/a>"],[100,1,"<a href=\"Hof_model.php.html#12\">Hof_model::__construct<\/a>"],[66.66666666666666,2,"<a href=\"Hof_model.php.html#27\">Hof_model::get_all_final_submission<\/a>"],[44.44444444444444,2,"<a href=\"Hof_model.php.html#48\">Hof_model::get_all_user_assignments<\/a>"],[100,1,"<a href=\"Logs_model.php.html#12\">Logs_model::__construct<\/a>"],[47.05882352941176,4,"<a href=\"Logs_model.php.html#27\">Logs_model::insert_to_logs<\/a>"],[100,1,"<a href=\"Logs_model.php.html#72\">Logs_model::get_all_logs<\/a>"],[100,1,"<a href=\"Notifications_model.php.html#12\">Notifications_model::__construct<\/a>"],[100,1,"<a href=\"Notifications_model.php.html#24\">Notifications_model::get_all_notifications<\/a>"],[0,2,"<a href=\"Notifications_model.php.html#39\">Notifications_model::get_latest_notifications<\/a>"],[100,1,"<a href=\"Notifications_model.php.html#63\">Notifications_model::add_notification<\/a>"],[100,1,"<a href=\"Notifications_model.php.html#82\">Notifications_model::update_notification<\/a>"],[100,1,"<a href=\"Notifications_model.php.html#101\">Notifications_model::delete_notification<\/a>"],[100,2,"<a href=\"Notifications_model.php.html#113\">Notifications_model::get_notification<\/a>"],[0,3,"<a href=\"Notifications_model.php.html#129\">Notifications_model::have_new_notification<\/a>"],[100,1,"<a href=\"Queue_model.php.html#12\">Queue_model::__construct<\/a>"],[0,1,"<a href=\"Queue_model.php.html#25\">Queue_model::in_queue<\/a>"],[100,1,"<a href=\"Queue_model.php.html#38\">Queue_model::get_queue<\/a>"],[0,1,"<a href=\"Queue_model.php.html#50\">Queue_model::empty_queue<\/a>"],[0,1,"<a href=\"Queue_model.php.html#59\">Queue_model::add_to_queue<\/a>"],[0,3,"<a href=\"Queue_model.php.html#83\">Queue_model::rejudge<\/a>"],[0,2,"<a href=\"Queue_model.php.html#128\">Queue_model::rejudge_single<\/a>"],[0,2,"<a href=\"Queue_model.php.html#160\">Queue_model::get_first_item<\/a>"],[0,1,"<a href=\"Queue_model.php.html#175\">Queue_model::remove_item<\/a>"],[0,2,"<a href=\"Queue_model.php.html#193\">Queue_model::save_judge_result_in_db<\/a>"],[100,1,"<a href=\"Scoreboard_model.php.html#12\">Scoreboard_model::__construct<\/a>"],[97.5,6,"<a href=\"Scoreboard_model.php.html#27\">Scoreboard_model::_generate_scoreboard<\/a>"],[100,2,"<a href=\"Scoreboard_model.php.html#96\">Scoreboard_model::update_scoreboards<\/a>"],[95,5,"<a href=\"Scoreboard_model.php.html#127\">Scoreboard_model::update_scoreboard<\/a>"],[100,2,"<a href=\"Scoreboard_model.php.html#179\">Scoreboard_model::get_scoreboard<\/a>"],[0,1,"<a href=\"Settings_model.php.html#17\">Settings_model::__construct<\/a>"],[100,1,"<a href=\"Settings_model.php.html#26\">Settings_model::get_setting<\/a>"],[0,1,"<a href=\"Settings_model.php.html#35\">Settings_model::set_setting<\/a>"],[0,2,"<a href=\"Settings_model.php.html#44\">Settings_model::get_all_settings<\/a>"],[0,2,"<a href=\"Settings_model.php.html#59\">Settings_model::set_settings<\/a>"],[100,1,"<a href=\"Submit_model.php.html#11\">Submit_model::__construct<\/a>"],[0,2,"<a href=\"Submit_model.php.html#23\">Submit_model::get_submission<\/a>"],[57.14285714285714,6,"<a href=\"Submit_model.php.html#42\">Submit_model::get_final_submissions<\/a>"],[53.84615384615385,6,"<a href=\"Submit_model.php.html#69\">Submit_model::get_all_submissions<\/a>"],[0,4,"<a href=\"Submit_model.php.html#94\">Submit_model::count_final_submissions<\/a>"],[75,4,"<a href=\"Submit_model.php.html#111\">Submit_model::count_all_submissions<\/a>"],[0,1,"<a href=\"Submit_model.php.html#127\">Submit_model::set_final_submission<\/a>"],[0,1,"<a href=\"Submit_model.php.html#154\">Submit_model::add_upload_only<\/a>"],[0,7,"<a href=\"User.php.html#18\">User::__construct<\/a>"],[0,1,"<a href=\"User.php.html#64\">User::select_assignment<\/a>"],[0,1,"<a href=\"User.php.html#80\">User::save_widget_positions<\/a>"],[0,1,"<a href=\"User.php.html#99\">User::get_widget_positions<\/a>"],[100,1,"<a href=\"User_model.php.html#13\">User_model::__construct<\/a>"],[83.33333333333334,3,"<a href=\"User_model.php.html#30\">User_model::have_user<\/a>"],[100,3,"<a href=\"User_model.php.html#52\">User_model::user_id_to_username<\/a>"],[100,2,"<a href=\"User_model.php.html#74\">User_model::username_to_user_id<\/a>"],[100,4,"<a href=\"User_model.php.html#95\">User_model::have_email<\/a>"],[100,10,"<a href=\"User_model.php.html#122\">User_model::add_user<\/a>"],[37.77777777777778,11,"<a href=\"User_model.php.html#163\">User_model::add_users<\/a>"],[92.3076923076923,3,"<a href=\"User_model.php.html#253\">User_model::delete_user<\/a>"],[91.66666666666666,3,"<a href=\"User_model.php.html#289\">User_model::delete_submissions<\/a>"],[87.5,6,"<a href=\"User_model.php.html#326\">User_model::validate_user<\/a>"],[0,2,"<a href=\"User_model.php.html#359\">User_model::selected_assignment<\/a>"],[100,2,"<a href=\"User_model.php.html#380\">User_model::get_names<\/a>"],[16.666666666666664,5,"<a href=\"User_model.php.html#402\">User_model::update_profile<\/a>"],[9.090909090909092,2,"<a href=\"User_model.php.html#447\">User_model::send_password_reset_mail<\/a>"],[37.5,4,"<a href=\"User_model.php.html#496\">User_model::passchange_is_valid<\/a>"],[50,2,"<a href=\"User_model.php.html#521\">User_model::reset_password<\/a>"],[100,1,"<a href=\"User_model.php.html#542\">User_model::get_all_users<\/a>"],[100,2,"<a href=\"User_model.php.html#559\">User_model::get_user<\/a>"],[0,2,"<a href=\"User_model.php.html#577\">User_model::update_login_time<\/a>"],[100,1,"<a href=\"tests\/Hoftest_model.php.html#5\">Hoftest_model::__construct<\/a>"],[0,1,"<a href=\"tests\/Hoftest_model.php.html#9\">Hoftest_model::emptyDB<\/a>"],[100,1,"<a href=\"tests\/Hoftest_model.php.html#12\">Hoftest_model::testget_all_final_submission<\/a>"],[100,1,"<a href=\"tests\/Hoftest_model.php.html#18\">Hoftest_model::testget_all_user_assignments<\/a>"],[100,1,"<a href=\"tests\/Hoftest_model.php.html#24\">Hoftest_model::test<\/a>"],[100,1,"<a href=\"tests\/Logtest_model.php.html#12\">Logtest_model::__construct<\/a>"],[100,1,"<a href=\"tests\/Logtest_model.php.html#21\">Logtest_model::test<\/a>"],[100,1,"<a href=\"tests\/Logtest_model.php.html#28\">Logtest_model::clear<\/a>"],[100,1,"<a href=\"tests\/Logtest_model.php.html#32\">Logtest_model::testInitialDBStatus<\/a>"],[100,1,"<a href=\"tests\/Logtest_model.php.html#39\">Logtest_model::initPastLogin<\/a>"],[100,1,"<a href=\"tests\/Logtest_model.php.html#47\">Logtest_model::loginUser<\/a>"],[100,1,"<a href=\"tests\/Notificationtest_model.php.html#13\">Notificationtest_model::__construct<\/a>"],[100,1,"<a href=\"tests\/Notificationtest_model.php.html#19\">Notificationtest_model::test<\/a>"],[100,1,"<a href=\"tests\/Notificationtest_model.php.html#26\">Notificationtest_model::clear<\/a>"],[100,1,"<a href=\"tests\/Notificationtest_model.php.html#30\">Notificationtest_model::checkNotificationFirstTime<\/a>"],[100,1,"<a href=\"tests\/Notificationtest_model.php.html#37\">Notificationtest_model::checkAddNotification<\/a>"],[100,2,"<a href=\"tests\/Notificationtest_model.php.html#46\">Notificationtest_model::checkUpdateNotifications<\/a>"],[100,1,"<a href=\"tests\/Notificationtest_model.php.html#61\">Notificationtest_model::checkDeletedNotification<\/a>"],[100,1,"<a href=\"tests\/Queuetest_model.php.html#11\">Queuetest_model::__construct<\/a>"],[100,1,"<a href=\"tests\/Queuetest_model.php.html#17\">Queuetest_model::test<\/a>"],[100,1,"<a href=\"tests\/Queuetest_model.php.html#24\">Queuetest_model::testNotEmptyQueue<\/a>"],[100,1,"<a href=\"tests\/Scoreboardtest_model.php.html#162\">Scoreboardtest_model::__construct<\/a>"],[100,1,"<a href=\"tests\/Scoreboardtest_model.php.html#169\">Scoreboardtest_model::emptyDB<\/a>"],[100,1,"<a href=\"tests\/Scoreboardtest_model.php.html#174\">Scoreboardtest_model::testUpdateAllScoreboard<\/a>"],[100,1,"<a href=\"tests\/Scoreboardtest_model.php.html#213\">Scoreboardtest_model::testGetScoreboard<\/a>"],[100,1,"<a href=\"tests\/Scoreboardtest_model.php.html#220\">Scoreboardtest_model::testUpdateScoreboard<\/a>"],[100,1,"<a href=\"tests\/Scoreboardtest_model.php.html#258\">Scoreboardtest_model::test<\/a>"],[100,1,"<a href=\"tests\/Settingtest_model.php.html#12\">Settingtest_model::__construct<\/a>"],[100,1,"<a href=\"tests\/Settingtest_model.php.html#21\">Settingtest_model::test<\/a>"],[100,1,"<a href=\"tests\/Settingtest_model.php.html#32\">Settingtest_model::printSetting<\/a>"],[100,1,"<a href=\"tests\/Settingtest_model.php.html#39\">Settingtest_model::set_setting<\/a>"],[100,1,"<a href=\"tests\/Settingtest_model.php.html#44\">Settingtest_model::get_setting<\/a>"],[100,2,"<a href=\"tests\/Settingtest_model.php.html#49\">Settingtest_model::get_all_settings<\/a>"],[100,1,"<a href=\"tests\/Submittest_model.php.html#12\">Submittest_model::__construct<\/a>"],[100,1,"<a href=\"tests\/Submittest_model.php.html#21\">Submittest_model::test<\/a>"],[100,1,"<a href=\"tests\/Submittest_model.php.html#32\">Submittest_model::checkSubmitFirstTime<\/a>"],[100,1,"<a href=\"tests\/Submittest_model.php.html#69\">Submittest_model::clear<\/a>"],[100,1,"<a href=\"tests\/Submittest_model.php.html#75\">Submittest_model::addSubmissionForCertainUser<\/a>"],[100,1,"<a href=\"tests\/Submittest_model.php.html#171\">Submittest_model::adminLookAllSubmission<\/a>"],[100,1,"<a href=\"tests\/Submittest_model.php.html#268\">Submittest_model::countAllSubmissionForAdmin<\/a>"],[100,1,"<a href=\"tests\/Submittest_model.php.html#365\">Submittest_model::countAllSubmissionForCertainUsers<\/a>"],[100,1,"<a href=\"tests\/Submittest_model.php.html#462\">Submittest_model::checkFinalSubmissionForAdmin<\/a>"],[100,1,"<a href=\"tests\/Submittest_model.php.html#559\">Submittest_model::checkFinalSubmissionForCertainUser<\/a>"],[100,1,"<a href=\"tests\/Test_model.php.html#14\">Test_model::__construct<\/a>"],[100,1,"<a href=\"tests\/Test_model.php.html#20\">Test_model::test<\/a>"],[100,1,"<a href=\"tests\/Test_model.php.html#22\">Test_model::runTest<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#13\">Usertest_model::__construct<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#22\">Usertest_model::test<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#64\">Usertest_model::clear<\/a>"],[100,2,"<a href=\"tests\/Usertest_model.php.html#69\">Usertest_model::testing_method_add_user<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#136\">Usertest_model::testing_method_add_users<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#158\">Usertest_model::testing_method_have_user<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#179\">Usertest_model::testing_method_username_to_user_id<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#194\">Usertest_model::testing_method_user_id_to_username<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#215\">Usertest_model::testing_method_have_email<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#236\">Usertest_model::testing_method_validate_user<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#263\">Usertest_model::testing_method_get_names<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#276\">Usertest_model::testing_method_get_user<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#291\">Usertest_model::testing_method_get_all_users<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#301\">Usertest_model::testing_method_delete_submissions<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#316\">Usertest_model::testing_method_delete_user<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#331\">Usertest_model::testing_method_update_profile<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#340\">Usertest_model::testing_method_passchange_is_valid<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#350\">Usertest_model::testing_method_selected_assignment<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#369\">Usertest_model::testing_method_send_password_reset_mail<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#378\">Usertest_model::testing_method_reset_password<\/a>"],[100,1,"<a href=\"tests\/Usertest_model.php.html#389\">Usertest_model::testing_method_update_login_time<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

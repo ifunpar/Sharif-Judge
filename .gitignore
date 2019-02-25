@@ -7,8 +7,8 @@ application/config/database.php
 application/config/secrets.php
 application/vendor/
 restricted/
-reports/code-coverage/
-reports/test_report.html
+reports-dev/code-coverage/
+reports-dev/test_report.html
 
 # Ignore Twig Cache Files
 application/cache/Twig/*/

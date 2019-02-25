@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\laragon\www\Sharif-Judge\application\controllers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../_css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">C:\laragon\www\Sharif-Judge\application</a></li>
+         <li class="breadcrumb-item"><a href="index.html">controllers</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Assignments.php.html#9">Assignments</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queueprocess.php.html#9">Queueprocess</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submit.php.html#9">Submit</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#16">Submissions</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings.php.html#9">Settings</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SettingTest.php.html#9">SettingTest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Server_time.php.html#9">Server_time</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Scoreboard.php.html#9">Scoreboard</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rejudge.php.html#9">Rejudge</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue.php.html#9">Queue</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dashboard.php.html#9">Dashboard</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Profile.php.html#9">Profile</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Problems.php.html#9">Problems</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notifications.php.html#9">Notifications</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Moss.php.html#9">Moss</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logs.php.html#9">Logs</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Login.php.html#9">Login</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Install.php.html#9">Install</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Halloffame.php.html#9">Halloffame</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#16">Users</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="RunTest.php.html#6">RunTest</a></td><td class="text-right">20%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Submissions.php.html#16">Submissions</a></td><td class="text-right">6806</td></tr>
+       <tr><td><a href="Assignments.php.html#9">Assignments</a></td><td class="text-right">5256</td></tr>
+       <tr><td><a href="Submit.php.html#9">Submit</a></td><td class="text-right">3782</td></tr>
+       <tr><td><a href="Problems.php.html#9">Problems</a></td><td class="text-right">930</td></tr>
+       <tr><td><a href="Settings.php.html#9">Settings</a></td><td class="text-right">812</td></tr>
+       <tr><td><a href="Users.php.html#16">Users</a></td><td class="text-right">552</td></tr>
+       <tr><td><a href="Login.php.html#9">Login</a></td><td class="text-right">462</td></tr>
+       <tr><td><a href="Notifications.php.html#9">Notifications</a></td><td class="text-right">420</td></tr>
+       <tr><td><a href="Moss.php.html#9">Moss</a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="Profile.php.html#9">Profile</a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="Queueprocess.php.html#9">Queueprocess</a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="Install.php.html#9">Install</a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="Dashboard.php.html#9">Dashboard</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="SettingTest.php.html#9">SettingTest</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Queue.php.html#9">Queue</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="RunTest.php.html#6">RunTest</a></td><td class="text-right">84</td></tr>
+       <tr><td><a href="Rejudge.php.html#9">Rejudge</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Halloffame.php.html#9">Halloffame</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Logs.php.html#9">Logs</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Scoreboard.php.html#9">Scoreboard</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Server_time.php.html#9">Server_time</a></td><td class="text-right">20</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Assignments.php.html#20"><abbr title="Assignments::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Server_time.php.html#28"><abbr title="Server_time::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings.php.html#19"><abbr title="Settings::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SettingTest.php.html#123"><abbr title="SettingTest::printSetting">printSetting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SettingTest.php.html#103"><abbr title="SettingTest::testing">testing</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SettingTest.php.html#97"><abbr title="SettingTest::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SettingTest.php.html#86"><abbr title="SettingTest::get_all_settings">get_all_settings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SettingTest.php.html#81"><abbr title="SettingTest::get_setting">get_setting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SettingTest.php.html#76"><abbr title="SettingTest::set_setting">set_setting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SettingTest.php.html#14"><abbr title="SettingTest::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Server_time.php.html#12"><abbr title="Server_time::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings.php.html#58"><abbr title="Settings::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Scoreboard.php.html#26"><abbr title="Scoreboard::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Scoreboard.php.html#13"><abbr title="Scoreboard::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rejudge.php.html#54"><abbr title="Rejudge::rejudge_single">rejudge_single</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rejudge.php.html#27"><abbr title="Rejudge::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rejudge.php.html#13"><abbr title="Rejudge::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queueprocess.php.html#34"><abbr title="Queueprocess::run">run</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queueprocess.php.html#13"><abbr title="Queueprocess::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue.php.html#67"><abbr title="Queue::empty_queue">empty_queue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue.php.html#55"><abbr title="Queue::resume">resume</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Settings.php.html#34"><abbr title="Settings::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#28"><abbr title="Submissions::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignments.php.html#35"><abbr title="Assignments::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submit.php.html#70"><abbr title="Submit::_match">_match</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#119"><abbr title="Users::delete_submissions">delete_submissions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#91"><abbr title="Users::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#56"><abbr title="Users::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#37"><abbr title="Users::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#20"><abbr title="Users::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submit.php.html#159"><abbr title="Submit::_upload">_upload</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submit.php.html#101"><abbr title="Submit::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submit.php.html#88"><abbr title="Submit::_check_language">_check_language</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submit.php.html#50"><abbr title="Submit::_language_to_type">_language_to_type</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#58"><abbr title="Submissions::_download_excel">_download_excel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submit.php.html#25"><abbr title="Submit::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#522"><abbr title="Submissions::download_file">download_file</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#455"><abbr title="Submissions::view_code">view_code</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#446"><abbr title="Submissions::_check_type">_check_type</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#389"><abbr title="Submissions::select">select</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#325"><abbr title="Submissions::all">all</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#261"><abbr title="Submissions::the_final">the_final</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#248"><abbr title="Submissions::all_excel">all_excel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#241"><abbr title="Submissions::final_excel">final_excel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue.php.html#43"><abbr title="Queue::pause">pause</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue.php.html#27"><abbr title="Queue::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Queue.php.html#13"><abbr title="Queue::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Halloffame.php.html#13"><abbr title="Halloffame::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Login.php.html#116"><abbr title="Login::logout">logout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Login.php.html#80"><abbr title="Login::register">register</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Login.php.html#41"><abbr title="Login::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Login.php.html#25"><abbr title="Login::_registration_code">_registration_code</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Login.php.html#12"><abbr title="Login::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Install.php.html#22"><abbr title="Install::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Install.php.html#12"><abbr title="Install::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Halloffame.php.html#48"><abbr title="Halloffame::hof_details">hof_details</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Halloffame.php.html#29"><abbr title="Halloffame::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dashboard.php.html#61"><abbr title="Dashboard::widget_positions">widget_positions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Login.php.html#147"><abbr title="Login::reset">reset</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dashboard.php.html#27"><abbr title="Dashboard::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Dashboard.php.html#13"><abbr title="Dashboard::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignments.php.html#565"><abbr title="Assignments::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignments.php.html#371"><abbr title="Assignments::_add">_add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignments.php.html#276"><abbr title="Assignments::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignments.php.html#240"><abbr title="Assignments::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignments.php.html#200"><abbr title="Assignments::download_submissions">download_submissions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignments.php.html#138"><abbr title="Assignments::downloadtestsdesc">downloadtestsdesc</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignments.php.html#100"><abbr title="Assignments::pdf">pdf</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Assignments.php.html#67"><abbr title="Assignments::select">select</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Login.php.html#126"><abbr title="Login::lost">lost</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logs.php.html#13"><abbr title="Logs::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Profile.php.html#104"><abbr title="Profile::_role_check">_role_check</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Logs.php.html#30"><abbr title="Logs::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Profile.php.html#94"><abbr title="Profile::_email_check">_email_check</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Profile.php.html#84"><abbr title="Profile::_password_again_check">_password_again_check</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Profile.php.html#77"><abbr title="Profile::_password_check">_password_check</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Profile.php.html#31"><abbr title="Profile::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Profile.php.html#19"><abbr title="Profile::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Problems.php.html#97"><abbr title="Problems::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Problems.php.html#37"><abbr title="Problems::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Problems.php.html#18"><abbr title="Problems::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#146"><abbr title="Users::list_excel">list_excel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notifications.php.html#115"><abbr title="Notifications::check">check</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notifications.php.html#93"><abbr title="Notifications::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notifications.php.html#79"><abbr title="Notifications::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notifications.php.html#46"><abbr title="Notifications::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notifications.php.html#31"><abbr title="Notifications::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notifications.php.html#18"><abbr title="Notifications::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Moss.php.html#77"><abbr title="Moss::_detect">_detect</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Moss.php.html#60"><abbr title="Moss::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Moss.php.html#26"><abbr title="Moss::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Moss.php.html#13"><abbr title="Moss::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="RunTest.php.html#44"><abbr title="RunTest::showResult">showResult</abbr></a></td><td class="text-right">13%</td></tr>
+       <tr><td><a href="RunTest.php.html#21"><abbr title="RunTest::__construct">__construct</abbr></a></td><td class="text-right">28%</td></tr>
+       <tr><td><a href="RunTest.php.html#40"><abbr title="RunTest::index">index</abbr></a></td><td class="text-right">50%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Settings.php.html#58"><abbr title="Settings::update">update</abbr></a></td><td class="text-right">600</td></tr>
+       <tr><td><a href="Assignments.php.html#371"><abbr title="Assignments::_add">_add</abbr></a></td><td class="text-right">420</td></tr>
+       <tr><td><a href="Submissions.php.html#58"><abbr title="Submissions::_download_excel">_download_excel</abbr></a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="Install.php.html#22"><abbr title="Install::index">index</abbr></a></td><td class="text-right">342</td></tr>
+       <tr><td><a href="Submit.php.html#70"><abbr title="Submit::_match">_match</abbr></a></td><td class="text-right">306</td></tr>
+       <tr><td><a href="Queueprocess.php.html#34"><abbr title="Queueprocess::run">run</abbr></a></td><td class="text-right">306</td></tr>
+       <tr><td><a href="Submit.php.html#159"><abbr title="Submit::_upload">_upload</abbr></a></td><td class="text-right">306</td></tr>
+       <tr><td><a href="Submissions.php.html#455"><abbr title="Submissions::view_code">view_code</abbr></a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="Problems.php.html#97"><abbr title="Problems::edit">edit</abbr></a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="Problems.php.html#37"><abbr title="Problems::index">index</abbr></a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="Submissions.php.html#28"><abbr title="Submissions::__construct">__construct</abbr></a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="Submit.php.html#101"><abbr title="Submit::index">index</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Submissions.php.html#325"><abbr title="Submissions::all">all</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Assignments.php.html#276"><abbr title="Assignments::add">add</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Assignments.php.html#200"><abbr title="Assignments::download_submissions">download_submissions</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Submissions.php.html#261"><abbr title="Submissions::the_final">the_final</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Submit.php.html#50"><abbr title="Submit::_language_to_type">_language_to_type</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Assignments.php.html#138"><abbr title="Assignments::downloadtestsdesc">downloadtestsdesc</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Moss.php.html#77"><abbr title="Moss::_detect">_detect</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Users.php.html#146"><abbr title="Users::list_excel">list_excel</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Profile.php.html#31"><abbr title="Profile::index">index</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Assignments.php.html#100"><abbr title="Assignments::pdf">pdf</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Submissions.php.html#389"><abbr title="Submissions::select">select</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="RunTest.php.html#44"><abbr title="RunTest::showResult">showResult</abbr></a></td><td class="text-right">50</td></tr>
+       <tr><td><a href="Dashboard.php.html#27"><abbr title="Dashboard::index">index</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Moss.php.html#26"><abbr title="Moss::index">index</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Assignments.php.html#240"><abbr title="Assignments::delete">delete</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Login.php.html#80"><abbr title="Login::register">register</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Notifications.php.html#46"><abbr title="Notifications::add">add</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="SettingTest.php.html#103"><abbr title="SettingTest::testing">testing</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Users.php.html#119"><abbr title="Users::delete_submissions">delete_submissions</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Submissions.php.html#522"><abbr title="Submissions::download_file">download_file</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Submit.php.html#25"><abbr title="Submit::__construct">__construct</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Assignments.php.html#35"><abbr title="Assignments::index">index</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Profile.php.html#77"><abbr title="Profile::_password_check">_password_check</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Login.php.html#147"><abbr title="Login::reset">reset</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Notifications.php.html#93"><abbr title="Notifications::delete">delete</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Notifications.php.html#115"><abbr title="Notifications::check">check</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Notifications.php.html#79"><abbr title="Notifications::edit">edit</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Login.php.html#41"><abbr title="Login::index">index</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Users.php.html#91"><abbr title="Users::delete">delete</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Queue.php.html#13"><abbr title="Queue::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Assignments.php.html#67"><abbr title="Assignments::select">select</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Moss.php.html#13"><abbr title="Moss::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Settings.php.html#19"><abbr title="Settings::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Users.php.html#20"><abbr title="Users::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Login.php.html#126"><abbr title="Login::lost">lost</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Server_time.php.html#12"><abbr title="Server_time::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Scoreboard.php.html#13"><abbr title="Scoreboard::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Submit.php.html#88"><abbr title="Submit::_check_language">_check_language</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Users.php.html#56"><abbr title="Users::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Rejudge.php.html#54"><abbr title="Rejudge::rejudge_single">rejudge_single</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Dashboard.php.html#61"><abbr title="Dashboard::widget_positions">widget_positions</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Rejudge.php.html#13"><abbr title="Rejudge::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Logs.php.html#13"><abbr title="Logs::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Submissions.php.html#446"><abbr title="Submissions::_check_type">_check_type</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Dashboard.php.html#13"><abbr title="Dashboard::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Login.php.html#25"><abbr title="Login::_registration_code">_registration_code</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="RunTest.php.html#21"><abbr title="RunTest::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Assignments.php.html#20"><abbr title="Assignments::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="SettingTest.php.html#86"><abbr title="SettingTest::get_all_settings">get_all_settings</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Rejudge.php.html#27"><abbr title="Rejudge::index">index</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Queueprocess.php.html#13"><abbr title="Queueprocess::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Queue.php.html#67"><abbr title="Queue::empty_queue">empty_queue</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Queue.php.html#55"><abbr title="Queue::resume">resume</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Queue.php.html#43"><abbr title="Queue::pause">pause</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Profile.php.html#104"><abbr title="Profile::_role_check">_role_check</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Profile.php.html#84"><abbr title="Profile::_password_again_check">_password_again_check</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Profile.php.html#19"><abbr title="Profile::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Problems.php.html#18"><abbr title="Problems::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Notifications.php.html#18"><abbr title="Notifications::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Moss.php.html#60"><abbr title="Moss::update">update</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Halloffame.php.html#48"><abbr title="Halloffame::hof_details">hof_details</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Halloffame.php.html#13"><abbr title="Halloffame::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Assignments.php.html#565"><abbr title="Assignments::edit">edit</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Profile.php.html#94"><abbr title="Profile::_email_check">_email_check</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 7.0.2</a> using <a href="https://secure.php.net/" target="_top">PHP 7.2.11</a> with <a href="https://xdebug.org/">Xdebug 2.6.1</a> at Mon Feb 25 11:28:46 UTC 2019.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/jquery.min.js" type="text/javascript"></script>
+  <script src="../_js/d3.min.js" type="text/javascript"></script>
+  <script src="../_js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([20,0,0,1,0,0,0,0,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([92,0,1,1,0,0,1,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,72,"<a href=\"Assignments.php.html#9\">Assignments<\/a>"],[0,12,"<a href=\"Dashboard.php.html#9\">Dashboard<\/a>"],[0,5,"<a href=\"Halloffame.php.html#9\">Halloffame<\/a>"],[0,19,"<a href=\"Install.php.html#9\">Install<\/a>"],[0,21,"<a href=\"Login.php.html#9\">Login<\/a>"],[0,4,"<a href=\"Logs.php.html#9\">Logs<\/a>"],[0,19,"<a href=\"Moss.php.html#9\">Moss<\/a>"],[0,20,"<a href=\"Notifications.php.html#9\">Notifications<\/a>"],[0,30,"<a href=\"Problems.php.html#9\">Problems<\/a>"],[0,19,"<a href=\"Profile.php.html#9\">Profile<\/a>"],[0,10,"<a href=\"Queue.php.html#9\">Queue<\/a>"],[0,19,"<a href=\"Queueprocess.php.html#9\">Queueprocess<\/a>"],[0,8,"<a href=\"Rejudge.php.html#9\">Rejudge<\/a>"],[20.51282051282051,12,"<a href=\"RunTest.php.html#6\">RunTest<\/a>"],[0,4,"<a href=\"Scoreboard.php.html#9\">Scoreboard<\/a>"],[0,4,"<a href=\"Server_time.php.html#9\">Server_time<\/a>"],[0,11,"<a href=\"SettingTest.php.html#9\">SettingTest<\/a>"],[0,28,"<a href=\"Settings.php.html#9\">Settings<\/a>"],[0,82,"<a href=\"Submissions.php.html#16\">Submissions<\/a>"],[0,61,"<a href=\"Submit.php.html#9\">Submit<\/a>"],[0,23,"<a href=\"Users.php.html#16\">Users<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,2,"<a href=\"Assignments.php.html#20\">Assignments::__construct<\/a>"],[0,4,"<a href=\"Assignments.php.html#35\">Assignments::index<\/a>"],[0,3,"<a href=\"Assignments.php.html#67\">Assignments::select<\/a>"],[0,7,"<a href=\"Assignments.php.html#100\">Assignments::pdf<\/a>"],[0,9,"<a href=\"Assignments.php.html#138\">Assignments::downloadtestsdesc<\/a>"],[0,10,"<a href=\"Assignments.php.html#200\">Assignments::download_submissions<\/a>"],[0,5,"<a href=\"Assignments.php.html#240\">Assignments::delete<\/a>"],[0,10,"<a href=\"Assignments.php.html#276\">Assignments::add<\/a>"],[0,20,"<a href=\"Assignments.php.html#371\">Assignments::_add<\/a>"],[0,2,"<a href=\"Assignments.php.html#565\">Assignments::edit<\/a>"],[0,3,"<a href=\"Dashboard.php.html#13\">Dashboard::__construct<\/a>"],[0,6,"<a href=\"Dashboard.php.html#27\">Dashboard::index<\/a>"],[0,3,"<a href=\"Dashboard.php.html#61\">Dashboard::widget_positions<\/a>"],[0,2,"<a href=\"Halloffame.php.html#13\">Halloffame::__construct<\/a>"],[0,1,"<a href=\"Halloffame.php.html#29\">Halloffame::index<\/a>"],[0,2,"<a href=\"Halloffame.php.html#48\">Halloffame::hof_details<\/a>"],[0,1,"<a href=\"Install.php.html#12\">Install::__construct<\/a>"],[0,18,"<a href=\"Install.php.html#22\">Install::index<\/a>"],[0,1,"<a href=\"Login.php.html#12\">Login::__construct<\/a>"],[0,3,"<a href=\"Login.php.html#25\">Login::_registration_code<\/a>"],[0,4,"<a href=\"Login.php.html#41\">Login::index<\/a>"],[0,5,"<a href=\"Login.php.html#80\">Login::register<\/a>"],[0,1,"<a href=\"Login.php.html#116\">Login::logout<\/a>"],[0,3,"<a href=\"Login.php.html#126\">Login::lost<\/a>"],[0,4,"<a href=\"Login.php.html#147\">Login::reset<\/a>"],[0,3,"<a href=\"Logs.php.html#13\">Logs::__construct<\/a>"],[0,1,"<a href=\"Logs.php.html#30\">Logs::index<\/a>"],[0,3,"<a href=\"Moss.php.html#13\">Moss::__construct<\/a>"],[0,6,"<a href=\"Moss.php.html#26\">Moss::index<\/a>"],[0,2,"<a href=\"Moss.php.html#60\">Moss::update<\/a>"],[0,8,"<a href=\"Moss.php.html#77\">Moss::_detect<\/a>"],[0,2,"<a href=\"Notifications.php.html#18\">Notifications::__construct<\/a>"],[0,1,"<a href=\"Notifications.php.html#31\">Notifications::index<\/a>"],[0,5,"<a href=\"Notifications.php.html#46\">Notifications::add<\/a>"],[0,4,"<a href=\"Notifications.php.html#79\">Notifications::edit<\/a>"],[0,4,"<a href=\"Notifications.php.html#93\">Notifications::delete<\/a>"],[0,4,"<a href=\"Notifications.php.html#115\">Notifications::check<\/a>"],[0,2,"<a href=\"Problems.php.html#18\">Problems::__construct<\/a>"],[0,13,"<a href=\"Problems.php.html#37\">Problems::index<\/a>"],[0,15,"<a href=\"Problems.php.html#97\">Problems::edit<\/a>"],[0,2,"<a href=\"Profile.php.html#19\">Profile::__construct<\/a>"],[0,7,"<a href=\"Profile.php.html#31\">Profile::index<\/a>"],[0,4,"<a href=\"Profile.php.html#77\">Profile::_password_check<\/a>"],[0,2,"<a href=\"Profile.php.html#84\">Profile::_password_again_check<\/a>"],[0,2,"<a href=\"Profile.php.html#94\">Profile::_email_check<\/a>"],[0,2,"<a href=\"Profile.php.html#104\">Profile::_role_check<\/a>"],[0,3,"<a href=\"Queue.php.html#13\">Queue::__construct<\/a>"],[0,1,"<a href=\"Queue.php.html#27\">Queue::index<\/a>"],[0,2,"<a href=\"Queue.php.html#43\">Queue::pause<\/a>"],[0,2,"<a href=\"Queue.php.html#55\">Queue::resume<\/a>"],[0,2,"<a href=\"Queue.php.html#67\">Queue::empty_queue<\/a>"],[0,2,"<a href=\"Queueprocess.php.html#13\">Queueprocess::__construct<\/a>"],[0,17,"<a href=\"Queueprocess.php.html#34\">Queueprocess::run<\/a>"],[0,3,"<a href=\"Rejudge.php.html#13\">Rejudge::__construct<\/a>"],[0,2,"<a href=\"Rejudge.php.html#27\">Rejudge::index<\/a>"],[0,3,"<a href=\"Rejudge.php.html#54\">Rejudge::rejudge_single<\/a>"],[28.57142857142857,3,"<a href=\"RunTest.php.html#21\">RunTest::__construct<\/a>"],[50,1,"<a href=\"RunTest.php.html#40\">RunTest::index<\/a>"],[13.043478260869565,8,"<a href=\"RunTest.php.html#44\">RunTest::showResult<\/a>"],[0,3,"<a href=\"Scoreboard.php.html#13\">Scoreboard::__construct<\/a>"],[0,1,"<a href=\"Scoreboard.php.html#26\">Scoreboard::index<\/a>"],[0,3,"<a href=\"Server_time.php.html#12\">Server_time::__construct<\/a>"],[0,1,"<a href=\"Server_time.php.html#28\">Server_time::index<\/a>"],[0,1,"<a href=\"SettingTest.php.html#14\">SettingTest::__construct<\/a>"],[0,1,"<a href=\"SettingTest.php.html#76\">SettingTest::set_setting<\/a>"],[0,1,"<a href=\"SettingTest.php.html#81\">SettingTest::get_setting<\/a>"],[0,2,"<a href=\"SettingTest.php.html#86\">SettingTest::get_all_settings<\/a>"],[0,1,"<a href=\"SettingTest.php.html#97\">SettingTest::index<\/a>"],[0,4,"<a href=\"SettingTest.php.html#103\">SettingTest::testing<\/a>"],[0,1,"<a href=\"SettingTest.php.html#123\">SettingTest::printSetting<\/a>"],[0,3,"<a href=\"Settings.php.html#19\">Settings::__construct<\/a>"],[0,1,"<a href=\"Settings.php.html#34\">Settings::index<\/a>"],[0,24,"<a href=\"Settings.php.html#58\">Settings::update<\/a>"],[0,12,"<a href=\"Submissions.php.html#28\">Submissions::__construct<\/a>"],[0,19,"<a href=\"Submissions.php.html#58\">Submissions::_download_excel<\/a>"],[0,1,"<a href=\"Submissions.php.html#241\">Submissions::final_excel<\/a>"],[0,1,"<a href=\"Submissions.php.html#248\">Submissions::all_excel<\/a>"],[0,10,"<a href=\"Submissions.php.html#261\">Submissions::the_final<\/a>"],[0,10,"<a href=\"Submissions.php.html#325\">Submissions::all<\/a>"],[0,7,"<a href=\"Submissions.php.html#389\">Submissions::select<\/a>"],[0,3,"<a href=\"Submissions.php.html#446\">Submissions::_check_type<\/a>"],[0,15,"<a href=\"Submissions.php.html#455\">Submissions::view_code<\/a>"],[0,4,"<a href=\"Submissions.php.html#522\">Submissions::download_file<\/a>"],[0,4,"<a href=\"Submit.php.html#25\">Submit::__construct<\/a>"],[0,9,"<a href=\"Submit.php.html#50\">Submit::_language_to_type<\/a>"],[0,17,"<a href=\"Submit.php.html#70\">Submit::_match<\/a>"],[0,3,"<a href=\"Submit.php.html#88\">Submit::_check_language<\/a>"],[0,11,"<a href=\"Submit.php.html#101\">Submit::index<\/a>"],[0,17,"<a href=\"Submit.php.html#159\">Submit::_upload<\/a>"],[0,3,"<a href=\"Users.php.html#20\">Users::__construct<\/a>"],[0,1,"<a href=\"Users.php.html#37\">Users::index<\/a>"],[0,3,"<a href=\"Users.php.html#56\">Users::add<\/a>"],[0,4,"<a href=\"Users.php.html#91\">Users::delete<\/a>"],[0,4,"<a href=\"Users.php.html#119\">Users::delete_submissions<\/a>"],[0,8,"<a href=\"Users.php.html#146\">Users::list_excel<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

@@ -31,17 +31,29 @@ class Logtest_model extends Test_model
 
     private function testInitialDBStatus() {
         $test = $this->Logs_model->get_all_logs();
-		$expected_result = NULL;
+        $expected_result = NULL;
+        $testString = $test;
+        $expected_resultString = $expected_result;
+        if($testString == NULL){
+            $testString = 'NULL';
+        }
+        if($expected_resultString == NULL){
+            $expected_resultString = 'NULL';
+        }
+        $notes = "Test: $testString<br>" .
+                "Expected result: $expected_resultString<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
         $test_name = "Initial test | Database should be empty.";
-		$this->unit->run($test, $expected_result, $test_name);
+		$this->unit->run($test, $expected_result, $test_name, $notes);
     }
     
     private function initPastLogin() {
-        $data = array(
-            'username' => 'testuser',
-            'ip_address' => '127.0.0.1'
-        );
-        $this->db->insert('logins', $data);
+        // $data = array(
+        //     'username' => 'testuser',
+        //     'ip_address' => '127.0.0.1'
+        // );
+        // $this->db->insert('logins', $data);
+        $this->Logs_model->insert_to_logs('testuser', '127.0.0.1');
     }
 
     private function loginUser() {
@@ -58,8 +70,19 @@ class Logtest_model extends Test_model
             'ip_address' => '127.0.0.2',
             'last_24h_login_id' => 1
         );
+        $testString = $test;
+        $expected_resultString = $expected_result;
+        if($testString == NULL){
+            $testString = 'NULL';
+        }
+        if($expected_resultString == NULL){
+            $expected_resultString = 'NULL';
+        }
+        $notes = "Test: $testString <br>" .
+                "Expected result: $expected_resultString<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
         $test_name = "Login test | Login log should be updated by this last login";
-        $this->unit->run($test, $expected_result, $test_name);
+        $this->unit->run($test, $expected_result, $test_name, $notes);
     }
 
 	// ------------------------------------------------------------------------

@@ -4,7 +4,7 @@ include('BaseTest.php');
 defined('BASEPATH') OR exit('No direct script access allowed');
 // php index.php RunTest
 class RunTest extends CI_Controller {
-	const ENABLE_COVERAGE = true; // Requires xdebug
+	const ENABLE_COVERAGE = false; // Requires xdebug
 	public $classes = [
 		'notificationtest_model',
 		'usertest_model',
@@ -24,12 +24,10 @@ class RunTest extends CI_Controller {
         $this->load->library('unit_test');
 				if (self::ENABLE_COVERAGE) {
 					$this->coverage = new CodeCoverage;
-					$this->coverage->filter()->addDirectoryToWhitelist('application/controllers');
-					$this->coverage->filter()->removeDirectoryFromWhitelist('application/controllers/tests');
-					$this->coverage->filter()->addDirectoryToWhitelist('application/libraries');
 					$this->coverage->filter()->addDirectoryToWhitelist('application/models');
-					$this->coverage->filter()->addDirectoryToWhitelist('application/views');
-					$this->coverage->start('UnitTests');
+					$this->coverage->filter()->addDirectoryToWhitelist('application/controllers');
+					$this->coverage->filter()->removeDirectoryFromWhitelist('application/models/tests');
+					$this->coverage->start('Sharif Unit Testing');
 			}	
 		foreach ($this->classes as $className) {
 			$this->load->model('tests/' . $className);

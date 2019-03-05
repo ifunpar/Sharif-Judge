@@ -1,0 +1,13 @@
+language: php
+php:
+  - '7.2.15'
+before_script:
+  - cp application/config/database.example.php application/config/database.php
+  - cp application/config/secrets.example.php application/config/secrets.php
+  - sudo mysql -e "CREATE DATABASE sharifjudge;"
+  - composer install
+services:
+  - mysql
+script: 
+  - php index.php Migrations
+  - php index.php RunTest

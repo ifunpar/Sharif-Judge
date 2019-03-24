@@ -13,7 +13,8 @@ class RunTest extends CI_Controller {
 		'logtest_model',
 		'Submittest_model',
 		'Queuetest_model',
-		'Hoftest_model'
+		'Hoftest_model',
+		'Assignmenttest_model'
 	];
 	private $test, $expected_result, $test_name;
 	private $coverage;

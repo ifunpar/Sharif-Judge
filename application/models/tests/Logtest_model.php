@@ -48,11 +48,7 @@ class Logtest_model extends Test_model
     }
     
     private function initPastLogin() {
-        // $data = array(
-        //     'username' => 'testuser',
-        //     'ip_address' => '127.0.0.1'
-        // );
-        // $this->db->insert('logins', $data);
+        $this->db->query("INSERT INTO `shj_logins` (`login_id`, `username`, `ip_address`, `timestamp`, `last_24h_login_id`) VALUES (NULL, 'testuser', '127.0.0.4', '2019-03-01 00:00:00', NULL);");
         $this->Logs_model->insert_to_logs('testuser', '127.0.0.1');
     }
 
@@ -68,7 +64,7 @@ class Logtest_model extends Test_model
         $expected_result = array(
             'username' => 'testuser',
             'ip_address' => '127.0.0.2',
-            'last_24h_login_id' => 1
+            'last_24h_login_id' => 2
         );
         $testString = $test;
         $expected_resultString = $expected_result;

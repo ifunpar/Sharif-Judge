@@ -6,6 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class RunTest extends CI_Controller {
 	const ENABLE_COVERAGE = false; // Requires xdebug
 	public $classes = [
+		//notificationtest model has to be run first in the list
 		'notificationtest_model',
 		'usertest_model',
 		'settingtest_model',

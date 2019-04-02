@@ -105,8 +105,12 @@ class Hoftest_model extends Test_model {
         $this->emptyDB('assignments');
         $this->emptyDB('problems');
     }
-    public function test(){
-        $this->testget_all_final_submission();
-        $this->testget_all_user_assignments();
+    public function test()
+    {
+        //echo("db driver: " . $this->db->dbdriver);
+        if ($this->db->dbdriver != "postgre") {
+            $this->testget_all_final_submission();
+            $this->testget_all_user_assignments();
+        }
     }
 }

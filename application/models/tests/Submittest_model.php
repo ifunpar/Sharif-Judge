@@ -158,7 +158,8 @@ class Submittest_model extends Test_model
           'file_type' => 'java',
         )
       );
-      $this->db->insert('users',$user);
+      $this->db->insert('users',$user[0]);
+      $this->db->insert('users',$user[1]);
       $this->db->insert('assignments', $assignment);
       $this->db->insert('submissions', $submissions[0]);
       $this->db->insert('submissions', $submissions[1]);
@@ -254,7 +255,8 @@ class Submittest_model extends Test_model
           'file_type' => 'java',
         )
       );
-      $this->db->insert('users',$user);
+      $this->db->insert('users',$user[0]);
+      $this->db->insert('users',$user[1]);
       $this->db->insert('assignments', $assignment);
       $this->db->insert('submissions', $submissions[0]);
       $this->db->insert('submissions', $submissions[1]);
@@ -351,7 +353,8 @@ class Submittest_model extends Test_model
           'file_type' => 'java',
         )
       );
-      $this->db->insert('users',$user);
+      $this->db->insert('users',$user[0]);
+      $this->db->insert('users',$user[1]);
       $this->db->insert('assignments', $assignment);
       $this->db->insert('submissions', $submissions[0]);
       $this->db->insert('submissions', $submissions[1]);
@@ -448,7 +451,8 @@ class Submittest_model extends Test_model
           'file_type' => 'java',
         )
       );
-      $this->db->insert('users',$user);
+      $this->db->insert('users',$user[0]);
+      $this->db->insert('users',$user[1]);
       $this->db->insert('assignments', $assignment);
       $this->db->insert('submissions', $submissions[0]);
       $this->db->insert('submissions', $submissions[1]);
@@ -545,7 +549,8 @@ class Submittest_model extends Test_model
           'file_type' => 'java',
         )
       );
-      $this->db->insert('users',$user);
+      $this->db->insert('users',$user[0]);
+      $this->db->insert('users',$user[1]);
       $this->db->insert('assignments', $assignment);
       $this->db->insert('submissions', $submissions[0]);
       $this->db->insert('submissions', $submissions[1]);
@@ -642,7 +647,8 @@ class Submittest_model extends Test_model
           'file_type' => 'java',
         )
       );
-      $this->db->insert('users',$user);
+      $this->db->insert('users',$user[0]);
+      $this->db->insert('users',$user[1]);
       $this->db->insert('assignments', $assignment);
       $this->db->insert('submissions', $submissions[0]);
       $this->db->insert('submissions', $submissions[1]);

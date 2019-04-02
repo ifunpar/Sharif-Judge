@@ -12,6 +12,7 @@ class Settingtest_model extends Test_model
 	public function __construct()
 	{
         parent::__construct();
+        $this->load->library("unit_test");
         $this->load->model("Settings_model");
 	}
 

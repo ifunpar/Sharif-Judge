@@ -149,8 +149,12 @@ class Submittest_model extends Test_model
         $this->checkAllSubmissionForCertainProblemFromAdmin();
         $this->checkAllSubmissionForCertainProblemFromAdminWithPageSettingZero();
         $this->checkAllSubmissionForCertainProblemFromAdminWithPageSettingOne();
+        $this->countAllFinalSubmissionForAdminFilterUser();
         $this->countAllFinalSubmissionForCertainUser();
         $this->countAllFinalSubmissionForCertainUserCertainProblem();
+        $this->countAllSubmissionAdminForCertainUserCertainProblem();
+        $this->checkUploadOnlyMethod();
+        $this->checkSetFinalSubmission();
     }
 
   // ------------------------------------------------------------------------
@@ -160,7 +164,10 @@ class Submittest_model extends Test_model
       $this->db->insert('assignments', $this->assignment);
       $total = count($this->Submit_model->get_all_submissions(1, 1, "Aku Tester"));
       $expected_result = 0;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: There is not submitted<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
 
@@ -181,7 +188,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[3]);
       $total = count($this->Submit_model->get_all_submissions(1, 0, "Aku Tester"));
       $expected_result = 2;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 2 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
     private function adminLookAllSubmission(){
@@ -195,7 +205,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[3]);
       $total = count($this->Submit_model->get_all_submissions(1, 1, "Aku Tester "));
       $expected_result = 4;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 4 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
 
@@ -210,7 +223,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[3]);
       $total = $this->Submit_model->count_all_submissions(1, 1, "Aku Tester ");
       $expected_result = 4;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 4 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
 
@@ -225,7 +241,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[3]);
       $total = $this->Submit_model->count_all_submissions(1, 0, "Aku Tester Versi 2");
       $expected_result = 2;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 2 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
 
@@ -240,7 +259,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[3]);
       $total = count($this->Submit_model->get_final_submissions(1, 1, "Aku Tester"));
       $expected_result = 3;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 3 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
     private function checkFinalSubmissionForCertainUser(){
@@ -254,7 +276,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[3]);
       $total = count($this->Submit_model->get_final_submissions(1, 0, "Aku Tester"));
       $expected_result = 1;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: should be 1 final submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
     private function checkFinalSubmissionForCertainUserFromAdmin(){
@@ -268,7 +293,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[3]);
       $total = count($this->Submit_model->get_final_submissions(1, 1, "Aku Tester Versi 2",NULL,"Aku Tester Versi 2"));
       $expected_result = 2;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 2 final submissions for 2 problem<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
     private function checkFinalSubmissionForCertainProblemFromAdmin(){
@@ -282,7 +310,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[3]);
       $total = count($this->Submit_model->get_final_submissions(1, 1, "Aku Tester Versi 2",NULL,NULL,1));
       $expected_result = 2;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 2 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
 
@@ -298,7 +329,10 @@ class Submittest_model extends Test_model
       $this->db->where('shj_key', 'results_per_page_final')->update('settings', array('shj_value'=>0));
       $total = count($this->Submit_model->get_final_submissions(1, 1, "Aku Tester Versi 2",0,NULL,1));
       $expected_result = 2;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 2 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
       $this->db->where('shj_key', 'results_per_page_final')->update('settings', array('shj_value'=>80));
     }
@@ -314,7 +348,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[3]);
       $total = count($this->Submit_model->get_final_submissions(1, 1, "Aku Tester Versi 2",1,NULL,1));
       $expected_result = 2;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 2 final submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
 
@@ -329,7 +366,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[3]);
       $total = count($this->Submit_model->get_submission("Aku Tester", 1, 1,1));
       $expected_result = 12;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 12 columns<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
     private function checkGetSubmissionMethodNotFound(){
@@ -343,7 +383,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[3]);
       $total = count($this->Submit_model->get_submission("Aku Tester", 1, 1,13));
       $expected_result = 1;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: Not found<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
 
@@ -359,7 +402,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[4]);
       $total = count($this->Submit_model->get_all_submissions(1, 1, "Aku Tester"));
       $expected_result = 5;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 5 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
 
@@ -375,7 +421,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[4]);
       $total = count($this->Submit_model->get_all_submissions(1, 0, "Aku Tester"));
       $expected_result = 2;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 2 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
     private function checkAllSubmissionForCertainUserFromAdmin(){
@@ -390,7 +439,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[4]);
       $total = count($this->Submit_model->get_all_submissions(1, 1, "Aku Tester Versi 2",NULL,"Aku Tester Versi 2"));
       $expected_result = 3;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 3 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
     private function checkAllSubmissionForCertainProblemFromAdmin(){
@@ -405,7 +457,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[4]);
       $total = count($this->Submit_model->get_all_submissions(1, 1, "Aku Tester Versi 2",NULL,NULL,1));
       $expected_result = 3;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 3 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
 
@@ -422,7 +477,10 @@ class Submittest_model extends Test_model
       $this->db->where('shj_key', 'results_per_page_all')->update('settings', array('shj_value'=>0));
       $total = count($this->Submit_model->get_all_submissions(1, 1, "Aku Tester Versi 2",0,NULL,1));
       $expected_result = 3;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 3 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
       $this->db->where('shj_key', 'results_per_page_all')->update('settings', array('shj_value'=>40));
     }
@@ -439,7 +497,10 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[4]);
       $total = count($this->Submit_model->get_all_submissions(1, 1, "Aku Tester Versi 2",1,NULL,1));
       $expected_result = 3;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 3 submissions <br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
     
@@ -455,7 +516,28 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[4]);
       $total = $this->Submit_model->count_final_submissions(1, 0, "Aku Tester Versi 2","Aku Tester Versi 2",NULL);
       $expected_result = 2;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 2 final submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
+      $this->clear();
+    }
+    private function countAllFinalSubmissionForAdminFilterUser(){
+      $test_name = "Count all Final Submission for Admin Filter User";
+      $this->db->insert('users',$this->user[0]);
+      $this->db->insert('users',$this->user[1]);
+      $this->db->insert('assignments', $this->assignment);
+      $this->db->insert('submissions', $this->submissions[0]);
+      $this->db->insert('submissions', $this->submissions[1]);
+      $this->db->insert('submissions', $this->submissions[2]);
+      $this->db->insert('submissions', $this->submissions[3]);
+      $this->db->insert('submissions', $this->submissions[4]);
+      $total = $this->Submit_model->count_final_submissions(1, 1, "Aku Tester Versi 2","Aku Tester Versi 2",NULL);
+      $expected_result = 2;
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 2 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
       $this->clear();
     }
     private function countAllFinalSubmissionForCertainUserCertainProblem(){
@@ -470,7 +552,63 @@ class Submittest_model extends Test_model
       $this->db->insert('submissions', $this->submissions[4]);
       $total = $this->Submit_model->count_final_submissions(1, 0, "Aku Tester Versi 2","Aku Tester Versi 2",1);
       $expected_result = 1;
-      $this->unit->run($total,$expected_result,$test_name);
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 1 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
+      $this->clear();
+    }
+
+    private function countAllSubmissionAdminForCertainUserCertainProblem(){
+      $test_name = "Count all Submission admin for Certain User Certain Problem";
+      $this->db->insert('users',$this->user[0]);
+      $this->db->insert('users',$this->user[1]);
+      $this->db->insert('assignments', $this->assignment);
+      $this->db->insert('submissions', $this->submissions[0]);
+      $this->db->insert('submissions', $this->submissions[1]);
+      $this->db->insert('submissions', $this->submissions[2]);
+      $this->db->insert('submissions', $this->submissions[3]);
+      $this->db->insert('submissions', $this->submissions[4]);
+      $total = $this->Submit_model->count_all_submissions(1, 1, "Aku Tester Versi 2","Aku Tester Versi 2",2);
+      $expected_result = 2;
+      $notes = "Test: $test_name <br>" .
+                "Expected result: 2 submissions<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($total,$expected_result,$test_name,$notes);
+      $this->clear();
+    }
+    private function checkUploadOnlyMethod(){
+      $test_name = "Check upload only method";
+      $this->db->insert('users',$this->user[0]);
+      $this->db->insert('users',$this->user[1]);
+      $this->db->insert('assignments', $this->assignment);
+      $this->db->insert('submissions', $this->submissions[3]);
+      $this->Submit_model->add_upload_only($this->submissions[4]);
+      $query = ($this->db->get_where('submissions', array('submit_id' => 5)))->row_array();
+      $result = $query['is_final'];
+      $expected_result = 1;
+      $notes = "Test: $test_name <br>" .
+                "Expected result: should be final<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($result,$expected_result,$test_name,$notes);
+      $this->clear();
+    }
+
+    private function checkSetFinalSubmission(){
+      $test_name = "check final submission method";
+      $this->db->insert('users',$this->user[0]);
+      $this->db->insert('users',$this->user[1]);
+      $this->db->insert('assignments', $this->assignment);
+      $this->db->insert('submissions', $this->submissions[3]);
+      $this->db->insert('submissions', $this->submissions[4]);
+      $this->Submit_model->set_final_submission("Aku Tester Versi 2",1,2,5);
+      $query = ($this->db->get_where('submissions', array('submit_id' => 5)))->row_array();
+      $result = $query['is_final'];
+      $expected_result = 1;
+      $notes = "Test: $test_name <br>" .
+                "Expected result: new data should be final<br>" .
+                "Last test date: " . date('H:i:s ~ Y-m-d');
+      $this->unit->run($result,$expected_result,$test_name,$notes);
       $this->clear();
     }
 }

@@ -32,7 +32,7 @@ class Assignmenttest_model extends Test_model
     $this->initial_test();
 
     //add new assignment (id 1)
-    $this->testing_method_add_assignment();
+    // $this->testing_method_add_assignment();
 
     //add 2 dummy assignment (id 2 and 3)
     $this->addDummyAssignment();
@@ -50,6 +50,10 @@ class Assignmenttest_model extends Test_model
     $this->test_edit_assignment();
 
     //the rest tbd
+    $this->addDummyAssignment();
+    $this->testing_method_increase_total_submits();
+    $this->testing_method_get_moss_time();
+    $this->testing_method_set_moss_time();
     $this->clear();
   }
 
@@ -57,6 +61,32 @@ class Assignmenttest_model extends Test_model
   {
     $this->db->truncate('shj_assignments');
     $this->db->truncate('shj_problems');
+  }
+
+  private function testing_method_increase_total_submits(){
+    $test = $this->Assignment_model->increase_total_submits(1);
+    $expected_result = 1;
+    $test_name = "Testing increase_total_submits function in Assignment_model.php";
+    $notes = "input : Assigment Id = 1 \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+    $this->unit->run($test, $expected_result, $test_name,$notes);
+  }
+
+  private function testing_method_get_moss_time(){
+    $test = $this->Assignment_model->get_moss_time(1);
+    $expected_result = "Never";
+    $test_name = "Testing get_moss_time function in Assignment_model.php";
+    $notes = "input : Assigment Id = 1 \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+    $this->unit->run($test, $expected_result, $test_name,$notes);
+  }
+
+  private function testing_method_set_moss_time(){
+    $this->Assignment_model->set_moss_time(1);
+    $expected_result = False;
+    $test = $this->Assignment_model->get_moss_time(1);
+    $test = ($test=="Never");
+    $test_name = "Testing set_moss_time function in Assignment_model.php";
+    $notes = "input : Assigment Id = 1 \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
+    $this->unit->run($test, $expected_result, $test_name,$notes);
   }
 
   private function testing_method_add_assignment()

@@ -185,13 +185,13 @@ class Assignmenttest_model extends Test_model
   }
 
   private function testing_method_new_assignment_id(){
-    $shellString = "cd {$this->settings_model->get_setting('assignments_root')}; mkdir 'assignment_4'";
+    $shellString = "cd {$this->settings_model->get_setting('assignments_root')}&& mkdir assignment_4";
     shell_exec($shellString);
     $test = $this->Assignment_model->new_assignment_id();
     $expected_result = 5;
     $test_name = "Testing new_assignment_id function in Assignment_model.php || input : - \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
     $this->unit->run($test, $expected_result, $test_name);
-    shell_exec("cd {$this->settings_model->get_setting('assignments_root')}; rm -r 'assignment_4'");
+    shell_exec("cd {$this->settings_model->get_setting('assignments_root')}&& rm -r assignment_4");
   }
 
   private function addDummyAssignment()

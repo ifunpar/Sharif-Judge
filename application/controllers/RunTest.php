@@ -46,10 +46,10 @@ class RunTest extends CI_Controller {
 		if (self::ENABLE_COVERAGE) {
 			$this->coverage->stop();        
 			$writer = new \SebastianBergmann\CodeCoverage\Report\Html\Facade;
-			$writer->process($this->coverage, 'reports-dev/code-coverage');
+			$writer->process($this->coverage, 'reports/code-coverage');
 		}
 		//generate test report
-		file_put_contents('reports-dev/test_report.html', $this->unit->report());
+		file_put_contents('reports/test_report.html', $this->unit->report());
 		$statistics = [
 				'Pass' => 0,
 				'Fail' => 0

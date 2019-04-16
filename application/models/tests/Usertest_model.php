@@ -462,6 +462,9 @@ class Usertest_model extends Test_model
     $notes = "input : not valid userId \nTime ~ Date: " . date('H:i:s ~ Y-m-d');
     $this->unit->run($test, $expected_result, $test_name, $notes);
 
+    $this->db-> trans_strict(FALSE);
+    $this->db->trans_complete();
+    $this->db-> trans_strict();
     //35 - User_model method delete_user
     $test = $this->User_model->delete_user(100);
     $expected_result = true;

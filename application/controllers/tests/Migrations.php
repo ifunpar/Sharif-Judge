@@ -190,8 +190,8 @@ class Migrations extends CI_Controller
 		// insert default settings to table 'settings'
 		$result = $this->db->insert_batch('settings', array(
 			array('shj_key' => 'timezone',               'shj_value' => 'Asia/Jakarta'),
-			array('shj_key' => 'tester_path',            'shj_value' => dirname(__FILE__, 3) . "/restricted/tester"),
-			array('shj_key' => 'assignments_root',       'shj_value' => dirname(__FILE__, 3) . "/restricted/assignments"),
+			array('shj_key' => 'tester_path',            'shj_value' => dirname(__FILE__, 4) . "/restricted/tester"),
+			array('shj_key' => 'assignments_root',       'shj_value' => dirname(__FILE__, 4) . "/restricted/assignments"),
 			array('shj_key' => 'file_size_limit',        'shj_value' => '50'),
 			array('shj_key' => 'output_size_limit',      'shj_value' => '1024'),
 			array('shj_key' => 'queue_is_working',       'shj_value' => '0'),

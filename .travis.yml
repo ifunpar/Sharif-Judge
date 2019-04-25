@@ -6,9 +6,9 @@ before_script:
   - cp application/config/secrets.example.php application/config/secrets.php
   - sudo mysql -e "CREATE DATABASE sharifjudge;"
   - composer install
-  - cd restricted/ && mkdir assignments && cd ../
+  - cd restricted/ && mkdir assignments && ls && cd ../
 services:
   - mysql
 script: 
-  - php index.php Migrations
-  - php index.php RunTest
+  - php index.php tests/Migrations
+  - php index.php tests/RunTest

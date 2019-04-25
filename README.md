@@ -59,6 +59,23 @@ For running SharIF Judge, a Linux server with following requirements is needed:
 
   * Read the [documentation](https://github.com/ftisunpar/Sharif-Judge/tree/docs)
 
+## Running The Testing
+
+  
+  1. Clone the project first `git clone https://github.com/ferdianexe/Sharif-Judge.git`
+  2. If you dont have MySQL install it first.
+  3. Create new database in MySQL, **[IMPORTANT]** for testing, you need to run the test in new database, otherwise the data will be lost
+  4. Make sure there is 2 file there is `application/config/database.php` and `application/config/secrets.php` for secrets file you can rename it from `application/config/secrets.example.php`.
+  4. Set new database connection settings in `application/config/database.php`.
+  5. Make `application/cache/Twig` writable by php.
+  6. Create a folder in root directory for example `reports-dev` it will be the place where the Test Reports and Code Coverage will be rendered  
+  7. Create a new folder in directory `restricted/`. give the folder name `assignments`
+  8. Run the migrations first in terminal `php index.php tests/Migrations` **[IMPORTANT]** You dont need to to this again if there is database that used to do the testing
+  9. in `controllers/test/RunTest.php`. check this line of code `$writer->process($this->coverage, 'reports-dev/code-coverage');` and `file_put_contents('reports-dev/test_report.html', $this->unit->report()); ` change ONLY the `reports-dev` to the file that you already make
+  10. if you wanna render the code coverage result set `const ENABLE_COVERAGE ` to `TRUE ` **[IMPORTANT]** xdebug needed
+  11. Last for Running the test in terminal run this `php index.php tests/Migrations` the test result gonna print in terminal.
+
+
 ## License
 
 GPL v3

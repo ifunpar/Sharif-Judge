@@ -30,7 +30,7 @@ class RunTest extends CI_Controller {
 					$this->coverage->filter()->addDirectoryToWhitelist('application/controllers');
 					$this->coverage->filter()->removeDirectoryFromWhitelist('application/models/tests');
 					$this->coverage->start('Sharif Unit Testing');
-			}	
+				}	
 		foreach ($this->classes as $className) {
 			$this->load->model('../controllers/tests/' . $className);
 			$this->$className->runTest();

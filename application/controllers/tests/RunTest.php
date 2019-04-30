@@ -27,8 +27,7 @@ class RunTest extends CI_Controller {
 				if (self::ENABLE_COVERAGE) {
 					$this->coverage = new CodeCoverage;
 					$this->coverage->filter()->addDirectoryToWhitelist('application/models');
-					$this->coverage->filter()->addDirectoryToWhitelist('application/controllers');
-					$this->coverage->filter()->removeDirectoryFromWhitelist('application/models/tests');
+					$this->coverage->filter()->removeDirectoryFromWhitelist('application/controllers/tests');
 					$this->coverage->start('Sharif Unit Testing');
 				}	
 		foreach ($this->classes as $className) {

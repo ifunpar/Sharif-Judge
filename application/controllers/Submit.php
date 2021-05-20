@@ -238,5 +238,22 @@ class Submit extends CI_Controller
 	}
 
 
+	// ------------------------------------------------------------------------
 
+	public function pdf($assignment_id){
+		$pattern = rtrim($this->settings_model->get_setting('assignments_root'),'/')."/assignment_{$assignment_id}/*.pdf";
+		$pdf_files = glob($pattern);
+
+		$filename = shj_basename($pdf_files[0]);
+		$content = file_get_contents($pdf_files[0]);
+	
+		header('Content-Type: application/pdf');
+		header('Content-Length: ' . strlen($content));
+		header('Content-Disposition: inline; filename="'.$filename.'"');
+		header('Cache-Control: private, max-age=0, must-revalidate');
+		header('Pragma: public');
+		ini_set('zlib.output_compression','0');
+	
+		die($content);
+	}
 }

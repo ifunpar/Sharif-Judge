@@ -68,6 +68,6 @@
 		<input type="submit" value="Submit" class="sharif_input"/>
 	</p>
 	</form>
-	<embed src={{ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true') }} width="500" height="400" type='application/pdf'>
+	<iframe id="pdfjs_iframe" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} frameborder="0" width="100%" height="600"></iframe>
 {% endif %}
 {% endblock %}  {# main_content #}

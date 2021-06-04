@@ -68,6 +68,6 @@
 		<input type="submit" value="Submit" class="sharif_input"/>
 	</p>
 	</form>
-	<embed src={{ site_url('submit/pdf/'~user.selected_assignment.id) }} width="500" height="400" type='application/pdf'>
+	<embed src={{ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true') }} width="500" height="400" type='application/pdf'>
 {% endif %}
 {% endblock %}  {# main_content #}

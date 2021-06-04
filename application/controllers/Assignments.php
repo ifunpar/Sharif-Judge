@@ -97,14 +97,14 @@ class Assignments extends CI_Controller
 	/**
 	 * Download pdf file of an assignment (or problem) to browser
 	 */
-	public function pdf($assignment_id, $problem_id = NULL)
+	public function pdf($assignment_id, $problem_id = NULL, $dl_flag = NULL)
 	{
 		$finishtime = strtotime($this->assignment_model->assignment_info($assignment_id)['finish_time']);
 		$starttime = strtotime($this->assignment_model->assignment_info($assignment_id)['start_time']);
 		$extratime = $this->assignment_model->assignment_info($assignment_id)['extra_time'];
 
 		// Find pdf file
-		if ($problem_id === NULL)
+		if ($problem_id === NULL || $problem_id === "null")
 			$pattern = rtrim($this->settings_model->get_setting('assignments_root'),'/')."/assignment_{$assignment_id}/*.pdf";
 		else
 			$pattern = rtrim($this->settings_model->get_setting('assignments_root'),'/')."/assignment_{$assignment_id}/p{$problem_id}/*.pdf";
@@ -120,10 +120,24 @@ class Assignments extends CI_Controller
 		elseif ( shj_now() < $starttime)
 			show_error('Selected assignment has not started.');
 
-		// Download the file to browser
-		$this->load->helper('download')->helper('file');
+
+		
 		$filename = shj_basename($pdf_files[0]);
-		force_download($filename, file_get_contents($pdf_files[0]), TRUE);
+		// Download the file to browser
+		if($dl_flag === NULL){
+			$this->load->helper('download')->helper('file');
+			force_download($filename, file_get_contents($pdf_files[0]), TRUE);
+		}
+		else{
+			$content = file_get_contents($pdf_files[0]);
+			header('Content-Type: application/pdf');
+			header('Content-Length: ' . strlen($content));
+			header('Content-Disposition: inline; filename="'.$filename.'"');
+			header('Cache-Control: private, max-age=0, must-revalidate');
+			header('Pragma: public');
+			ini_set('zlib.output_compression','0');
+			die($content);
+		}
 	}
 
 

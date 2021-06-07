@@ -12,29 +12,35 @@
 
 
 {% block other_assets %}
+<script src={{ base_url('assets/ace/ace.js') }} type="text/javascript" charset="utf-8"></script>
+
 <script>
 	shj.p={};
 	{{ problems_js|raw }}
 	$(document).ready(function(){
+		var editor = ace.edit("code_editor");
+    	editor.setTheme("ace/theme/monokai");
+    	editor.session.setMode("ace/mode/java");
+
 		function disableEditor(bool) {
 			$("#save").prop("disabled", bool);
-			$("#code_editor").prop("disabled", bool);
 		}
 
 		function loadCode(problem_id){
 			if(problem_id == 0){
-				$("#code_editor").val("");
+				editor.setValue("");
 				$("#ajax_status").html("Select problem");
 				disableEditor(true);
 			}
 			else{
+				disableEditor(true);
 				var url = "{{ site_url('submit/load') ~ '/'}}" + problem_id;	
 				$.ajax({
 					url: url,
 					cache: false,
 					success: function (data){
 						data = JSON.parse(data);
-						$("#code_editor").val(data.content);
+						editor.setValue(data.content);
 						$("#ajax_status").html(data.message);
 						disableEditor(false);
 					},
@@ -61,7 +67,7 @@
 				url: "{{ site_url('submit/save') }}", 
 				data: {
 					["{{csrf_name}}"]: "{{csrf_hash}}",
-					code_editor: $("#code_editor").val(),
+					code_editor: editor.getValue(),
 					problem_id: $("select#problems").val(),
 				},
 				dataType: "text",  
@@ -122,7 +128,10 @@
 	</form>
 
 	<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} frameborder="0" width="80%" height="400"></iframe>
-	<textarea id="code_editor" value="" style="resize: none; width: 80%; height: 400px;" disabled></textarea>
+	<div id="code_editor" style="resize: none; width: 80%; height: 400px;" disabled>function foo(items) {
+    	var x = "All this is syntax highlighted";
+    	return x;
+	}</div>
 	<button type="button" id="save" disabled>Save</button>
 	<span id="ajax_status"></span>
 {% endif %}

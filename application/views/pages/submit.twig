@@ -16,15 +16,67 @@
 	shj.p={};
 	{{ problems_js|raw }}
 	$(document).ready(function(){
+		function disableEditor(bool) {
+			$("#save").prop("disabled", bool);
+			$("#code_editor").prop("disabled", bool);
+		}
+
+		function loadCode(problem_id){
+			if(problem_id == 0){
+				$("#code_editor").val("");
+				$("#ajax_status").html("Select problem");
+				disableEditor(true);
+			}
+			else{
+				var url = "{{ site_url('submit/load') ~ '/'}}" + problem_id;	
+				$.ajax({
+					url: url,
+					cache: false,
+					success: function (data){
+						data = JSON.parse(data);
+						$("#code_editor").val(data.content);
+						$("#ajax_status").html(data.message);
+						disableEditor(false);
+					},
+					error: function (error){
+						console.log(JSON.stringify(error));
+						disableEditor(false);
+					},
+				});
+			}
+		}
+
 		$("select#problems").change(function(){
 			var v = $(this).val();
+			loadCode(v);
 			$('select#languages').empty();
 			$('<option value="0" selected="selected">-- Select Language --</option>').appendTo('select#languages');
-			if (v==0)
-				return;
 			for (var i=0;i<shj.p[v].length;i++)
 				$('<option value="'+shj.p[v][i]+'">'+shj.p[v][i]+'</option>').appendTo('select#languages');
 		});
+
+		$("#save").click(function(){
+			$.ajax({
+				type: "POST",
+				url: "{{ site_url('submit/save') }}", 
+				data: {
+					["{{csrf_name}}"]: "{{csrf_hash}}",
+					code_editor: $("#code_editor").val(),
+					problem_id: $("select#problems").val(),
+				},
+				dataType: "text",  
+				cache: false,
+				success: function(data){
+					$("#ajax_status").html(data);
+				},
+				error: function (error){
+					console.log(JSON.stringify(error));
+				},
+			});
+			return false;
+ 		});
+
+		loadCode($("select#problems").val());
 	});
 </script>
 {% endblock %}
@@ -68,6 +120,10 @@
 		<input type="submit" value="Submit" class="sharif_input"/>
 	</p>
 	</form>
-	<iframe id="pdfjs_iframe" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} frameborder="0" width="100%" height="600"></iframe>
+
+	<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} frameborder="0" width="80%" height="400"></iframe>
+	<textarea id="code_editor" value="" style="resize: none; width: 80%; height: 400px;" disabled></textarea>
+	<button type="button" id="save" disabled>Save</button>
+	<span id="ajax_status"></span>
 {% endif %}
 {% endblock %}  {# main_content #}

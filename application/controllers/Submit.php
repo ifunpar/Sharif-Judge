@@ -145,8 +145,10 @@ class Submit extends CI_Controller
 		else
 			$this->data['error'] = 'none';
 
-		$this->twig->display('pages/submit.twig', $this->data);
+		$this->data['csrf_name'] = $this->security->get_csrf_token_name();
+		$this->data['csrf_hash'] = $this->security->get_csrf_hash();
 
+		$this->twig->display('pages/submit.twig', $this->data);
 	}
 
 
@@ -240,20 +242,51 @@ class Submit extends CI_Controller
 
 	// ------------------------------------------------------------------------
 
-	public function pdf($assignment_id){
-		$pattern = rtrim($this->settings_model->get_setting('assignments_root'),'/')."/assignment_{$assignment_id}/*.pdf";
-		$pdf_files = glob($pattern);
 
-		$filename = shj_basename($pdf_files[0]);
-		$content = file_get_contents($pdf_files[0]);
+	public function save(){
+		$file_name = 'temp.txt';
+		$data = $_POST['code_editor'];
+		$problem_id = $_POST['problem_id'];
+
+		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
+		if (!file_exists($user_dir)){
+			mkdir($user_dir, 0700);
+		}
+		$file_path = $user_dir.'/'.$file_name;
+
+		$this->load->helper('file');
+		if (!write_file($file_path, $data)){
+			echo 'Unable to save';
+		}
+		else{
+			echo 'Saved';
+		}
+	}
 	
-		header('Content-Type: application/pdf');
-		header('Content-Length: ' . strlen($content));
-		header('Content-Disposition: inline; filename="'.$filename.'"');
-		header('Cache-Control: private, max-age=0, must-revalidate');
-		header('Pragma: public');
-		ini_set('zlib.output_compression','0');
-	
-		die($content);
+
+	// ------------------------------------------------------------------------
+
+
+
+	public function load($problem_id){
+		$file_name = 'temp.txt';
+
+		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
+		if (!file_exists($user_dir)){
+			$response = json_encode(array(content=>'', message=>'Unable to load'));
+		}
+		else{
+			$file_path = $user_dir.'/'.$file_name;
+			$this->load->helper('file');
+			$file_content = file_get_contents($file_path);
+			if ($file_content === false){
+				$response = json_encode(array(content=>'', message=>'Unable to load'));
+			}
+			else{
+				addslashes($file_content);
+				$response = json_encode(array(content=>$file_content, message=>'Loaded'));
+			}
+		}
+		echo $response;
 	}
 }

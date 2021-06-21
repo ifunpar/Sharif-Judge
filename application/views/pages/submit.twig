@@ -20,17 +20,17 @@
 	$(document).ready(function(){
 		var editor = ace.edit("code_editor");
     	editor.setTheme("ace/theme/monokai");
-    	editor.session.setMode("ace/mode/java");
 
 		function disableEditor(bool) {
 			$("#save").prop("disabled", bool);
+			editor.setReadOnly(bool);
 		}
 
 		function loadCode(problem_id){
 			if(problem_id == 0){
+				disableEditor(true);
 				editor.setValue("");
 				$("#ajax_status").html("Select problem");
-				disableEditor(true);
 			}
 			else{
 				disableEditor(true);
@@ -45,8 +45,7 @@
 						disableEditor(false);
 					},
 					error: function (error){
-						console.log(JSON.stringify(error));
-						disableEditor(false);
+						console.error(error);
 					},
 				});
 			}
@@ -59,6 +58,21 @@
 			$('<option value="0" selected="selected">-- Select Language --</option>').appendTo('select#languages');
 			for (var i=0;i<shj.p[v].length;i++)
 				$('<option value="'+shj.p[v][i]+'">'+shj.p[v][i]+'</option>').appendTo('select#languages');
+		});
+
+		$("select#languages").change(function(){
+			if(this.value.toLowerCase().includes("java")){
+				editor.session.setMode("ace/mode/java");
+			}
+			else if(this.value.toLowerCase().includes("python")){
+				editor.session.setMode("ace/mode/python");
+			}
+			else if(this.value.toLowerCase().includes("c")){
+				editor.session.setMode("ace/mode/c_cpp");
+			}
+			else{
+				editor.session.setMode("ace/mode/plain_text");
+			}
 		});
 
 		$("#save").click(function(){
@@ -76,7 +90,7 @@
 					$("#ajax_status").html(data);
 				},
 				error: function (error){
-					console.log(JSON.stringify(error));
+					console.error(error);
 				},
 			});
 			return false;
@@ -128,10 +142,7 @@
 	</form>
 
 	<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} frameborder="0" width="80%" height="400"></iframe>
-	<div id="code_editor" style="resize: none; width: 80%; height: 400px;" disabled>function foo(items) {
-    	var x = "All this is syntax highlighted";
-    	return x;
-	}</div>
+	<div id="code_editor" style="resize: none; width: 80%; height: 400px;"></div>
 	<button type="button" id="save" disabled>Save</button>
 	<span id="ajax_status"></span>
 {% endif %}

@@ -97,7 +97,7 @@ class Assignments extends CI_Controller
 	/**
 	 * Download pdf file of an assignment (or problem) to browser
 	 */
-	public function pdf($assignment_id, $problem_id = NULL, $dl_flag = NULL)
+	public function pdf($assignment_id, $problem_id = NULL, $no_download = FALSE)
 	{
 		$finishtime = strtotime($this->assignment_model->assignment_info($assignment_id)['finish_time']);
 		$starttime = strtotime($this->assignment_model->assignment_info($assignment_id)['start_time']);
@@ -124,7 +124,7 @@ class Assignments extends CI_Controller
 		
 		$filename = shj_basename($pdf_files[0]);
 		// Download the file to browser
-		if($dl_flag === NULL){
+		if($no_download === FALSE){
 			$this->load->helper('download')->helper('file');
 			force_download($filename, file_get_contents($pdf_files[0]), TRUE);
 		}

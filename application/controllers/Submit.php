@@ -273,7 +273,7 @@ class Submit extends CI_Controller
 
 		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
 		if (!file_exists($user_dir)){
-			$response = json_encode(array(content=>'', message=>'Unable to load'));
+			$response = json_encode(array(content=>'', message=>'No saved file'));
 		}
 		else{
 			$file_path = $user_dir.'/'.$file_name;

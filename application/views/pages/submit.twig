@@ -22,7 +22,8 @@
     	editor.setTheme("ace/theme/monokai");
 
 		function disableEditor(bool) {
-			$("#save").prop("disabled", bool);
+			$("#editor_save").prop("disabled", bool);
+			$("#editor_submit").prop("disabled", bool);
 			editor.setReadOnly(bool);
 		}
 
@@ -42,7 +43,6 @@
 						data = JSON.parse(data);
 						editor.setValue(data.content);
 						$("#ajax_status").html(data.message);
-						disableEditor(false);
 					},
 					error: function (error){
 						console.error(error);
@@ -63,19 +63,23 @@
 		$("select#languages").change(function(){
 			if(this.value.toLowerCase().includes("java")){
 				editor.session.setMode("ace/mode/java");
+				disableEditor(false);
 			}
 			else if(this.value.toLowerCase().includes("python")){
 				editor.session.setMode("ace/mode/python");
+				disableEditor(false);
 			}
 			else if(this.value.toLowerCase().includes("c")){
 				editor.session.setMode("ace/mode/c_cpp");
+				disableEditor(false);
 			}
 			else{
 				editor.session.setMode("ace/mode/plain_text");
+				disableEditor(true);
 			}
 		});
 
-		$("#save").click(function(){
+		$("#editor_save").click(function(){
 			$.ajax({
 				type: "POST",
 				url: "{{ site_url('submit/save') }}", 
@@ -88,6 +92,30 @@
 				cache: false,
 				success: function(data){
 					$("#ajax_status").html(data);
+				},
+				error: function (error){
+					console.error(error);
+				},
+			});
+			return false;
+ 		});
+
+		$("#editor_submit").click(function(){
+			var url = "{{ site_url('submit/save') }}" + "/true/" + $("select#problems").val() + "/" + $("select#languages").val();
+			console.log(url);
+			$.ajax({
+				type: "POST",
+				url: url, 
+				data: {
+					["{{csrf_name}}"]: "{{csrf_hash}}",
+					code_editor: editor.getValue(),
+					problem_id: $("select#problems").val(),
+				},
+				dataType: "text",  
+				cache: false,
+				success: function(data){
+					$("#ajax_status").html(data);
+					window.location.href = "{{ site_url('submissions/all') }}";
 				},
 				error: function (error){
 					console.error(error);
@@ -143,7 +171,8 @@
 
 	<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} frameborder="0" width="80%" height="400"></iframe>
 	<div id="code_editor" style="resize: none; width: 80%; height: 400px;"></div>
-	<button type="button" id="save" disabled>Save</button>
+	<button type="button" id="editor_save" disabled>Save</button>
+	<button type="button" id="editor_submit" disabled>Submit</button>
 	<span id="ajax_status"></span>
 {% endif %}
 {% endblock %}  {# main_content #}

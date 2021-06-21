@@ -67,6 +67,26 @@ class Submit extends CI_Controller
 	// ------------------------------------------------------------------------
 
 
+		public function _language_to_ext($language)
+		{
+			$language = strtolower ($language);
+			switch ($language) {
+				case 'c': return 'c';
+				case 'c++': return 'cpp';
+				case 'python 2': return 'py';
+				case 'python 3': return 'py';
+				case 'java': return 'java';
+				case 'zip': return 'zip';
+				case 'pdf': return 'pdf';
+				case 'txt': return 'txt';
+				default: return FALSE;
+			}
+		}
+
+
+	// ------------------------------------------------------------------------
+
+
 	public function _match($type, $extension)
 	{
 		switch ($type) {
@@ -243,8 +263,9 @@ class Submit extends CI_Controller
 	// ------------------------------------------------------------------------
 
 
-	public function save(){
-		$file_name = 'temp.txt';
+	public function save($submit = FALSE, $problem_id = NULL, $language = NULL){
+		$file_name = 'editor';
+		$file_ext = 'txt';
 		$data = $_POST['code_editor'];
 		$problem_id = $_POST['problem_id'];
 
@@ -252,14 +273,65 @@ class Submit extends CI_Controller
 		if (!file_exists($user_dir)){
 			mkdir($user_dir, 0700);
 		}
-		$file_path = $user_dir.'/'.$file_name;
+		$file_path = $user_dir.'/'.$file_name.'.'.$file_ext;
 
 		$this->load->helper('file');
 		if (!write_file($file_path, $data)){
 			echo 'Unable to save';
 		}
 		else{
-			echo 'Saved';
+			if($submit === FALSE){
+				echo 'Saved';
+			}
+			else{
+				$now = shj_now();
+				if ( $this->queue_model->in_queue($this->user->username,$this->user->selected_assignment['id'], $this->problem['id']) )
+					show_error('You have already submitted for this problem. Your last submission is still in queue.');
+				if ($this->user->level==0 && !$this->user->selected_assignment['open'])
+					show_error('Selected assignment has been closed.');
+				if ($now < strtotime($this->user->selected_assignment['start_time']))
+					show_error('Selected assignment has not started.');
+				if ($now > strtotime($this->user->selected_assignment['finish_time'])+$this->user->selected_assignment['extra_time'])
+					show_error('Selected assignment has finished.');
+				if ( ! $this->assignment_model->is_participant($this->user->selected_assignment['participants'],$this->user->username) )
+					show_error('You are not registered for submitting.');
+
+				$file_type = $this->_language_to_type(strtolower(trim($language)));
+				$file_ext = $this->_language_to_ext(strtolower(trim($language)));
+				$file_fname = $file_name.'-'.($this->user->selected_assignment['total_submits']+1);
+				$file_path = $user_dir.'/'.$file_fname.'.'.$file_ext;
+
+				if (!write_file($file_path, $data)){
+					echo 'Unable to submit';
+				}
+				else{
+					$this->load->model('submit_model');
+
+					$submit_info = array(
+						'submit_id' => $this->assignment_model->increase_total_submits($this->user->selected_assignment['id']),
+						'username' => $this->user->username,
+						'assignment' => $this->user->selected_assignment['id'],
+						'problem' => $problem_id,
+						'file_name' => $file_fname,
+						'main_file_name' => $file_name,
+						'file_type' => $file_type,
+						'coefficient' => $this->coefficient,
+						'pre_score' => 0,
+						'time' => shj_now_str(),
+					);
+					if ($this->problem['is_upload_only'] == 0)
+					{
+						$this->queue_model->add_to_queue($submit_info);
+						process_the_queue();
+					}
+					else
+					{
+						$this->submit_model->add_upload_only($submit_info);
+					}
+
+					echo 'Submitted';
+				}
+			}
 		}
 	}
 	
@@ -269,14 +341,15 @@ class Submit extends CI_Controller
 
 
 	public function load($problem_id){
-		$file_name = 'temp.txt';
+		$file_name = 'editor.txt';
 
 		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
-		if (!file_exists($user_dir)){
+		$file_path = $user_dir.'/'.$file_name;
+
+		if (!file_exists($file_path)){
 			$response = json_encode(array(content=>'', message=>'No saved file'));
 		}
 		else{
-			$file_path = $user_dir.'/'.$file_name;
 			$this->load->helper('file');
 			$file_content = file_get_contents($file_path);
 			if ($file_content === false){

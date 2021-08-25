@@ -17,7 +17,8 @@ class Submit extends CI_Controller
 	private $ext; //uploaded file extension
 	private $file_name; //uploaded file name without extension
 	private $coefficient;
-
+	private $editor_file_name;
+	private $editor_file_ext;
 
 	// ------------------------------------------------------------------------
 
@@ -41,6 +42,8 @@ class Submit extends CI_Controller
 		ob_end_clean();
 		$this->coefficient = $coefficient;
 
+		$this->editor_file_name = "editor";
+		$this->editor_file_ext = "tmp";
 	}
 
 
@@ -264,8 +267,8 @@ class Submit extends CI_Controller
 
 
 	public function save($submit = FALSE, $problem_id = NULL, $language = NULL){
-		$file_name = 'editor';
-		$file_ext = 'txt';
+		$file_name = $this->editor_file_name;
+		$file_ext = $this->editor_file_ext;
 		$data = $_POST['code_editor'];
 		$problem_id = $_POST['problem_id'];
 
@@ -341,10 +344,8 @@ class Submit extends CI_Controller
 
 
 	public function load($problem_id){
-		$file_name = 'editor.txt';
-
 		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
-		$file_path = $user_dir.'/'.$file_name;
+		$file_path = $user_dir.'/'.$this->editor_file_name.'.'.$this->editor_file_ext;
 
 		if (!file_exists($file_path)){
 			$response = json_encode(array(content=>'', message=>'No saved file'));

@@ -102,7 +102,6 @@
 
 		$("#editor_submit").click(function(){
 			var url = "{{ site_url('submit/save') }}" + "/true/" + $("select#problems").val() + "/" + $("select#languages").val();
-			console.log(url);
 			$.ajax({
 				type: "POST",
 				url: url, 
@@ -169,8 +168,11 @@
 	</p>
 	</form>
 
-	<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} frameborder="0" width="80%" height="400"></iframe>
-	<div id="code_editor" style="resize: none; width: 80%; height: 400px;"></div>
+	<div>
+		<div id="code_editor" style="float: left; width: 60%; height: 800px;"></div>
+		<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} style="float:right; width: 40%;  height: 800px;"></iframe>
+	</div>
+	
 	<button type="button" id="editor_save" disabled>Save</button>
 	<button type="button" id="editor_submit" disabled>Submit</button>
 	<span id="ajax_status"></span>

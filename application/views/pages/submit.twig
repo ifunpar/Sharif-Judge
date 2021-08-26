@@ -19,7 +19,10 @@
 	{{ problems_js|raw }}
 	$(document).ready(function(){
 		var editor = ace.edit("code_editor");
-    	editor.setTheme("ace/theme/monokai");
+		editor.setOptions({
+			theme: "ace/theme/monokai",
+			fontSize: "12pt"
+		});
 
 		function disableEditor(bool) {
 			$("#editor_save").prop("disabled", bool);
@@ -101,7 +104,7 @@
  		});
 
 		$("#editor_submit").click(function(){
-			var url = "{{ site_url('submit/save') }}" + "/true/" + $("select#problems").val() + "/" + $("select#languages").val();
+			var url = "{{ site_url('submit/save') }}" + "/true";
 			$.ajax({
 				type: "POST",
 				url: url, 
@@ -109,6 +112,7 @@
 					["{{csrf_name}}"]: "{{csrf_hash}}",
 					code_editor: editor.getValue(),
 					problem_id: $("select#problems").val(),
+					language: $("select#languages").val(),
 				},
 				dataType: "text",  
 				cache: false,

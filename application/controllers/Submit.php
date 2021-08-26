@@ -266,11 +266,12 @@ class Submit extends CI_Controller
 	// ------------------------------------------------------------------------
 
 
-	public function save($submit = FALSE, $problem_id = NULL, $language = NULL){
+	public function save($submit = FALSE){
 		$file_name = $this->editor_file_name;
 		$file_ext = $this->editor_file_ext;
 		$data = $_POST['code_editor'];
 		$problem_id = $_POST['problem_id'];
+		$language = $_POST['language'];
 
 		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
 		if (!file_exists($user_dir)){

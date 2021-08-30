@@ -266,84 +266,6 @@ class Submit extends CI_Controller
 	// ------------------------------------------------------------------------
 
 
-	public function save($submit = FALSE){
-		$file_name = $this->editor_file_name;
-		$file_ext = $this->editor_file_ext;
-		$data = $_POST['code_editor'];
-		$problem_id = $_POST['problem_id'];
-		$language = $_POST['language'];
-
-		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
-		if (!file_exists($user_dir)){
-			mkdir($user_dir, 0700);
-		}
-		$file_path = $user_dir.'/'.$file_name.'.'.$file_ext;
-
-		$this->load->helper('file');
-		if (!write_file($file_path, $data)){
-			echo 'Unable to save';
-		}
-		else{
-			if($submit === FALSE){
-				echo 'Saved';
-			}
-			else{
-				$now = shj_now();
-				if ( $this->queue_model->in_queue($this->user->username,$this->user->selected_assignment['id'], $this->problem['id']) )
-					show_error('You have already submitted for this problem. Your last submission is still in queue.');
-				if ($this->user->level==0 && !$this->user->selected_assignment['open'])
-					show_error('Selected assignment has been closed.');
-				if ($now < strtotime($this->user->selected_assignment['start_time']))
-					show_error('Selected assignment has not started.');
-				if ($now > strtotime($this->user->selected_assignment['finish_time'])+$this->user->selected_assignment['extra_time'])
-					show_error('Selected assignment has finished.');
-				if ( ! $this->assignment_model->is_participant($this->user->selected_assignment['participants'],$this->user->username) )
-					show_error('You are not registered for submitting.');
-
-				$file_type = $this->_language_to_type(strtolower(trim($language)));
-				$file_ext = $this->_language_to_ext(strtolower(trim($language)));
-				$file_fname = $file_name.'-'.($this->user->selected_assignment['total_submits']+1);
-				$file_path = $user_dir.'/'.$file_fname.'.'.$file_ext;
-
-				if (!write_file($file_path, $data)){
-					echo 'Unable to submit';
-				}
-				else{
-					$this->load->model('submit_model');
-
-					$submit_info = array(
-						'submit_id' => $this->assignment_model->increase_total_submits($this->user->selected_assignment['id']),
-						'username' => $this->user->username,
-						'assignment' => $this->user->selected_assignment['id'],
-						'problem' => $problem_id,
-						'file_name' => $file_fname,
-						'main_file_name' => $file_name,
-						'file_type' => $file_type,
-						'coefficient' => $this->coefficient,
-						'pre_score' => 0,
-						'time' => shj_now_str(),
-					);
-					if ($this->problem['is_upload_only'] == 0)
-					{
-						$this->queue_model->add_to_queue($submit_info);
-						process_the_queue();
-					}
-					else
-					{
-						$this->submit_model->add_upload_only($submit_info);
-					}
-
-					echo 'Submitted';
-				}
-			}
-		}
-	}
-	
-
-	// ------------------------------------------------------------------------
-
-
-
 	public function load($problem_id){
 		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
 		$file_path = $user_dir.'/'.$this->editor_file_name.'.'.$this->editor_file_ext;
@@ -354,7 +276,7 @@ class Submit extends CI_Controller
 		else{
 			$this->load->helper('file');
 			$file_content = file_get_contents($file_path);
-			if ($file_content === false){
+			if ($file_content === FALSE){
 				$response = json_encode(array(content=>'', message=>'Unable to load'));
 			}
 			else{
@@ -362,6 +284,96 @@ class Submit extends CI_Controller
 				$response = json_encode(array(content=>$file_content, message=>'Loaded'));
 			}
 		}
+		echo $response;
+	}
+
+
+	// ------------------------------------------------------------------------
+
+
+	public function save($submit = FALSE){
+		$data = $_POST['code_editor'];
+		$problem_id = $_POST['problem_id'];
+		$language = $_POST['language'];
+		
+		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
+		if (!file_exists($user_dir)){
+			mkdir($user_dir, 0700);
+		}
+		$file_path = $user_dir.'/'.$this->editor_file_name.'.'.$this->editor_file_ext;
+
+		$this->load->helper('file');
+		if (!write_file($file_path, $data)){
+			$response = json_encode(array(message=>'Unable to save'));
+			echo $response;
+		}
+		else{
+			$response = json_encode(array(message=>'Saved'));
+			if($submit === FALSE){
+				echo $response;
+			}
+			else{
+				$this->_submit($data, $problem_id, $language, $user_dir);
+			}
+		}
+
+
+	}
+
+
+	// ------------------------------------------------------------------------
+
+
+	private function _submit($data, $problem_id, $language, $user_dir){
+		$now = shj_now();
+		if ( $this->queue_model->in_queue($this->user->username,$this->user->selected_assignment['id'], $this->problem['id']) )
+			show_error('You have already submitted for this problem. Your last submission is still in queue.');
+		if ($this->user->level==0 && !$this->user->selected_assignment['open'])
+			show_error('Selected assignment has been closed.');
+		if ($now < strtotime($this->user->selected_assignment['start_time']))
+			show_error('Selected assignment has not started.');
+		if ($now > strtotime($this->user->selected_assignment['finish_time'])+$this->user->selected_assignment['extra_time'])
+			show_error('Selected assignment has finished.');
+		if ( ! $this->assignment_model->is_participant($this->user->selected_assignment['participants'],$this->user->username) )
+			show_error('You are not registered for submitting.');
+
+		$file_type = $this->_language_to_type(strtolower(trim($language)));
+		$file_ext = $this->_language_to_ext(strtolower(trim($language)));
+		$file_name = $this->editor_file_name;
+		$file_fname = $file_name.'-'.($this->user->selected_assignment['total_submits']+1);
+		$file_path = $user_dir.'/'.$file_fname.'.'.$file_ext;
+
+		if (!write_file($file_path, $data)){
+			$response = json_encode(array(status=>FALSE, message=>'Unable to submit', debug=>$file_path));
+		}
+		else{
+			$this->load->model('submit_model');
+
+			$submit_info = array(
+				'submit_id' => $this->assignment_model->increase_total_submits($this->user->selected_assignment['id']),
+				'username' => $this->user->username,
+				'assignment' => $this->user->selected_assignment['id'],
+				'problem' => $problem_id,
+				'file_name' => $file_fname,
+				'main_file_name' => $file_name,
+				'file_type' => $file_type,
+				'coefficient' => $this->coefficient,
+				'pre_score' => 0,
+				'time' => shj_now_str(),
+			);
+			if ($this->problem['is_upload_only'] == 0)
+			{
+				$this->queue_model->add_to_queue($submit_info);
+				process_the_queue();
+			}
+			else
+			{
+				$this->submit_model->add_upload_only($submit_info);
+			}
+
+			$response = json_encode(array(status=>TRUE, message=>'Submitted'));
+		}
+
 		echo $response;
 	}
 }

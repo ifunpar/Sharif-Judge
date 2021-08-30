@@ -94,7 +94,8 @@
 				dataType: "text",  
 				cache: false,
 				success: function(data){
-					$("#ajax_status").html(data);
+					data = JSON.parse(data);
+					$("#ajax_status").html(data.message);
 				},
 				error: function (error){
 					console.error(error);
@@ -104,10 +105,9 @@
  		});
 
 		$("#editor_submit").click(function(){
-			var url = "{{ site_url('submit/save') }}" + "/true";
 			$.ajax({
 				type: "POST",
-				url: url, 
+				url: "{{ site_url('submit/save/submit') }}", 
 				data: {
 					["{{csrf_name}}"]: "{{csrf_hash}}",
 					code_editor: editor.getValue(),
@@ -117,8 +117,11 @@
 				dataType: "text",  
 				cache: false,
 				success: function(data){
-					$("#ajax_status").html(data);
-					window.location.href = "{{ site_url('submissions/all') }}";
+					data = JSON.parse(data);
+					$("#ajax_status").html(data.message);
+					if(data.status){	
+						window.location.href = "{{ site_url('submissions/all') }}";
+					}
 				},
 				error: function (error){
 					console.error(error);

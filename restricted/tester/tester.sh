@@ -685,8 +685,37 @@ else
 			shj_finish "File Format Not Supported"
 		fi
 
-		cp err $PROBLEMPATH/$UN/exec_err.txt
 		shj_log_exec "$(cat out)"
+
+		if ! grep -q "FINISHED" err; then
+			if grep -q "SHJ_TIME" err; then
+				t=`grep "SHJ_TIME" err|cut -d" " -f3`
+				shj_log "Time Limit Exceeded ($t s)"
+				shj_log_exec "Time Limit Exceeded ($t s)"
+				continue
+			elif grep -q "SHJ_MEM" err; then
+				shj_log "Memory Limit Exceeded"
+				shj_log_exec "Memory Limit Exceeded"
+				continue
+			elif grep -q "SHJ_HANGUP" err; then
+				shj_log "Hang Up"
+				shj_log_exec "Hang Up"
+				continue
+			elif grep -q "SHJ_SIGNAL" err; then
+				shj_log "Killed by a signal"
+				shj_log_exec "Killed by a signal"
+				continue
+			elif grep -q "SHJ_OUTSIZE" err; then
+				shj_log "Output Size Limit Exceeded"
+				shj_log_exec "Output Size Limit Exceeded"
+				continue
+			fi
+		else
+			t=`grep "FINISHED" err|cut -d" " -f3`
+			shj_log "Time: $t s"
+		fi
+
+		cp err $PROBLEMPATH/$UN/exec_err.txt
 		shj_log "Exit Code = $EXITCODE"
 fi
 

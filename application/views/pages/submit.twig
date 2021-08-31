@@ -28,6 +28,7 @@
 			$("#editor_save").prop("disabled", bool);
 			$("#editor_execute").prop("disabled", bool);
 			$("#editor_submit").prop("disabled", bool);
+			$("#editor_input").prop("disabled", bool);
 			editor.setReadOnly(bool);
 		}
 
@@ -83,6 +84,7 @@
 		});
 
 		$("#editor_save").click(function(){
+			disableEditor(true);
 			$.ajax({
 				type: "POST",
 				url: shj.site_url + 'submit/save', 
@@ -96,15 +98,17 @@
 				success: function(data){
 					data = JSON.parse(data);
 					$("#ajax_status").html(data.message);
+					disableEditor(false);
 				},
 				error: function (error){
 					console.error(error);
+					disableEditor(false);
 				},
 			});
-			return false;
  		});
 
 		$("#editor_submit").click(function(){
+			disableEditor(true);
 			$.ajax({
 				type: "POST",
 				url: shj.site_url + 'submit/save/submit', 
@@ -118,18 +122,20 @@
 				success: function(data){
 					data = JSON.parse(data);
 					$("#ajax_status").html(data.message);
+					disableEditor(false);
 					if(data.status){	
 						window.location.href = shj.site_url + 'submissions/all';
 					}
 				},
 				error: function (error){
 					console.error(error);
+					disableEditor(false);
 				},
 			});
-			return false;
  		});
 
 		$("#editor_execute").click(function(){
+			disableEditor(true);
 			$.ajax({
 				type: "POST",
 				url: shj.site_url + 'submit/save/execute', 
@@ -156,19 +162,21 @@
 								}
 								else{
 									$("#ajax_status").html("Completed");
+									disableEditor(false);
 								}
 							},
 							error: function (error){
 								console.error(error);
+								disableEditor(false);
 							},
 						})
 					})();  
 				},
 				error: function (error){
 					console.error(error);
+					disableEditor(false);
 				},
 			});
-			return false;
  		});
 
 		loadCode($("select#problems").val()); 

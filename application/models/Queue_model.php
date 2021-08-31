@@ -50,6 +50,11 @@ class Queue_model extends CI_Model
 	public function empty_queue ()
 	{
 		return $this->db->empty_table('queue');
+
+		//Delete all dummy submission
+		$this->db->delete('submissions', array(
+			'submit_id' => 0,
+		));
 	}
 
 
@@ -180,6 +185,16 @@ class Queue_model extends CI_Model
 			'assignment' => $assignment,
 			'problem' => $problem
 		));
+
+		//Delete dummy submission if exec only
+		if($submit_id == 0){
+			$this->db->delete('submissions', array(
+				'submit_id' => $submit_id,
+				'username' => $username,
+				'assignment' => $assignment,
+				'problem' => $problem
+			));
+		}
 	}
 
 
@@ -239,30 +254,18 @@ class Queue_model extends CI_Model
 			$submit_info['is_final'] = 0;
 			$submit_info['status'] = 'PENDING';
 			$this->db->insert('submissions', $submit_info);
+
+			$this->db->insert('queue', array(
+				'submit_id' => $submit_info['submit_id'],
+				'username' => $submit_info['username'],
+				'assignment' => $submit_info['assignment'],
+				'problem' => $submit_info['problem'],
+				'type' => 'exec'
+			));
+			return TRUE;
 		}
-		
-		$this->db->insert('queue', array(
-			'submit_id' => $submit_info['submit_id'],
-			'username' => $submit_info['username'],
-			'assignment' => $submit_info['assignment'],
-			'problem' => $submit_info['problem'],
-			'type' => 'exec'
-		));
-	}
-
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Delete dummy submission used for execution purpose
-	 * This function is called from Queueprocess controller
-	 */
-	public function delete_exec_submission($submission){
-		$this->db->delete('submissions', array(
-			'submit_id' => $submission['submit_id'], 
-			'username' => $submission['username'],
-			'assignment' => $submission['assignment'],
-			'problem' => $submission['problem']
-		));
+		else{
+			return FALSE;
+		}
 	}
 }

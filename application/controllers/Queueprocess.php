@@ -129,25 +129,19 @@ class Queueprocess extends CI_Controller
 				shell_exec("mv $userdir/log $userdir/log-{$submit_id}");
 			}
 
-			if(!$exec_only) {
-				if (is_numeric($output)) {
-					$submission['pre_score'] = $output;
-					$submission['status'] = 'SCORE';
-				}
-				else {
-					$submission['pre_score'] = 0;
-					$submission['status'] = $output;
-				}
+			if (is_numeric($output)) {
+				$submission['pre_score'] = $output;
+				$submission['status'] = 'SCORE';
+			}
+			else {
+				$submission['pre_score'] = 0;
+				$submission['status'] = $output;
+			}
 
-				//reconnect to database incase we have run test for a long time.
-				$this->db->reconnect();
-				// Save the result
-				$this->queue_model->save_judge_result_in_db($submission, $type);
-			}
-			else{
-				$this->db->reconnect();
-				$this->queue_model->delete_exec_submission($submission);
-			}
+			//reconnect to database incase we have run test for a long time.
+			$this->db->reconnect();
+			// Save the result
+			$this->queue_model->save_judge_result_in_db($submission, $type);
 
 			// Remove the judged item from queue
 			$this->queue_model->remove_item($username, $assignment, $problem['id'], $submit_id);

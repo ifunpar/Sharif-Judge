@@ -307,7 +307,6 @@ class Submit extends CI_Controller
 		}
 		$file_path = $user_dir.'/'.$this->editor_file_name.'.'.$this->editor_file_ext;
 		$input_path = $user_dir.'/'.$this->editor_in_name.'.'.$this->editor_file_ext;
-		$output_path = $user_dir.'/'.$this->editor_out_name.'.'.$this->editor_file_ext;
 
 		$this->load->helper('file');
 		if (!write_file($file_path, $data)){
@@ -326,10 +325,6 @@ class Submit extends CI_Controller
 				$editor_input =  $_POST['editor_input'];
 				if (!write_file($input_path, $editor_input)){
 					$response = json_encode(array(message=>'Unable to write input file'));
-					echo $response;
-				}
-				else if (!write_file($output_path, "")){
-					$response = json_encode(array(message=>'Unable to write output file'));
 					echo $response;
 				}
 				else{
@@ -424,6 +419,7 @@ class Submit extends CI_Controller
 		$file_name = $this->editor_file_name;
 		$file_fname = $file_name.'-0';
 		$file_path = $user_dir.'/'.$file_fname.'.'.$file_ext;
+		$output_path = $user_dir.'/'.$this->editor_out_name.'.'.$this->editor_file_ext;
 
 		if (!write_file($file_path, $data)){
 			$response = json_encode(array(status=>FALSE, message=>'Unable to execute', debug=>$file_path));
@@ -441,13 +437,19 @@ class Submit extends CI_Controller
 				'pre_score' => 0,
 				'time' => shj_now_str(),
 			);
-			if ($this->problem['is_upload_only'] == 0)
-			{
-				$this->queue_model->add_to_queue_exec($submit_info);
-				process_the_queue();
-			}
 
-			$response = json_encode(array(status=>TRUE, message=>'Executing'));
+			if($this->queue_model->add_to_queue_exec($submit_info)){
+				if (!write_file($output_path, "Queueing...")){
+					$response = json_encode(array(status=>FALSE, message=>'Unable to write output file'));
+				}
+				else{
+					process_the_queue();
+					$response = json_encode(array(status=>TRUE, message=>'Executing'));
+				}
+			}
+			else{
+				$response = json_encode(array(status=>FALSE, message=>'Still in queue'));
+			}
 		}
 
 		echo $response;

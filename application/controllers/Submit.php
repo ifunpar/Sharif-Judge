@@ -19,6 +19,8 @@ class Submit extends CI_Controller
 	private $coefficient;
 	private $editor_file_name;
 	private $editor_file_ext;
+	private $editor_in_name;
+	private $editor_out_name;
 
 	// ------------------------------------------------------------------------
 
@@ -43,7 +45,9 @@ class Submit extends CI_Controller
 		$this->coefficient = $coefficient;
 
 		$this->editor_file_name = "editor";
-		$this->editor_file_ext = "tmp";
+		$this->editor_file_ext = "txt";
+		$this->editor_in_name = "exec_in";
+		$this->editor_out_name = "exec_out";
 	}
 
 
@@ -168,9 +172,6 @@ class Submit extends CI_Controller
 		else
 			$this->data['error'] = 'none';
 
-		$this->data['csrf_name'] = $this->security->get_csrf_token_name();
-		$this->data['csrf_hash'] = $this->security->get_csrf_hash();
-
 		$this->twig->display('pages/submit.twig', $this->data);
 	}
 
@@ -265,7 +266,9 @@ class Submit extends CI_Controller
 
 	// ------------------------------------------------------------------------
 
-
+	/**
+	 * Load code from editor file
+	 */
 	public function load($problem_id){
 		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
 		$file_path = $user_dir.'/'.$this->editor_file_name.'.'.$this->editor_file_ext;
@@ -290,8 +293,10 @@ class Submit extends CI_Controller
 
 	// ------------------------------------------------------------------------
 
-
-	public function save($submit = FALSE){
+	/**
+	 * Save code to editor file and submit/execute if needed
+	 */
+	public function save($type = FALSE){
 		$data = $_POST['code_editor'];
 		$problem_id = $_POST['problem_id'];
 		$language = $_POST['language'];
@@ -301,6 +306,8 @@ class Submit extends CI_Controller
 			mkdir($user_dir, 0700);
 		}
 		$file_path = $user_dir.'/'.$this->editor_file_name.'.'.$this->editor_file_ext;
+		$input_path = $user_dir.'/'.$this->editor_in_name.'.'.$this->editor_file_ext;
+		$output_path = $user_dir.'/'.$this->editor_out_name.'.'.$this->editor_file_ext;
 
 		$this->load->helper('file');
 		if (!write_file($file_path, $data)){
@@ -309,11 +316,25 @@ class Submit extends CI_Controller
 		}
 		else{
 			$response = json_encode(array(message=>'Saved'));
-			if($submit === FALSE){
+			if($type === FALSE){
 				echo $response;
 			}
-			else{
+			else if($type === 'submit'){
 				$this->_submit($data, $problem_id, $language, $user_dir);
+			}
+			else if($type === 'execute'){
+				$editor_input =  $_POST['editor_input'];
+				if (!write_file($input_path, $editor_input)){
+					$response = json_encode(array(message=>'Unable to write input file'));
+					echo $response;
+				}
+				else if (!write_file($output_path, "")){
+					$response = json_encode(array(message=>'Unable to write output file'));
+					echo $response;
+				}
+				else{
+					$this->_execute($data, $problem_id, $language, $user_dir);
+				}
 			}
 		}
 
@@ -323,7 +344,9 @@ class Submit extends CI_Controller
 
 	// ------------------------------------------------------------------------
 
-
+	/**
+	 * Add code to queue for judging
+	 */
 	private function _submit($data, $problem_id, $language, $user_dir){
 		$now = shj_now();
 		if ( $this->queue_model->in_queue($this->user->username,$this->user->selected_assignment['id'], $this->problem['id']) )
@@ -374,6 +397,91 @@ class Submit extends CI_Controller
 			$response = json_encode(array(status=>TRUE, message=>'Submitted'));
 		}
 
+		echo $response;
+	}
+
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Add code to queue for execution only
+	 */
+	private function _execute($data, $problem_id, $language, $user_dir){
+		$now = shj_now();
+		if ( $this->queue_model->in_queue($this->user->username,$this->user->selected_assignment['id'], $this->problem['id']) )
+			show_error('You have already submitted for this problem. Your last submission is still in queue.');
+		if ($this->user->level==0 && !$this->user->selected_assignment['open'])
+			show_error('Selected assignment has been closed.');
+		if ($now < strtotime($this->user->selected_assignment['start_time']))
+			show_error('Selected assignment has not started.');
+		if ($now > strtotime($this->user->selected_assignment['finish_time'])+$this->user->selected_assignment['extra_time'])
+			show_error('Selected assignment has finished.');
+		if ( ! $this->assignment_model->is_participant($this->user->selected_assignment['participants'],$this->user->username) )
+			show_error('You are not registered for submitting.');
+		
+		$file_type = $this->_language_to_type(strtolower(trim($language)));
+		$file_ext = $this->_language_to_ext(strtolower(trim($language)));
+		$file_name = $this->editor_file_name;
+		$file_fname = $file_name.'-0';
+		$file_path = $user_dir.'/'.$file_fname.'.'.$file_ext;
+
+		if (!write_file($file_path, $data)){
+			$response = json_encode(array(status=>FALSE, message=>'Unable to execute', debug=>$file_path));
+		}
+		else{
+			$submit_info = array(
+				'submit_id' => 0,
+				'username' => $this->user->username,
+				'assignment' => $this->user->selected_assignment['id'],
+				'problem' => $problem_id,
+				'file_name' => $file_fname,
+				'main_file_name' => $file_name,
+				'file_type' => $file_type,
+				'coefficient' => $this->coefficient,
+				'pre_score' => 0,
+				'time' => shj_now_str(),
+			);
+			if ($this->problem['is_upload_only'] == 0)
+			{
+				$this->queue_model->add_to_queue_exec($submit_info);
+				process_the_queue();
+			}
+
+			$response = json_encode(array(status=>TRUE, message=>'Executing'));
+		}
+
+		echo $response;
+	}
+	
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Load output file as execution result
+	 */
+	public function get_output($problem_id){
+		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
+		$file_path = $user_dir.'/'.$this->editor_out_name.'.'.$this->editor_file_ext;
+
+		if (!file_exists($file_path)){
+			$response = json_encode(array(status=>FALSE, content=>''));
+		}
+		else{
+			$this->load->helper('file');
+			$file_content = file_get_contents($file_path);
+			if ($file_content === FALSE){
+				$response = json_encode(array(status=>FALSE, content=>''));
+			}
+			else{
+				$complete_status = strpos($file_content, 'Total Execution Time');
+				if($complete_status === FALSE){
+					$response = json_encode(array(status=>FALSE, content=>$file_content));
+				}
+				else{
+					$response = json_encode(array(status=>TRUE, content=>$file_content));
+				}
+			}
+		}
 		echo $response;
 	}
 }

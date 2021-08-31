@@ -221,4 +221,48 @@ class Queue_model extends CI_Model
 		$this->scoreboard_model->update_scoreboard($submission['assignment']);
 	}
 
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Adds a dummy submission to queue for execution only
+	 */
+	public function add_to_queue_exec($submit_info)
+	{
+		$query = $this->db->get_where('submissions', array(
+			'submit_id' => $submit_info['submit_id'], 
+			'username' => $submit_info['username'],
+			'assignment' => $submit_info['assignment'],
+			'problem' => $submit_info['problem']
+		));
+		if ($query->num_rows() == 0){
+			$submit_info['is_final'] = 0;
+			$submit_info['status'] = 'PENDING';
+			$this->db->insert('submissions', $submit_info);
+		}
+		
+		$this->db->insert('queue', array(
+			'submit_id' => $submit_info['submit_id'],
+			'username' => $submit_info['username'],
+			'assignment' => $submit_info['assignment'],
+			'problem' => $submit_info['problem'],
+			'type' => 'exec'
+		));
+	}
+
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Delete dummy submission used for execution purpose
+	 * This function is called from Queueprocess controller
+	 */
+	public function delete_exec_submission($submission){
+		$this->db->delete('submissions', array(
+			'submit_id' => $submission['submit_id'], 
+			'username' => $submission['username'],
+			'assignment' => $submission['assignment'],
+			'problem' => $submission['problem']
+		));
+	}
 }

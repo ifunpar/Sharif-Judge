@@ -12,12 +12,12 @@
 
 
 {% block other_assets %}
+	<link rel="stylesheet" type='text/css' href="{{ base_url('assets/styles/submit.css') }}"/>
 	<script>
 		shj.p={};
 		{{ problems_js|raw }}
 	</script>
-
-	<script src={{ base_url('assets/ace/ace.js') }} type="text/javascript" charset="utf-8"></script>
+	<script src={{ base_url('assets/ace/ace.js') }}></script>
 	<script type='text/javascript' src="{{ base_url("assets/js/shj_submit.js") }}"></script>
 {% endblock %}
 
@@ -63,22 +63,19 @@
 	</form>
 
 	<br>
-	<div style ="display:flex;">
-		<div style ="display:flex; flex-direction:column; width: 60%; height: 800px;">
-			<div id="code_editor" style="width: 100%; height: 70%;"></div>
-			<div style ="display:flex; width: 100%; height: 30%;">
-				<fieldset style="width: 50%; height: 100%; padding: 0; border: 0;">
-					<legend>In</legend>
-					<textarea id="editor_input" style="resize:none; width: 100%; height: 100%;"></textarea>
-				</fieldset>
-				<fieldset style="width: 50%; height: 100%; padding: 0; border: 0;">
-					<legend>Out</legend>
-					<textarea id="editor_output" style="resize:none; width: 100%; height: 100%;" readonly></textarea>
-				</fieldset>
-			</div>
-		</div>
-		<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} style="width: 40%;  height: 800px;"></iframe>
+	<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} ></iframe>
+	<div id="editor_wrap">
+		<div id="code_editor" ></div>
+		<fieldset id="in_out_wrap">
+			<legend>In</legend>
+			<textarea id="editor_input" class="in_out"></textarea>
+		</fieldset>
+		<fieldset id="in_out_wrap">
+			<legend>Out</legend>
+			<textarea id="editor_output" class="in_out" readonly></textarea>
+		</fieldset>
 	</div>
+
 	<br>
 	<button type="button" id="editor_save" disabled>Save</button>
 	<button type="button" id="editor_execute" disabled>Execute</button>

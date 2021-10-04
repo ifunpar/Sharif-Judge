@@ -109,5 +109,12 @@ define('EXIT_DATABASE', 8); // database error
 define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
+/*Code editor related constants*/
+define('EDITOR_FILE_NAME', "editor");
+define('EDITOR_FILE_EXT', "txt");
+define('EDITOR_IN_NAME', "exec_in");
+define('EDITOR_OUT_NAME', "exec_out");
+define('EDITOR_SUBMIT_ID', 0);
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

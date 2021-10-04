@@ -42,7 +42,7 @@ class Submit_model extends CI_Model {
 	public function get_final_submissions($assignment_id, $user_level, $username, $page_number = NULL, $filter_user = NULL, $filter_problem = NULL)
 	{
 		$arr['assignment'] = $assignment_id;
-		$arr['submit_id !='] = 0;
+		$arr['submit_id !='] = EDITOR_SUBMIT_ID;
 		$arr['is_final'] = 1;
 		if ($user_level === 0)// students can only get final submissions of themselves
 			$arr['username']=$username;
@@ -70,7 +70,7 @@ class Submit_model extends CI_Model {
 	public function get_all_submissions($assignment_id, $user_level, $username, $page_number = NULL, $filter_user = NULL, $filter_problem = NULL)
 	{
 		$arr['assignment']=$assignment_id;
-		$arr['submit_id !='] = 0;
+		$arr['submit_id !='] = EDITOR_SUBMIT_ID;
 		if ($user_level === 0)
 			$arr['username']=$username;
 		elseif ($filter_user !== NULL)
@@ -96,7 +96,7 @@ class Submit_model extends CI_Model {
 	public function count_final_submissions($assignment_id, $user_level, $username, $filter_user = NULL, $filter_problem = NULL)
 	{
 		$arr['assignment'] = $assignment_id;
-		$arr['submit_id !='] = 0;
+		$arr['submit_id !='] = EDITOR_SUBMIT_ID;
 		$arr['is_final'] = 1;
 		if ($user_level === 0)
 			$arr['username']=$username;
@@ -114,7 +114,7 @@ class Submit_model extends CI_Model {
 	public function count_all_submissions($assignment_id, $user_level, $username, $filter_user = NULL, $filter_problem = NULL)
 	{
 		$arr['assignment']=$assignment_id;
-		$arr['submit_id !='] = 0;
+		$arr['submit_id !='] = EDITOR_SUBMIT_ID;
 		if ($user_level === 0)
 			$arr['username']=$username;
 		elseif ($filter_user !== NULL)

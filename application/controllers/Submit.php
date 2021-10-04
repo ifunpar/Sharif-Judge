@@ -43,11 +43,6 @@ class Submit extends CI_Controller
 			$coefficient = "error";
 		ob_end_clean();
 		$this->coefficient = $coefficient;
-
-		$this->editor_file_name = "editor";
-		$this->editor_file_ext = "txt";
-		$this->editor_in_name = "exec_in";
-		$this->editor_out_name = "exec_out";
 	}
 
 
@@ -271,9 +266,9 @@ class Submit extends CI_Controller
 	 */
 	public function load($problem_id){
 		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
-		$file_path = $user_dir.'/'.$this->editor_file_name.'.'.$this->editor_file_ext;
-		$input_path = $user_dir.'/'.$this->editor_in_name.'.'.$this->editor_file_ext;
-		$output_path = $user_dir.'/'.$this->editor_out_name.'.'.$this->editor_file_ext;
+		$file_path = $user_dir.'/'.EDITOR_FILE_NAME.'.'.EDITOR_FILE_EXT;
+		$input_path = $user_dir.'/'.EDITOR_IN_NAME.'.'.EDITOR_FILE_EXT;
+		$output_path = $user_dir.'/'.EDITOR_OUT_NAME.'.'.EDITOR_FILE_EXT;
 		
 		$this->load->helper('file');
 		if(!write_file($input_path, ' ')){}
@@ -309,8 +304,8 @@ class Submit extends CI_Controller
 		if (!file_exists($user_dir)){
 			mkdir($user_dir, 0700);
 		}
-		$file_path = $user_dir.'/'.$this->editor_file_name.'.'.$this->editor_file_ext;
-		$input_path = $user_dir.'/'.$this->editor_in_name.'.'.$this->editor_file_ext;
+		$file_path = $user_dir.'/'.EDITOR_FILE_NAME.'.'.EDITOR_FILE_EXT;
+		$input_path = $user_dir.'/'.EDITOR_IN_NAME.'.'.EDITOR_FILE_EXT;
 
 		$this->load->helper('file');
 		if (!write_file($file_path, $data)){
@@ -374,7 +369,7 @@ class Submit extends CI_Controller
 	private function _submit($data, $problem_id, $language, $user_dir){
 		$file_type = $this->_language_to_type(strtolower(trim($language)));
 		$file_ext = $this->_language_to_ext(strtolower(trim($language)));
-		$file_name = $this->editor_file_name;
+		$file_name = EDITOR_FILE_NAME;
 		$file_fname = $file_name.'-'.($this->user->selected_assignment['total_submits']+1);
 		$file_path = $user_dir.'/'.$file_fname.'.'.$file_ext;
 
@@ -427,17 +422,17 @@ class Submit extends CI_Controller
 	private function _execute($data, $problem_id, $language, $user_dir){
 		$file_type = $this->_language_to_type(strtolower(trim($language)));
 		$file_ext = $this->_language_to_ext(strtolower(trim($language)));
-		$file_name = $this->editor_file_name;
-		$file_fname = $file_name.'-0';
+		$file_name = EDITOR_FILE_NAME;
+		$file_fname = $file_name.'-'.EDITOR_SUBMIT_ID;
 		$file_path = $user_dir.'/'.$file_fname.'.'.$file_ext;
-		$output_path = $user_dir.'/'.$this->editor_out_name.'.'.$this->editor_file_ext;
+		$output_path = $user_dir.'/'.EDITOR_OUT_NAME.'.'.EDITOR_FILE_EXT;
 
 		if (!write_file($file_path, $data)){
 			$response = json_encode(array(status=>FALSE, message=>'Unable to execute', debug=>$file_path));
 		}
 		else{
 			$submit_info = array(
-				'submit_id' => 0,
+				'submit_id' => EDITOR_SUBMIT_ID,
 				'username' => $this->user->username,
 				'assignment' => $this->user->selected_assignment['id'],
 				'problem' => $problem_id,
@@ -473,7 +468,7 @@ class Submit extends CI_Controller
 	 */
 	public function get_output($problem_id){
 		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
-		$file_path = $user_dir.'/'.$this->editor_out_name.'.'.$this->editor_file_ext;
+		$file_path = $user_dir.'/'.EDITOR_OUT_NAME.'.'.EDITOR_FILE_EXT;
 
 		if (!file_exists($file_path)){
 			$response = json_encode(array(status=>FALSE, content=>''));

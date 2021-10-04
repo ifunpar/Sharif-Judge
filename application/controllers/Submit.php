@@ -378,8 +378,15 @@ class Submit extends CI_Controller
 		$file_fname = $file_name.'-'.($this->user->selected_assignment['total_submits']+1);
 		$file_path = $user_dir.'/'.$file_fname.'.'.$file_ext;
 
+		foreach($this->problems as $item)
+			if ($item['id'] == $problem_id)
+			{
+				$this->problem = $item;
+				break;
+			}
+
 		if (!write_file($file_path, $data)){
-			$response = json_encode(array(status=>FALSE, message=>'Unable to submit', debug=>$file_path));
+			$response = json_encode(array(status=>FALSE, message=>'Unable to submit'));
 		}
 		else{
 			$this->load->model('submit_model');
@@ -406,7 +413,7 @@ class Submit extends CI_Controller
 				$this->submit_model->add_upload_only($submit_info);
 			}
 
-			$response = json_encode(array(status=>TRUE, message=>'Submitted'));
+			$response = json_encode(array(status=>TRUE, message=>"Submitted"));
 		}
 		echo $response;
 	}

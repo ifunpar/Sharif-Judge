@@ -175,9 +175,5 @@ $(document).ready(function(){
         });
      });
 
-    $("#show_upload").click(function(){
-        $(".upload_hidden").toggle();
-    });
-
     loadCode($("select#problems").val()); 
 });

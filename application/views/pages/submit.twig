@@ -47,39 +47,44 @@
 		</select>
 		{{ form_error('language','<div class="shj_error">','</div>') }}
 	</p>
-	<button type="button" id="show_upload">+</button>
-	<p class="input_p upload_hidden" hidden>
-		<label for="file" class="tiny">File:</label>
-		<input type="file" id="file" class="sharif_input medium" name="userfile" />
-		{% if upload_state == 'error' %}
-		<div class="shj_error">Error uploading file.</div>
-		{% elseif upload_state == 'ok' %}
-		<div class="shj_ok">File uploaded successfully. See the result in 'All Submissions'.</div>
-		{% endif %}
-	</p>
-	<p class="input_p upload_hidden" hidden>
-		<input type="submit" value="Submit" class="sharif_input"/>
-	</p>
+	<br>
+	<details>
+		<summary>Upload File</summary>
+		<p class="input_p upload_hidden">
+			<label for="file" class="tiny">File:</label>
+			<input type="file" id="file" class="sharif_input medium" name="userfile" />
+			{% if upload_state == 'error' %}
+			<div class="shj_error">Error uploading file.</div>
+			{% elseif upload_state == 'ok' %}
+			<div class="shj_ok">File uploaded successfully. See the result in 'All Submissions'.</div>
+			{% endif %}
+		</p>
+		<p class="input_p upload_hidden">
+			<input type="submit" value="Submit" class="sharif_input"/>
+		</p>
+	</details>
 	</form>
 
 	<br>
-	<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} ></iframe>
-	<div id="editor_wrap">
-		<div id="code_editor" ></div>
-		<fieldset id="in_out_wrap">
-			<legend>In</legend>
-			<textarea id="editor_input" class="in_out"></textarea>
-		</fieldset>
-		<fieldset id="in_out_wrap">
-			<legend>Out</legend>
-			<textarea id="editor_output" class="in_out" readonly></textarea>
-		</fieldset>
-	</div>
-
-	<br>
-	<button type="button" id="editor_save" disabled>Save</button>
-	<button type="button" id="editor_execute" disabled>Execute</button>
-	<button type="button" id="editor_submit" disabled>Submit</button>
-	<span id="ajax_status"></span>
+	<details>
+		<summary>Use IDE</summary>
+		<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} ></iframe>
+		<div id="editor_wrap">
+			<div id="code_editor" ></div>
+			<fieldset id="in_out_wrap">
+				<legend>In</legend>
+				<textarea id="editor_input" class="in_out"></textarea>
+			</fieldset>
+			<fieldset id="in_out_wrap">
+				<legend>Out</legend>
+				<textarea id="editor_output" class="in_out" readonly></textarea>
+			</fieldset>
+		</div>
+		<br>
+		<button type="button" id="editor_save" disabled>Save</button>
+		<button type="button" id="editor_execute" disabled>Execute</button>
+		<button type="button" id="editor_submit" disabled>Submit</button>
+		<span id="ajax_status"></span>
+	</details>
 {% endif %}
 {% endblock %}  {# main_content #}

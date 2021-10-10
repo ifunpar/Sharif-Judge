@@ -12,21 +12,13 @@
 
 
 {% block other_assets %}
-<script>
-	shj.p={};
-	{{ problems_js|raw }}
-	$(document).ready(function(){
-		$("select#problems").change(function(){
-			var v = $(this).val();
-			$('select#languages').empty();
-			$('<option value="0" selected="selected">-- Select Language --</option>').appendTo('select#languages');
-			if (v==0)
-				return;
-			for (var i=0;i<shj.p[v].length;i++)
-				$('<option value="'+shj.p[v][i]+'">'+shj.p[v][i]+'</option>').appendTo('select#languages');
-		});
-	});
-</script>
+	<link rel="stylesheet" type='text/css' href="{{ base_url('assets/styles/submit.css') }}"/>
+	<script>
+		shj.p={};
+		{{ problems_js|raw }}
+	</script>
+	<script src={{ base_url('assets/ace/ace.js') }}></script>
+	<script type='text/javascript' src="{{ base_url("assets/js/shj_submit.js") }}"></script>
 {% endblock %}
 
 
@@ -55,18 +47,44 @@
 		</select>
 		{{ form_error('language','<div class="shj_error">','</div>') }}
 	</p>
-	<p class="input_p">
-		<label for="file" class="tiny">File:</label>
-		<input type="file" id="file" class="sharif_input medium" name="userfile" />
-		{% if upload_state == 'error' %}
-		<div class="shj_error">Error uploading file.</div>
-		{% elseif upload_state == 'ok' %}
-		<div class="shj_ok">File uploaded successfully. See the result in 'All Submissions'.</div>
-		{% endif %}
-	</p>
-	<p class="input_p">
-		<input type="submit" value="Submit" class="sharif_input"/>
-	</p>
+	<br>
+	<details>
+		<summary>Upload File</summary>
+		<p class="input_p upload_hidden">
+			<label for="file" class="tiny">File:</label>
+			<input type="file" id="file" class="sharif_input medium" name="userfile" />
+			{% if upload_state == 'error' %}
+			<div class="shj_error">Error uploading file.</div>
+			{% elseif upload_state == 'ok' %}
+			<div class="shj_ok">File uploaded successfully. See the result in 'All Submissions'.</div>
+			{% endif %}
+		</p>
+		<p class="input_p upload_hidden">
+			<input type="submit" value="Submit" class="sharif_input"/>
+		</p>
+	</details>
 	</form>
+
+	<br>
+	<details>
+		<summary>Use IDE</summary>
+		<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} ></iframe>
+		<div id="editor_wrap">
+			<div id="code_editor" ></div>
+			<fieldset id="in_out_wrap">
+				<legend>In</legend>
+				<textarea id="editor_input" class="in_out"></textarea>
+			</fieldset>
+			<fieldset id="in_out_wrap">
+				<legend>Out</legend>
+				<textarea id="editor_output" class="in_out" readonly></textarea>
+			</fieldset>
+		</div>
+		<br>
+		<button type="button" id="editor_save" disabled>Save</button>
+		<button type="button" id="editor_execute" disabled>Execute</button>
+		<button type="button" id="editor_submit" disabled>Submit</button>
+		<span id="ajax_status"></span>
+	</details>
 {% endif %}
 {% endblock %}  {# main_content #}

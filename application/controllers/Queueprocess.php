@@ -57,7 +57,7 @@ class Queueprocess extends CI_Controller
 			$assignment = $queue_item['assignment'];
 			$assignment_info = $this->assignment_model->assignment_info($assignment);
 			$problem = $this->assignment_model->problem_info($assignment, $queue_item['problem']);
-			$type = $queue_item['type'];  // $type can be 'judge' or 'rejudge'
+			$type = $queue_item['type'];  // $type can be 'judge', 'rejudge', or 'exec'
 
 			$submission = $this->submit_model->get_submission($username, $assignment, $problem['id'], $submit_id);
 
@@ -86,7 +86,14 @@ class Queueprocess extends CI_Controller
 				$op4 = $this->settings_model->get_setting('enable_py3_shield');
 			$op5 = $this->settings_model->get_setting('enable_java_policy');
 			$op6 = $assignment_info['javaexceptions'];
-
+			if($type === 'exec') {
+				$exec_only = TRUE;
+				$op7 = 1;
+			}
+			else {
+				$op7 = 0;
+			}
+				
 			if ($file_type === 'c' OR $file_type === 'cpp')
 				$time_limit = $problem['c_time_limit']/1000;
 			elseif ($file_type === 'java')
@@ -101,7 +108,7 @@ class Queueprocess extends CI_Controller
 			$diff_arg = $problem['diff_arg'];
 			$output_size_limit = $this->settings_model->get_setting('output_size_limit') * 1024;
 
-			$cmd = "cd $tester_path;\n./tester.sh $problemdir ".escapeshellarg($username).' '.escapeshellarg($main_filename).' '.escapeshellarg($raw_filename)." $file_type $time_limit $time_limit_int $memory_limit $output_size_limit $diff_cmd $diff_arg $op1 $op2 $op3 $op4 $op5 $op6";
+			$cmd = "cd $tester_path;\n./tester.sh $problemdir ".escapeshellarg($username).' '.escapeshellarg($main_filename).' '.escapeshellarg($raw_filename)." $file_type $time_limit $time_limit_int $memory_limit $output_size_limit $diff_cmd $diff_arg $op1 $op2 $op3 $op4 $op5 $op6 $op7";
 
 			file_put_contents($userdir.'/log', $cmd);
 
@@ -132,8 +139,7 @@ class Queueprocess extends CI_Controller
 			}
 
 			//reconnect to database incase we have run test for a long time.
-			 $this->db->reconnect();
-
+			$this->db->reconnect();
 			// Save the result
 			$this->queue_model->save_judge_result_in_db($submission, $type);
 

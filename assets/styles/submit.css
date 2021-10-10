@@ -1,0 +1,34 @@
+iframe#pdf_viewer{
+    width: 95vw; 
+    height: 55vh;
+    padding: 0;
+    border: 0;
+}
+
+div#editor_wrap{
+    display:flex;
+    width: 95vw;
+    height: 40vh;
+    padding: 0;
+    border: 0;
+}
+
+div#code_editor{
+    width: 50%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+}
+
+fieldset#in_out_wrap{
+    width: 25%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+}
+
+textarea.in_out{
+    resize:none;
+    width: 100%;
+    height: 100%;
+}

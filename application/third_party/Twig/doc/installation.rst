@@ -6,79 +6,37 @@ You have multiple ways to install Twig.
 Installing the Twig PHP package
 -------------------------------
 
-Installing via Composer (recommended)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. Install Composer in your project:
+Install `Composer`_ and run the following command:
 
 .. code-block:: bash
 
-    curl -s http://getcomposer.org/installer | php
-
-2. Create a ``composer.json`` file in your project root:
-
-.. code-block:: javascript
-
-    {
-        "require": {
-            "twig/twig": "1.*"
-        }
-    }
-
-3. Install via Composer
-
-.. code-block:: bash
-
-    php composer.phar install
-
-.. note::
-    If you want to learn more about Composer, the ``composer.json`` file syntax
-    and its usage, you can read the `online documentation`_.
-
-Installing from the tarball release
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. Download the most recent tarball from the `download page`_
-2. Unpack the tarball
-3. Move the files somewhere in your project
-
-Installing the development version
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. Install Git
-2. ``git clone git://github.com/fabpot/Twig.git``
-
-Installing the PEAR package
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. Install PEAR
-2. ``pear channel-discover pear.twig-project.org``
-3. ``pear install twig/Twig`` (or ``pear install twig/Twig-beta``)
+    composer require "twig/twig:^1.0"
 
 Installing the C extension
 --------------------------
 
 .. versionadded:: 1.4
+
     The C extension was added in Twig 1.4.
 
-Twig comes with a C extension that enhances the performance of the Twig
-runtime engine.
+Twig comes with an **optional** C extension that improves the performance of the
+Twig runtime engine.
 
-You can install it via PEAR:
+Note that this extension does not replace the PHP code but only provides an
+optimized version of the ``\Twig\Template::getAttribute()`` method; you must
+still install the regular PHP code
 
-1. Install PEAR
-2. ``pear channel-discover pear.twig-project.org``
-3. ``pear install twig/CTwig`` (or ``pear install twig/CTwig-beta``)
+The C extension is only compatible and useful for **PHP5**.
 
-Or manually like any other PHP extension:
+Install it like any other PHP extensions:
 
 .. code-block:: bash
 
-    $ cd ext/twig
-    $ phpize
-    $ ./configure
-    $ make
-    $ make install
+    cd ext/twig
+    phpize
+    ./configure
+    make
+    make install
 
 For Windows:
 
@@ -90,29 +48,25 @@ For Windows:
 
 .. tip::
 
-    For Windows ZendServer, TS is not enabled as mentionned in `Zend Server
-    FAQ`_.
+    For Windows ZendServer, ZTS is not enabled as mentioned in `Zend Server FAQ`_.
 
-    You have to use `configure --disable-all --disable-zts --enable-cli
-    --enable-twig=shared` to be able to build the twig C extension for
+    You have to use ``configure --disable-all --disable-zts --enable-cli
+    --enable-twig=shared`` to be able to build the twig C extension for
     ZendServer.
 
     The built DLL will be available in
-    C:\\php-sdk\\phpdev\\vcXX\\x86\\php-source-directory\\Release
+    ``C:\\php-sdk\\phpdev\\vcXX\\x86\\php-source-directory\\Release``
 
 Finally, enable the extension in your ``php.ini`` configuration file:
 
 .. code-block:: ini
 
-    extension=twig.so #For Unix systems
-    extension=php_twig.dll #For Windows systems
+    extension=twig.so # For Unix systems
+    extension=php_twig.dll # For Windows systems
 
 And from now on, Twig will automatically compile your templates to take
-advantage of the C extension. Note that this extension does not replace the
-PHP code but only provides an optimized version of the
-``Twig_Template::getAttribute()`` method.
+advantage of the C extension.
 
-.. _`download page`: https://github.com/fabpot/Twig/tags
-.. _`online documentation`: http://getcomposer.org/doc
+.. _`Composer`:          https://getcomposer.org/download/
 .. _`PHP documentation`: https://wiki.php.net/internals/windows/stepbystepbuild
-.. _`Zend Server FAQ`: http://www.zend.com/en/products/server/faq#faqD6
+.. _`Zend Server FAQ`:   https://www.zend.com/en/products/server/faq#faqD6

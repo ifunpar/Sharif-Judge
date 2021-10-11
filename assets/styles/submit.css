@@ -1,27 +1,41 @@
 iframe#pdf_viewer{
-    width: 95vw; 
+    width: calc(80vw - 160px); 
     height: 55vh;
     padding: 0;
     border: 0;
 }
 
-div#editor_wrap{
+div#ide_wrap{
     display:flex;
-    width: 95vw;
+    width: calc(100vw - 200px); 
     height: 40vh;
     padding: 0;
     border: 0;
 }
 
-div#code_editor{
-    width: 50%;
+fieldset#editor_wrap{
+    width: 70%;
     height: 100%;
     padding: 0;
     border: 0;
 }
 
-fieldset#in_out_wrap{
-    width: 25%;
+div#code_editor{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+}
+
+fieldset#in_wrap{
+    width: 10%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+}
+
+fieldset#out_wrap{
+    width: 20%;
     height: 100%;
     padding: 0;
     border: 0;

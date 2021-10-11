@@ -49,7 +49,7 @@
 	</p>
 	<br>
 	<details>
-		<summary>Upload File</summary>
+		<summary>Submit by File Upload</summary>
 		<p class="input_p upload_hidden">
 			<label for="file" class="tiny">File:</label>
 			<input type="file" id="file" class="sharif_input medium" name="userfile" />
@@ -67,23 +67,26 @@
 
 	<br>
 	<details>
-		<summary>Use IDE</summary>
+		<summary>Edit, Test, and Submit by Built-in IDE</summary>
 		<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} ></iframe>
-		<div id="editor_wrap">
-			<div id="code_editor" ></div>
-			<fieldset id="in_out_wrap">
+		<div id="ide_wrap">
+			<fieldset id="editor_wrap">
+				<legend>Code</legend>
+				<div id="code_editor" ></div>
+			</fieldset>
+			<fieldset id="in_wrap">
 				<legend>In</legend>
 				<textarea id="editor_input" class="in_out"></textarea>
 			</fieldset>
-			<fieldset id="in_out_wrap">
+			<fieldset id="out_wrap">
 				<legend>Out</legend>
 				<textarea id="editor_output" class="in_out" readonly></textarea>
 			</fieldset>
 		</div>
 		<br>
 		<button type="button" id="editor_save" disabled>Save</button>
-		<button type="button" id="editor_execute" disabled>Execute</button>
-		<button type="button" id="editor_submit" disabled>Submit</button>
+		<button type="button" id="editor_execute" disabled>Save & Execute</button>
+		<button type="button" id="editor_submit" disabled>Save & Submit</button>
 		<span id="ajax_status"></span>
 	</details>
 {% endif %}

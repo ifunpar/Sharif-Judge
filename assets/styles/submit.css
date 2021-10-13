@@ -1,5 +1,5 @@
 iframe#pdf_viewer{
-    width: calc(80vw - 160px); 
+    width: calc(90vw - 160px); 
     height: 55vh;
     padding: 0;
     border: 0;
@@ -28,14 +28,14 @@ div#code_editor{
 }
 
 fieldset#in_wrap{
-    width: 10%;
+    width: 15%;
     height: 100%;
     padding: 0;
     border: 0;
 }
 
 fieldset#out_wrap{
-    width: 20%;
+    width: 15%;
     height: 100%;
     padding: 0;
     border: 0;

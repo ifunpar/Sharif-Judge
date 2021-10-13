@@ -67,7 +67,7 @@
 
 	<br>
 	<details>
-		<summary>Edit, Test, and Submit by Built-in IDE</summary>
+		<summary>Code, Test, and Submit using built-in editor</summary>
 		<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} ></iframe>
 		<div id="ide_wrap">
 			<fieldset id="editor_wrap">
@@ -75,11 +75,11 @@
 				<div id="code_editor" ></div>
 			</fieldset>
 			<fieldset id="in_wrap">
-				<legend>In</legend>
+				<legend>Input</legend>
 				<textarea id="editor_input" class="in_out"></textarea>
 			</fieldset>
 			<fieldset id="out_wrap">
-				<legend>Out</legend>
+				<legend>Output</legend>
 				<textarea id="editor_output" class="in_out" readonly></textarea>
 			</fieldset>
 		</div>

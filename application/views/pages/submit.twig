@@ -15,7 +15,21 @@
 	<link rel="stylesheet" type='text/css' href="{{ base_url('assets/styles/submit.css') }}"/>
 	<script>
 		shj.p={};
-		{{ problems_js|raw }}
+		{{ problems_js|raw }};
+		$.ajax({
+            url: "{{ site_url('assignments/pdfCheck/' ~ user.selected_assignment.id) }}", 
+            cache: false,
+            success: function(data){
+				data = JSON.parse(data);
+				if(data.status){
+					$("#pdf_viewer").attr('src', "{{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true') }}");
+					$("#pdf_viewer").show();
+				}
+            },
+            error: function (error){
+                console.error(error);
+            },
+        });
 	</script>
 	<script src={{ base_url('assets/ace/ace.js') }}></script>
 	<script type='text/javascript' src="{{ base_url("assets/js/shj_submit.js") }}"></script>
@@ -68,7 +82,7 @@
 	<br>
 	<details>
 		<summary>Code, Test, and Submit using built-in editor</summary>
-		<iframe id="pdf_viewer" src={{ base_url('assets/pdfjs/web/viewer.html?file=') ~ site_url('assignments/pdf/' ~ user.selected_assignment.id ~ '/null/true')}} ></iframe>
+		<iframe id="pdf_viewer" src="" style="display: none"></iframe>
 		<div id="ide_wrap">
 			<fieldset id="editor_wrap">
 				<legend>Code</legend>
@@ -84,9 +98,9 @@
 			</fieldset>
 		</div>
 		<br>
-		<button type="button" id="editor_save" disabled>Save</button>
-		<button type="button" id="editor_execute" disabled>Save & Execute</button>
-		<button type="button" id="editor_submit" disabled>Save & Submit</button>
+		<button type="button" class="sharif_input" id="editor_save" disabled>Save</button>
+		<button type="button" class="sharif_input" id="editor_execute" disabled>Save & Execute</button>
+		<button type="button" class="sharif_input" id="editor_submit" disabled>Save & Submit</button>
 		<span id="ajax_status"></span>
 	</details>
 {% endif %}

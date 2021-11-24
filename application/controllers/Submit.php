@@ -17,10 +17,6 @@ class Submit extends CI_Controller
 	private $ext; //uploaded file extension
 	private $file_name; //uploaded file name without extension
 	private $coefficient;
-	private $editor_file_name;
-	private $editor_file_ext;
-	private $editor_in_name;
-	private $editor_out_name;
 
 	// ------------------------------------------------------------------------
 

@@ -68,6 +68,12 @@ $(document).ready(function(){
             editor.session.setMode("ace/mode/c_cpp");
             disableEditor(false);
         }
+        else if(this.value.toLowerCase().includes("txt")){
+            editor.session.setMode("ace/mode/plain_text");
+            disableEditor(false);
+            $("#editor_execute").prop("disabled", true);
+            $("#editor_input").prop("disabled", true);
+        }
         else{
             editor.session.setMode("ace/mode/plain_text");
             disableEditor(true);

@@ -131,11 +131,6 @@ class Assignments extends CI_Controller
 		else{
 			$content = file_get_contents($pdf_files[0]);
 			header('Content-Type: application/pdf');
-			header('Content-Length: ' . strlen($content));
-			header('Content-Disposition: inline; filename="'.$filename.'"');
-			header('Cache-Control: private, max-age=0, must-revalidate');
-			header('Pragma: public');
-			ini_set('zlib.output_compression','0');
 			die($content);
 		}
 	}
@@ -588,7 +583,43 @@ class Assignments extends CI_Controller
 		// redirect to add function
 		$this->add();
 	}
+	
 
 
+	// ------------------------------------------------------------------------
+
+
+
+	/**
+	 * Check PDF File Availability
+	 */
+	public function pdfCheck($assignment_id, $problem_id = NULL)
+	{
+		$finishtime = strtotime($this->assignment_model->assignment_info($assignment_id)['finish_time']);
+		$starttime = strtotime($this->assignment_model->assignment_info($assignment_id)['start_time']);
+		$extratime = $this->assignment_model->assignment_info($assignment_id)['extra_time'];
+
+		// Find pdf file
+		if ($problem_id === NULL || $problem_id === "null")
+			$pattern = rtrim($this->settings_model->get_setting('assignments_root'),'/')."/assignment_{$assignment_id}/*.pdf";
+		else
+			$pattern = rtrim($this->settings_model->get_setting('assignments_root'),'/')."/assignment_{$assignment_id}/p{$problem_id}/*.pdf";
+		$pdf_files = glob($pattern);
+
+		if ( ! $pdf_files )
+			$response = json_encode(array(status=>FALSE));
+		elseif (!$this->assignment_model->assignment_info($assignment_id)['open'])
+			$response = json_encode(array(status=>FALSE));
+		elseif	( ! $this->assignment_model->is_participant($this->assignment_model->assignment_info($assignment_id)['participants'],$this->user->username) )
+			$response = json_encode(array(status=>FALSE));
+		elseif ( shj_now() > $finishtime + $extratime)
+			$response = json_encode(array(status=>FALSE));
+		elseif ( shj_now() < $starttime)
+			$response = json_encode(array(status=>FALSE));
+		else
+			$response = json_encode(array(status=>TRUE));
+
+		echo $response;
+	}
 
 }

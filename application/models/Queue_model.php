@@ -50,6 +50,11 @@ class Queue_model extends CI_Model
 	public function empty_queue ()
 	{
 		return $this->db->empty_table('queue');
+
+		//Delete all dummy submission
+		$this->db->delete('submissions', array(
+			'submit_id' => 0,
+		));
 	}
 
 
@@ -180,6 +185,16 @@ class Queue_model extends CI_Model
 			'assignment' => $assignment,
 			'problem' => $problem
 		));
+
+		//Delete dummy submission if exec only
+		if($submit_id == 0){
+			$this->db->delete('submissions', array(
+				'submit_id' => $submit_id,
+				'username' => $username,
+				'assignment' => $assignment,
+				'problem' => $problem
+			));
+		}
 	}
 
 
@@ -221,4 +236,36 @@ class Queue_model extends CI_Model
 		$this->scoreboard_model->update_scoreboard($submission['assignment']);
 	}
 
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Adds a dummy submission to queue for execution only
+	 */
+	public function add_to_queue_exec($submit_info)
+	{
+		$query = $this->db->get_where('submissions', array(
+			'submit_id' => $submit_info['submit_id'], 
+			'username' => $submit_info['username'],
+			'assignment' => $submit_info['assignment'],
+			'problem' => $submit_info['problem']
+		));
+		if ($query->num_rows() == 0){
+			$submit_info['is_final'] = 0;
+			$submit_info['status'] = 'PENDING';
+			$this->db->insert('submissions', $submit_info);
+
+			$this->db->insert('queue', array(
+				'submit_id' => $submit_info['submit_id'],
+				'username' => $submit_info['username'],
+				'assignment' => $submit_info['assignment'],
+				'problem' => $submit_info['problem'],
+				'type' => 'exec'
+			));
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
 }

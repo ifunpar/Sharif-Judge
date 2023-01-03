@@ -1,13 +1,11 @@
 Introduction
 ============
 
-This is the documentation for Twig, the flexible, fast, and secure template
+Welcome to the documentation for Twig, the flexible, fast, and secure template
 engine for PHP.
 
-If you have any exposure to other text-based template languages, such as
-Smarty, Django, or Jinja, you should feel right at home with Twig. It's both
-designer and developer friendly by sticking to PHP's principles and adding
-functionality useful for templating environments.
+Twig is both designer and developer friendly by sticking to PHP's principles and
+adding functionality useful for templating environments.
 
 The key-features are...
 
@@ -19,12 +17,20 @@ The key-features are...
   may modify the template design.
 
 * *Flexible*: Twig is powered by a flexible lexer and parser. This allows the
-  developer to define its own custom tags and filters, and create its own DSL.
+  developer to define their own custom tags and filters, and to create their own DSL.
+
+Twig is used by many Open-Source projects like Symfony, Drupal8, eZPublish,
+phpBB, Matomo, OroCRM; and many frameworks have support for it as well like
+Slim, Yii, Laravel, and Codeigniter — just to name a few.
+
+.. admonition:: Screencast
+
+    Like to learn from video tutorials? Check out the `SymfonyCasts Twig Tutorial`_!
 
 Prerequisites
 -------------
 
-Twig needs at least **PHP 5.2.4** to run.
+Twig 1.x needs at least **PHP 7.2.5** to run.
 
 Installation
 ------------
@@ -33,7 +39,7 @@ The recommended way to install Twig is via Composer:
 
 .. code-block:: bash
 
-    composer require twig/twig:1.*
+    composer require "twig/twig:^1.0"
 
 .. note::
 
@@ -44,19 +50,19 @@ The recommended way to install Twig is via Composer:
 Basic API Usage
 ---------------
 
-This section gives you a brief introduction to the PHP API for Twig.
-
-.. code-block:: php
+This section gives you a brief introduction to the PHP API for Twig::
 
     require_once '/path/to/vendor/autoload.php';
 
-    $loader = new Twig_Loader_String();
-    $twig = new Twig_Environment($loader);
+    $loader = new \Twig\Loader\ArrayLoader([
+        'index' => 'Hello {{ name }}!',
+    ]);
+    $twig = new \Twig\Environment($loader);
 
-    echo $twig->render('Hello {{ name }}!', array('name' => 'Fabien'));
+    echo $twig->render('index', ['name' => 'Fabien']);
 
-Twig uses a loader (``Twig_Loader_String``) to locate templates, and an
-environment (``Twig_Environment``) to store the configuration.
+Twig uses a loader (``\Twig\Loader\ArrayLoader``) to locate templates, and an
+environment (``\Twig\Environment``) to store its configuration.
 
 The ``render()`` method loads the template passed as a first argument and
 renders it with the variables passed as a second argument.
@@ -64,16 +70,11 @@ renders it with the variables passed as a second argument.
 As templates are generally stored on the filesystem, Twig also comes with a
 filesystem loader::
 
-    $loader = new Twig_Loader_Filesystem('/path/to/templates');
-    $twig = new Twig_Environment($loader, array(
+    $loader = new \Twig\Loader\FilesystemLoader('/path/to/templates');
+    $twig = new \Twig\Environment($loader, [
         'cache' => '/path/to/compilation_cache',
-    ));
+    ]);
 
-    echo $twig->render('index.html', array('name' => 'Fabien'));
+    echo $twig->render('index.html', ['name' => 'Fabien']);
 
-.. tip::
-
-    If you are not using Composer, use the Twig built-in autoloader::
-
-        require_once '/path/to/lib/Twig/Autoloader.php';
-        Twig_Autoloader::register();
+.. _`SymfonyCasts Twig Tutorial`: https://symfonycasts.com/screencast/twig

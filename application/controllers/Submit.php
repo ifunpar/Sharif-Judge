@@ -18,7 +18,6 @@ class Submit extends CI_Controller
 	private $file_name; //uploaded file name without extension
 	private $coefficient;
 
-
 	// ------------------------------------------------------------------------
 
 
@@ -40,7 +39,6 @@ class Submit extends CI_Controller
 			$coefficient = "error";
 		ob_end_clean();
 		$this->coefficient = $coefficient;
-
 	}
 
 
@@ -62,6 +60,26 @@ class Submit extends CI_Controller
 			default: return FALSE;
 		}
 	}
+
+
+	// ------------------------------------------------------------------------
+
+
+		public function _language_to_ext($language)
+		{
+			$language = strtolower ($language);
+			switch ($language) {
+				case 'c': return 'c';
+				case 'c++': return 'cpp';
+				case 'python 2': return 'py';
+				case 'python 3': return 'py';
+				case 'java': return 'java';
+				case 'zip': return 'zip';
+				case 'pdf': return 'pdf';
+				case 'txt': return 'txt';
+				default: return FALSE;
+			}
+		}
 
 
 	// ------------------------------------------------------------------------
@@ -146,7 +164,6 @@ class Submit extends CI_Controller
 			$this->data['error'] = 'none';
 
 		$this->twig->display('pages/submit.twig', $this->data);
-
 	}
 
 
@@ -238,5 +255,236 @@ class Submit extends CI_Controller
 	}
 
 
+	// ------------------------------------------------------------------------
 
+	/**
+	 * Load code from editor file
+	 */
+	public function load($problem_id){
+		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
+		$file_path = $user_dir.'/'.EDITOR_FILE_NAME.'.'.EDITOR_FILE_EXT;
+		$input_path = $user_dir.'/'.EDITOR_IN_NAME.'.'.EDITOR_FILE_EXT;
+		$output_path = $user_dir.'/'.EDITOR_OUT_NAME.'.'.EDITOR_FILE_EXT;
+		
+		$this->load->helper('file');
+		if(!write_file($input_path, ' ')){}
+		if(!write_file($output_path, ' ')){}
+		if (!file_exists($file_path)){
+			$response = json_encode(array(content=>'', message=>'No saved file'));
+		}
+		else{
+			$file_content = file_get_contents($file_path);
+			if ($file_content === FALSE){
+				$response = json_encode(array(content=>'', message=>'Unable to load'));
+			}
+			else{
+				addslashes($file_content);
+				$response = json_encode(array(content=>$file_content, message=>'Loaded'));
+			}
+		}
+		echo $response;
+	}
+
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Save code to editor file and submit/execute if needed
+	 */
+	public function save($type = FALSE){
+		$data = $_POST['code_editor'];
+		$problem_id = $_POST['problem_id'];
+		$language = $_POST['language'];
+		
+		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
+		if (!file_exists($user_dir)){
+			mkdir($user_dir, 0700);
+		}
+		$file_path = $user_dir.'/'.EDITOR_FILE_NAME.'.'.EDITOR_FILE_EXT;
+		$input_path = $user_dir.'/'.EDITOR_IN_NAME.'.'.EDITOR_FILE_EXT;
+
+		$this->load->helper('file');
+		if (!write_file($file_path, $data)){
+			$response = json_encode(array(status=>FALSE, message=>'Unable to save'));
+			echo $response;
+		}
+		else{
+			$response = json_encode(array(status=>TRUE, message=>'Saved'));
+			if($type === FALSE){
+				echo $response;
+			}
+			else{
+				$now = shj_now();
+				if ( $this->queue_model->in_queue($this->user->username,$this->user->selected_assignment['id'], $this->problem['id'])){
+					$response = json_encode(array(status=>FALSE, message=>'You have already submitted for this problem. Your last submission is still in queue.'));
+					echo $response;
+				}
+				else if ($this->user->level==0 && !$this->user->selected_assignment['open']){
+					$response = json_encode(array(status=>FALSE, message=>'Selected assignment has been closed.'));
+					echo $response;
+				}
+				else if ($now < strtotime($this->user->selected_assignment['start_time'])){
+					$response = json_encode(array(status=>FALSE, message=>'Selected assignment has not started.'));
+					echo $response;
+				}
+				else if ($now > strtotime($this->user->selected_assignment['finish_time'])+$this->user->selected_assignment['extra_time']){
+					$response = json_encode(array(status=>FALSE, message=>'Selected assignment has finished.'));
+					echo $response;
+				}
+				else if ( ! $this->assignment_model->is_participant($this->user->selected_assignment['participants'],$this->user->username)){
+					$response = json_encode(array(status=>FALSE, message=>'You are not registered for submitting.'));
+					echo $response;
+				}
+				else{
+					if($type === 'submit'){
+						$this->_submit($data, $problem_id, $language, $user_dir);
+					}
+					else if($type === 'execute'){
+						$editor_input =  $_POST['editor_input'];
+						if (!write_file($input_path, $editor_input)){
+							$response = json_encode(array(status=>FALSE, message=>'Unable to write input file'));
+							echo $response;
+						}
+						else{
+							$this->_execute($data, $problem_id, $language, $user_dir);
+						}
+					}
+				}
+			}
+		}
+
+
+	}
+
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Add code to queue for judging
+	 */
+	private function _submit($data, $problem_id, $language, $user_dir){
+		$file_type = $this->_language_to_type(strtolower(trim($language)));
+		$file_ext = $this->_language_to_ext(strtolower(trim($language)));
+		$file_name = EDITOR_FILE_NAME;
+		$file_fname = $file_name.'-'.($this->user->selected_assignment['total_submits']+1);
+		$file_path = $user_dir.'/'.$file_fname.'.'.$file_ext;
+
+		foreach($this->problems as $item)
+			if ($item['id'] == $problem_id)
+			{
+				$this->problem = $item;
+				break;
+			}
+
+		if (!write_file($file_path, $data)){
+			$response = json_encode(array(status=>FALSE, message=>'Unable to submit'));
+		}
+		else{
+			$this->load->model('submit_model');
+
+			$submit_info = array(
+				'submit_id' => $this->assignment_model->increase_total_submits($this->user->selected_assignment['id']),
+				'username' => $this->user->username,
+				'assignment' => $this->user->selected_assignment['id'],
+				'problem' => $problem_id,
+				'file_name' => $file_fname,
+				'main_file_name' => $file_name,
+				'file_type' => $file_type,
+				'coefficient' => $this->coefficient,
+				'pre_score' => 0,
+				'time' => shj_now_str(),
+			);
+			if ($this->problem['is_upload_only'] == 0)
+			{
+				$this->queue_model->add_to_queue($submit_info);
+				process_the_queue();
+			}
+			else
+			{
+				$this->submit_model->add_upload_only($submit_info);
+			}
+
+			$response = json_encode(array(status=>TRUE, message=>"Submitted"));
+		}
+		echo $response;
+	}
+
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Add code to queue for execution only
+	 */
+	private function _execute($data, $problem_id, $language, $user_dir){
+		$file_type = $this->_language_to_type(strtolower(trim($language)));
+		$file_ext = $this->_language_to_ext(strtolower(trim($language)));
+		$file_name = EDITOR_FILE_NAME;
+		$file_fname = $file_name.'-'.EDITOR_SUBMIT_ID;
+		$file_path = $user_dir.'/'.$file_fname.'.'.$file_ext;
+		$output_path = $user_dir.'/'.EDITOR_OUT_NAME.'.'.EDITOR_FILE_EXT;
+
+		if (!write_file($file_path, $data)){
+			$response = json_encode(array(status=>FALSE, message=>'Unable to execute', debug=>$file_path));
+		}
+		else{
+			$submit_info = array(
+				'submit_id' => EDITOR_SUBMIT_ID,
+				'username' => $this->user->username,
+				'assignment' => $this->user->selected_assignment['id'],
+				'problem' => $problem_id,
+				'file_name' => $file_fname,
+				'main_file_name' => $file_name,
+				'file_type' => $file_type,
+				'coefficient' => $this->coefficient,
+				'pre_score' => 0,
+				'time' => shj_now_str(),
+			);
+
+			if($this->queue_model->add_to_queue_exec($submit_info)){
+				if (!write_file($output_path, 'Queueing...')){
+					$response = json_encode(array(status=>FALSE, message=>'Unable to write output file'));
+				}
+				else{
+					process_the_queue();
+					$response = json_encode(array(status=>TRUE, message=>'Executing'));
+				}
+			}
+			else{
+				$response = json_encode(array(status=>FALSE, message=>'Still in queue'));
+			}
+		}
+		echo $response;
+	}
+	
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Load output file as execution result
+	 */
+	public function get_output($problem_id){
+		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
+		$file_path = $user_dir.'/'.EDITOR_OUT_NAME.'.'.EDITOR_FILE_EXT;
+
+		if (!file_exists($file_path)){
+			$response = json_encode(array(status=>FALSE, content=>''));
+		}
+		else{
+			$this->load->helper('file');
+			$file_content = file_get_contents($file_path);
+			if ($file_content === FALSE){
+				$response = json_encode(array(status=>FALSE, content=>''));
+			}
+			else{
+				$complete_status = strpos($file_content, 'Total Execution Time');
+				if($complete_status === FALSE){
+					$response = json_encode(array(status=>FALSE, content=>$file_content));
+				}
+				else{
+					$response = json_encode(array(status=>TRUE, content=>$file_content));
+				}
+			}
+		}
+		echo $response;
+	}
 }

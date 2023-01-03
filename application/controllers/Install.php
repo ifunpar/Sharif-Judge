@@ -78,8 +78,8 @@ class Install extends CI_Controller
 				'status'        => array('type' => 'VARCHAR', 'constraint' => 100),
 				'pre_score'     => array('type' => 'INT', 'constraint' => 11),
 				'coefficient'   => array('type' => 'VARCHAR', 'constraint' => 6),
-				'file_name'     => array('type' => 'VARCHAR', 'constraint' => 30),
-				'main_file_name'=> array('type' => 'VARCHAR', 'constraint' => 30),
+				'file_name'     => array('type' => 'VARCHAR', 'constraint' => 100),
+				'main_file_name'=> array('type' => 'VARCHAR', 'constraint' => 100),
 				'file_type'     => array('type' => 'VARCHAR', 'constraint' => 6),
 			);
 			$this->dbforge->add_field($fields);

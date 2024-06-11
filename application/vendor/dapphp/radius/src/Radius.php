@@ -838,9 +838,9 @@ class Radius
                 case 'I':
                     // Integer, 32 bit unsigned value, most significant octet first.
                     $temp = chr($type) . chr(6) .
-                            chr(($value / (256 * 256 * 256)) % 256) .
-                            chr(($value / (256 * 256)) % 256) .
-                            chr(($value / (256)) % 256) .
+                            chr(intval($value / (256 * 256 * 256)) % 256) .
+                            chr(intval($value / (256 * 256)) % 256) .
+                            chr(intval($value / (256)) % 256) .
                             chr($value % 256);
                     break;
                 case 'D':

@@ -1,29 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.2.4 or newer
- *
- * NOTICE OF LICENSE
- *
- * Licensed under the Academic Free License version 3.0
- *
- * This source file is subject to the Academic Free License (AFL 3.0) that is
- * bundled with this package in the files license_afl.txt / license_afl.rst.
- * It is also available through the world wide web at this URL:
- * http://opensource.org/licenses/AFL-3.0
- * If you did not receive a copy of the license and are unable to obtain it
- * through the world wide web, please send an email to
- * licensing@ellislab.com so we can send you a copy immediately.
- *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2013, EllisLab, Inc. (http://ellislab.com/)
- * @license		http://opensource.org/licenses/AFL-3.0 Academic Free License (AFL 3.0)
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -46,10 +22,10 @@ $foreign_characters = array(
 	'/б/' => 'b',
 	'/Ç|Ć|Ĉ|Ċ|Č/' => 'C',
 	'/ç|ć|ĉ|ċ|č/' => 'c',
-	'/Д/' => 'D',
-	'/д/' => 'd',
-	'/Ð|Ď|Đ|Δ/' => 'Dj',
-	'/ð|ď|đ|δ/' => 'dj',
+	'/Д|Δ/' => 'D',
+	'/д|δ/' => 'd',
+	'/Ð|Ď|Đ/' => 'Dj',
+	'/ð|ď|đ/' => 'dj',
 	'/È|É|Ê|Ë|Ē|Ĕ|Ė|Ę|Ě|Ε|Έ|Ẽ|Ẻ|Ẹ|Ề|Ế|Ễ|Ể|Ệ|Е|Э/' => 'E',
 	'/è|é|ê|ë|ē|ĕ|ė|ę|ě|έ|ε|ẽ|ẻ|ẹ|ề|ế|ễ|ể|ệ|е|э/' => 'e',
 	'/Ф/' => 'F',
@@ -62,6 +38,8 @@ $foreign_characters = array(
 	'/ì|í|î|ï|ĩ|ī|ĭ|ǐ|į|ı|η|ή|ί|ι|ϊ|ỉ|ị|и|ы|ї/' => 'i',
 	'/Ĵ/' => 'J',
 	'/ĵ/' => 'j',
+	'/Θ/' => 'TH',
+	'/θ/' => 'th',
 	'/Ķ|Κ|К/' => 'K',
 	'/ķ|κ|к/' => 'k',
 	'/Ĺ|Ļ|Ľ|Ŀ|Ł|Λ|Л/' => 'L',
@@ -78,16 +56,21 @@ $foreign_characters = array(
 	'/ŕ|ŗ|ř|ρ|р/' => 'r',
 	'/Ś|Ŝ|Ş|Ș|Š|Σ|С/' => 'S',
 	'/ś|ŝ|ş|ș|š|ſ|σ|ς|с/' => 's',
-	'/Ț|Ţ|Ť|Ŧ|τ|Т/' => 'T',
-	'/ț|ţ|ť|ŧ|т/' => 't',
+	'/Ț|Ţ|Ť|Ŧ|Τ|Т/' => 'T',
+	'/ț|ţ|ť|ŧ|τ|т/' => 't',
+	'/Þ|þ/' => 'th',
 	'/Ù|Ú|Û|Ũ|Ū|Ŭ|Ů|Ű|Ų|Ư|Ǔ|Ǖ|Ǘ|Ǚ|Ǜ|Ũ|Ủ|Ụ|Ừ|Ứ|Ữ|Ử|Ự|У/' => 'U',
 	'/ù|ú|û|ũ|ū|ŭ|ů|ű|ų|ư|ǔ|ǖ|ǘ|ǚ|ǜ|υ|ύ|ϋ|ủ|ụ|ừ|ứ|ữ|ử|ự|у/' => 'u',
-	'/Ý|Ÿ|Ŷ|Υ|Ύ|Ϋ|Ỳ|Ỹ|Ỷ|Ỵ|Й/' => 'Y',
-	'/ý|ÿ|ŷ|ỳ|ỹ|ỷ|ỵ|й/' => 'y',
+	'/Ƴ|Ɏ|Ỵ|Ẏ|Ӳ|Ӯ|Ў|Ý|Ÿ|Ŷ|Υ|Ύ|Ϋ|Ỳ|Ỹ|Ỷ|Ỵ|Й/' => 'Y',
+	'/ẙ|ʏ|ƴ|ɏ|ỵ|ẏ|ӳ|ӯ|ў|ý|ÿ|ŷ|ỳ|ỹ|ỷ|ỵ|й/' => 'y',
 	'/В/' => 'V',
 	'/в/' => 'v',
 	'/Ŵ/' => 'W',
 	'/ŵ/' => 'w',
+	'/Φ/' => 'F',
+	'/φ/' => 'f',
+	'/Χ/' => 'CH',
+	'/χ/' => 'ch',
 	'/Ź|Ż|Ž|Ζ|З/' => 'Z',
 	'/ź|ż|ž|ζ|з/' => 'z',
 	'/Æ|Ǽ/' => 'AE',
@@ -96,10 +79,15 @@ $foreign_characters = array(
 	'/ĳ/' => 'ij',
 	'/Œ/' => 'OE',
 	'/ƒ/' => 'f',
+	'/Ξ/' => 'KS',
 	'/ξ/' => 'ks',
+	'/Π/' => 'P',
 	'/π/' => 'p',
+	'/Β/' => 'V',
 	'/β/' => 'v',
+	'/Μ/' => 'M',
 	'/μ/' => 'm',
+	'/Ψ/' => 'PS',
 	'/ψ/' => 'ps',
 	'/Ё/' => 'Yo',
 	'/ё/' => 'yo',
@@ -124,6 +112,3 @@ $foreign_characters = array(
 	'/Я/' => 'Ya',
 	'/я/' => 'ya'
 );
-
-/* End of file foreign_chars.php */
-/* Location: ./application/config/foreign_chars.php */
